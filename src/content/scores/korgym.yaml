@@ -1,0 +1,27 @@
+benchmark_id: korgym
+updated: "2026-04-15"
+results:
+  - model_id: o3_mini
+    scores: { avg_score: 82 }
+    source: official
+    source_url: "https://arxiv.org/abs/2505.14552"
+  - model_id: gemini_2_5_pro
+    scores: { avg_score: 79 }
+    source: official
+    source_url: "https://arxiv.org/abs/2505.14552"
+  - model_id: o1
+    scores: { avg_score: 73 }
+    source: official
+    source_url: "https://arxiv.org/abs/2505.14552"
+  - model_id: doubao_1_5_pro
+    scores: { avg_score: 72 }
+    source: official
+    source_url: "https://arxiv.org/abs/2505.14552"
+  - model_id: deepseek_r1
+    scores: { avg_score: 71 }
+    source: official
+    source_url: "https://arxiv.org/abs/2505.14552"
+  - model_id: qwen3_32b
+    scores: { avg_score: 60 }
+    source: official
+    source_url: "https://arxiv.org/abs/2505.14552"

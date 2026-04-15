@@ -1,0 +1,255 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import { t } from '../../../i18n/translations';
+import { getCollection } from 'astro:content';
+import { buildBenchmarkDetailData, getModelsArray } from '../../../lib/data';
+import LeaderboardTable from '../../../components/LeaderboardTable';
+import SampleViewer from '../../../components/SampleViewer';
+
+const locale = 'en';
+
+export async function getStaticPaths() {
+  const taxonomy = await getCollection('taxonomy');
+  const benchmarksCol = await getCollection('benchmarks');
+
+  const paths = [];
+  for (const tax of taxonomy) {
+    for (const sub of tax.data.subcategories) {
+      for (const benchId of sub.benchmarks) {
+        const bench = benchmarksCol.find(b => b.data.id === benchId);
+        if (bench) {
+          paths.push({
+            params: { l1: tax.data.id, benchmark: benchId },
+            props: { taxonomy: tax, benchmark: bench },
+          });
+        }
+      }
+    }
+  }
+  return paths;
+}
+
+const { taxonomy: taxEntry, benchmark } = Astro.props;
+const scores = await getCollection('scores');
+const modelsCollection = await getCollection('models');
+const models = getModelsArray(modelsCollection);
+const modelsList = models.map(m => ({ id: m.id, name: m.name, org: m.org, color: m.color }));
+
+const scoreEntry = scores.find(s => s.data.benchmark_id === benchmark.data.id);
+const detail = buildBenchmarkDetailData(benchmark, scoreEntry, modelsList, locale);
+
+const columns = [
+  { key: 'model_name', label: t(locale, 'model'), sortable: false },
+  ...detail.metrics.map(m => ({ key: `score_${m.id}`, label: m.name })),
+  { key: 'source', label: 'Source', sortable: false },
+  { key: 'date', label: 'Date', sortable: false },
+];
+
+const rows = detail.leaderboardRows
+  .sort((a, b) => {
+    const m = detail.metrics[0];
+    if (!m) return 0;
+    const diff = (b.scores[m.id] ?? 0) - (a.scores[m.id] ?? 0);
+    return m.higher_is_better ? diff : -diff;
+  })
+  .map(r => ({
+    model_id: r.model_id,
+    model_name: r.model_name,
+    org: r.org,
+    color: r.color,
+    ...Object.fromEntries(Object.entries(r.scores).map(([k, v]) => [`score_${k}`, v])),
+    source: r.source,
+    date: r.date || '-',
+  }));
+---
+
+<Layout title={detail.name}>
+  <nav class="mb-6 text-sm text-[var(--color-text-secondary)]">
+    <a href={`/${locale}/`} class="hover:text-[var(--color-primary)]">{t(locale, 'nav_home')}</a>
+    <span class="mx-2">/</span>
+    <a href={`/${locale}/${taxEntry.data.id}/`} class="hover:text-[var(--color-primary)]">{taxEntry.data.name_en}</a>
+    <span class="mx-2">/</span>
+    <span>{benchmark.data.name}</span>
+  </nav>
+
+  <div class="rounded-xl border border-[var(--color-border)] bg-[var(--color-bg-card)] p-6 mb-8">
+    <h1 class="text-3xl font-bold mb-2">{detail.name}</h1>
+    <p class="text-[var(--color-text-secondary)] mb-4">{detail.description}</p>
+    <div class="flex flex-wrap gap-3">
+      {detail.url && (
+        <a href={detail.url} target="_blank" rel="noopener noreferrer"
+          class="inline-flex items-center gap-1.5 px-3 py-1.5 text-sm rounded-lg bg-[var(--color-primary)] text-white hover:opacity-90 transition-opacity">
+          {t(locale, 'official_link')} &rarr;
+        </a>
+      )}
+      {detail.paper && (
+        <a href={detail.paper} target="_blank" rel="noopener noreferrer"
+          class="inline-flex items-center gap-1.5 px-3 py-1.5 text-sm rounded-lg border border-[var(--color-border)] hover:border-[var(--color-primary)] transition-colors">
+          Paper &rarr;
+        </a>
+      )}
+    </div>
+  </div>
+
+  <section class="mb-8">
+    <h2 class="text-xl font-bold mb-4">{t(locale, 'metrics_desc')}</h2>
+    <div class="rounded-xl border border-[var(--color-border)] overflow-hidden">
+      <table class="w-full text-sm">
+        <thead>
+          <tr class="bg-[var(--color-bg-secondary)]">
+            <th class="py-2.5 px-4 text-left font-semibold">{t(locale, 'metric_name')}</th>
+            <th class="py-2.5 px-4 text-left font-semibold">{t(locale, 'metric_description')}</th>
+            <th class="py-2.5 px-4 text-left font-semibold">{t(locale, 'metric_direction')}</th>
+            <th class="py-2.5 px-4 text-left font-semibold">{t(locale, 'score_range')}</th>
+          </tr>
+        </thead>
+        <tbody>
+          {detail.metrics.map(m => (
+            <tr class="border-t border-[var(--color-border)]">
+              <td class="py-2.5 px-4 font-medium">{m.name}</td>
+              <td class="py-2.5 px-4 text-[var(--color-text-secondary)]">{m.description || '-'}</td>
+              <td class="py-2.5 px-4">
+                <span class={`text-xs px-2 py-0.5 rounded ${m.higher_is_better ? 'bg-green-100 text-green-700' : 'bg-red-100 text-red-700'}`}>
+                  {m.higher_is_better ? t(locale, 'higher_better') : t(locale, 'lower_better')}
+                </span>
+              </td>
+              <td class="py-2.5 px-4 font-mono text-sm">
+                {m.range ? `[${m.range[0]}, ${m.range[1]}]` : '-'}
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="mb-8">
+    <h2 class="text-xl font-bold mb-4">{t(locale, 'leaderboard')}</h2>
+    <div class="rounded-xl border border-[var(--color-border)] bg-[var(--color-bg-card)] p-4">
+      <LeaderboardTable
+        client:visible
+        columns={columns}
+        rows={rows}
+        searchPlaceholder={t(locale, 'search_placeholder')}
+        sourceLabels={{
+          official: t(locale, 'source_official'),
+          community: t(locale, 'source_community'),
+          self_reported: t(locale, 'source_self_reported'),
+        }}
+        highlightMax
+        highlightMode={detail.metrics[0]?.higher_is_better ? 'max' : 'min'}
+        emptyLabel={t(locale, 'no_results')}
+      />
+    </div>
+  </section>
+
+  {detail.overview && (
+    <section class="mb-8">
+      <h2 class="text-xl font-bold mb-4">{t(locale, 'paper_overview')}</h2>
+      <div class="rounded-xl border border-[var(--color-border)] bg-[var(--color-bg-card)] p-5 space-y-3">
+        {detail.overview.split('\n').filter(Boolean).map(line => (
+          <p class="text-sm text-[var(--color-text-secondary)] leading-7">{line}</p>
+        ))}
+      </div>
+    </section>
+  )}
+
+  {detail.leaderboardNote && (
+    <section class="mb-8">
+      <h2 class="text-xl font-bold mb-4">{t(locale, 'leaderboard_note')}</h2>
+      <div class="rounded-xl border border-[var(--color-border)] bg-[var(--color-bg-card)] p-5 text-sm text-[var(--color-text-secondary)] leading-7">
+        {detail.leaderboardNote}
+      </div>
+    </section>
+  )}
+
+  {(detail.glance?.length > 0 || detail.resources?.length > 0 || detail.downloads?.length > 0 || detail.highlights?.length > 0) && (
+    <section class="mb-8 grid gap-6 lg:grid-cols-3">
+      {detail.glance && detail.glance.length > 0 && (
+        <div class="rounded-xl border border-[var(--color-border)] bg-[var(--color-bg-card)] p-5">
+          <h2 class="text-lg font-bold mb-4">{t(locale, 'glance')}</h2>
+          <div class="space-y-3">
+            {detail.glance.map(item => (
+              <div class="flex items-start justify-between gap-3 border-b border-[var(--color-border)]/50 pb-3 last:border-b-0 last:pb-0">
+                <span class="text-sm text-[var(--color-text-secondary)]">{item.label}</span>
+                <span class="text-sm font-medium text-right">{item.value}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+
+      {detail.resources && detail.resources.length > 0 && (
+        <div class="rounded-xl border border-[var(--color-border)] bg-[var(--color-bg-card)] p-5">
+          <h2 class="text-lg font-bold mb-4">{t(locale, 'resources')}</h2>
+          <div class="flex flex-wrap gap-2">
+            {detail.resources.map(item => (
+              <a
+                href={item.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="px-3 py-1.5 text-sm rounded-lg border border-[var(--color-border)] hover:border-[var(--color-primary)] hover:text-[var(--color-primary)] transition-colors"
+              >
+                {item.label} &rarr;
+              </a>
+            ))}
+          </div>
+        </div>
+      )}
+
+      {detail.downloads && detail.downloads.length > 0 && (
+        <div class="rounded-xl border border-[var(--color-border)] bg-[var(--color-bg-card)] p-5">
+          <h2 class="text-lg font-bold mb-4">{t(locale, 'downloads')}</h2>
+          <div class="space-y-3">
+            {detail.downloads.map(item => (
+              <div class="border border-[var(--color-border)]/70 rounded-lg p-3">
+                <a
+                  href={item.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="text-sm font-medium hover:text-[var(--color-primary)] transition-colors"
+                >
+                  {item.label} &rarr;
+                </a>
+                {item.note && <p class="mt-1 text-xs text-[var(--color-text-secondary)]">{item.note}</p>}
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+    </section>
+  )}
+
+  {detail.highlights && detail.highlights.length > 0 && (
+    <section class="mb-8">
+      <h2 class="text-xl font-bold mb-4">{t(locale, 'key_findings')}</h2>
+      <div class="rounded-xl border border-[var(--color-border)] bg-[var(--color-bg-card)] p-5">
+        <ul class="list-disc pl-5 space-y-2 text-sm text-[var(--color-text-secondary)]">
+          {detail.highlights.map(item => (
+            <li>{item}</li>
+          ))}
+        </ul>
+      </div>
+    </section>
+  )}
+
+  {detail.samples && detail.samples.length > 0 && (
+    <section class="mb-8">
+      <h2 class="text-xl font-bold mb-4">{t(locale, 'data_samples')}</h2>
+      <SampleViewer
+        client:visible
+        samples={detail.samples}
+        locale={locale}
+        inputLabel={t(locale, 'input')}
+        outputLabel={t(locale, 'output')}
+        explanationLabel={t(locale, 'explanation')}
+      />
+    </section>
+  )}
+
+  <div class="mt-8">
+    <a href={`/${locale}/${taxEntry.data.id}/`} class="text-sm text-[var(--color-primary)] hover:underline">
+      &larr; {t(locale, 'back_to_category')}
+    </a>
+  </div>
+</Layout>

@@ -1,0 +1,23 @@
+benchmark_id: mceval
+updated: "2026-04-15"
+results:
+  - model_id: gpt_4o
+    scores: { avg_all: 65.2 }
+    source: official
+    source_url: "https://arxiv.org/abs/2406.07436"
+  - model_id: gpt_4_turbo
+    scores: { avg_all: 63.4 }
+    source: official
+    source_url: "https://arxiv.org/abs/2406.07436"
+  - model_id: deepseek_coder_6_7b
+    scores: { avg_all: 54.3 }
+    source: official
+    source_url: "https://arxiv.org/abs/2406.07436"
+  - model_id: gpt_3_5_turbo
+    scores: { avg_all: 52.6 }
+    source: official
+    source_url: "https://arxiv.org/abs/2406.07436"
+  - model_id: yi_large_turbo
+    scores: { avg_all: 46.6 }
+    source: official
+    source_url: "https://arxiv.org/abs/2406.07436"

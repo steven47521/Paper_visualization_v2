@@ -1,0 +1,53 @@
+id: dr3_eval
+name: "DR3-Eval"
+name_zh: "DR3-Eval"
+name_en: "DR3-Eval"
+url: "https://github.com/NJU-LINK/DR3-Eval"
+description_zh: "DR3-Eval 是面向深度研究代理的现实且可复现实验平台。页面主榜单采用官方项目页 512k 设置下的 Overall。"
+description_en: "DR3-Eval is a realistic and reproducible benchmark for deep research evaluation. This page uses the 512k Overall score from the official project page."
+overview_zh: |
+  DR3-Eval 目标是把深度研究评测同时做得更真实、可控、可复现。
+  它从真实用户多模态文件出发，为每个任务构建静态研究沙盒，并用反向构造方法生成查询。
+  任务以多文件报告生成为核心，而不是只做单步检索或短问答。
+  评测维度覆盖信息召回、事实准确性、引用覆盖、指令遵循和深度质量。
+  这项工作的主要贡献，是缩小“真实场景”和“可重复评测”之间长期存在的张力。
+overview_en: |
+  DR3-Eval is designed to make deep research evaluation more realistic, controllable, and reproducible at the same time.
+  It starts from real user multimodal files, builds a static sandbox for each task, and generates queries through reverse construction.
+  The benchmark centers on multi-file report generation rather than short QA or isolated retrieval.
+  Its evaluation protocol covers information recall, factual accuracy, citation coverage, instruction following, and depth quality.
+  The main contribution is addressing the long-standing tension between realism and reproducibility in deep research evaluation.
+glance:
+  - label_zh: "研究重点"
+    label_en: "Focus"
+    value: "可复现实验型深度研究评测"
+  - label_zh: "主指标"
+    label_en: "Primary Metric"
+    value: "Overall (512k)"
+  - label_zh: "展示设置"
+    label_en: "Displayed Setting"
+    value: "Official project page leaderboard"
+metrics:
+  - id: overall_512k
+    name: "Overall (512k)"
+    description: "Overall score under the 512k evaluation setting."
+    higher_is_better: true
+    range: [0, 100]
+resources:
+  - label_zh: "代码仓库"
+    label_en: "Code Repository"
+    url: "https://github.com/NJU-LINK/DR3-Eval"
+downloads:
+  - label_zh: "项目主页"
+    label_en: "Project Page"
+    url: "https://github.com/NJU-LINK/DR3-Eval"
+    note_zh: "该工作当前公开结果主要来自官方项目页与仓库文档。"
+    note_en: "The currently public results are mainly released on the official project page and repository docs."
+highlights_zh:
+  - "512k 长上下文设置下，当前最强模型的平均分仍只有中等水平。"
+  - "该工作强调现实约束、可重复性和失败分析，而不仅是单次得分。"
+highlights_en:
+  - "Even under the strongest current systems, the 512k setting remains challenging."
+  - "The work emphasizes realism, reproducibility, and failure analysis rather than a single score."
+leaderboard_note_zh: "榜单数据来自 DR3-Eval 官方项目页的 512k Overall。由于公开正式论文尚未稳定发布，这里以官方页面为准。"
+leaderboard_note_en: "The leaderboard uses the 512k Overall from the official DR3-Eval project page. Since a stable formal paper release is not yet the main public artifact, this page follows the official project page."

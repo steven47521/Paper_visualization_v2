@@ -1,0 +1,27 @@
+benchmark_id: rolellm
+updated: "2026-04-15"
+results:
+  - model_id: rolegpt
+    scores: { avg: 47.7, cus: 57.6, raw: 53.2, spe: 32.3 }
+    source: official
+    source_url: "https://arxiv.org/abs/2310.00746"
+  - model_id: rolellama2_13b_chat
+    scores: { avg: 44.7, cus: 37.5, raw: 47.9, spe: 48.8 }
+    source: official
+    source_url: "https://arxiv.org/abs/2310.00746"
+  - model_id: character_ai
+    scores: { avg: 39.3, cus: 41.9, raw: 45.7, spe: 30.3 }
+    source: official
+    source_url: "https://arxiv.org/abs/2310.00746"
+  - model_id: rolellama_7b
+    scores: { avg: 36.2, cus: 32.9, raw: 37.6, spe: 38.1 }
+    source: official
+    source_url: "https://arxiv.org/abs/2310.00746"
+  - model_id: alpaca_7b
+    scores: { avg: 28.8, cus: 24.2, raw: 35.3, spe: 27.0 }
+    source: official
+    source_url: "https://arxiv.org/abs/2310.00746"
+  - model_id: vicuna_13b
+    scores: { avg: 25.2, cus: 21.0, raw: 25.5, spe: 29.1 }
+    source: official
+    source_url: "https://arxiv.org/abs/2310.00746"

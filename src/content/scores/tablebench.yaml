@@ -1,0 +1,31 @@
+benchmark_id: tablebench
+updated: "2026-04-15"
+results:
+  - model_id: gpt_4_turbo
+    scores: { overall_tcot: 51.32 }
+    source: official
+    source_url: "https://arxiv.org/abs/2408.09174"
+  - model_id: gpt_4o
+    scores: { overall_tcot: 50.39 }
+    source: official
+    source_url: "https://arxiv.org/abs/2408.09174"
+  - model_id: deepseek_chat_v2
+    scores: { overall_tcot: 47.22 }
+    source: official
+    source_url: "https://arxiv.org/abs/2408.09174"
+  - model_id: deepseek_coder_v2_instruct
+    scores: { overall_tcot: 44.26 }
+    source: official
+    source_url: "https://arxiv.org/abs/2408.09174"
+  - model_id: llama_3_1_70b_instruct
+    scores: { overall_tcot: 43.85 }
+    source: official
+    source_url: "https://arxiv.org/abs/2408.09174"
+  - model_id: yi_large
+    scores: { overall_tcot: 38.57 }
+    source: official
+    source_url: "https://arxiv.org/abs/2408.09174"
+  - model_id: qwen2_72b_instruct
+    scores: { overall_tcot: 38.13 }
+    source: official
+    source_url: "https://arxiv.org/abs/2408.09174"

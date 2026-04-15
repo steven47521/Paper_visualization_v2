@@ -1,0 +1,36 @@
+id: tablebench
+name: "TableBench"
+name_zh: "TableBench"
+name_en: "TableBench"
+url: "https://github.com/TableBench/TableBench"
+paper: "https://arxiv.org/abs/2408.09174"
+description_zh: "TableBench 评估复杂表格问答能力。页面主榜单采用论文主表中 TCoT 设定下的 Overall。"
+description_en: "TableBench evaluates complex table question answering. This page uses Overall under the TCoT setting from the paper's main results table."
+glance:
+  - label_zh: "研究重点"
+    label_en: "Focus"
+    value: "复杂表格问答"
+  - label_zh: "主指标"
+    label_en: "Primary Metric"
+    value: "Overall TCoT"
+  - label_zh: "展示设置"
+    label_en: "Displayed Setting"
+    value: "TCoT reasoning protocol"
+metrics:
+  - id: overall_tcot
+    name: "Overall TCoT"
+    description: "Overall score under the TCoT protocol."
+    higher_is_better: true
+    range: [0, 100]
+resources:
+  - label_zh: "代码仓库"
+    label_en: "Code Repository"
+    url: "https://github.com/TableBench/TableBench"
+highlights_zh:
+  - "论文同时比较多种推理协议，这里固定 TCoT 作为主榜单。"
+  - "这样做能保留结构化数据理解的主难点，同时避免页面过于复杂。"
+highlights_en:
+  - "The paper compares multiple reasoning protocols; this page fixes TCoT as the primary leaderboard."
+  - "This keeps the core structured-data reasoning challenge while avoiding excessive page complexity."
+leaderboard_note_zh: "榜单使用 TCoT 设定下的 Overall。论文还报告其他协议结果，本页不将不同协议混合。"
+leaderboard_note_en: "The leaderboard uses Overall under the TCoT setting. The paper also reports other protocols, which are not mixed here."

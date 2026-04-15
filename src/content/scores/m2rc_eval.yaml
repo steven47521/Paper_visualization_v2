@@ -1,0 +1,15 @@
+benchmark_id: m2rc_eval
+updated: "2026-04-15"
+results:
+  - model_id: deepseek_coder_6_7b
+    scores: { avg_es: 54.7, avg_em: 22.6 }
+    source: official
+    source_url: "https://arxiv.org/abs/2410.21157"
+  - model_id: starcoder_7b
+    scores: { avg_es: 52.0, avg_em: 21.0 }
+    source: official
+    source_url: "https://arxiv.org/abs/2410.21157"
+  - model_id: code_llama_7b
+    scores: { avg_es: 50.3, avg_em: 19.4 }
+    source: official
+    source_url: "https://arxiv.org/abs/2410.21157"

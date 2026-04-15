@@ -1,0 +1,27 @@
+benchmark_id: mt_video_bench
+updated: "2026-04-15"
+results:
+  - model_id: gemini_2_5_pro
+    scores: { overall: 76.95, or: 71.63, mr: 72.45, cs: 93.71, ar: 57.74, ts: 89.67, pi: 76.50 }
+    source: official
+    source_url: "https://arxiv.org/abs/2510.17722"
+  - model_id: qwen3_vl_32b_thinking
+    scores: { overall: 68.57, or: 58.50, mr: 59.11, cs: 93.21, ar: 52.93, ts: 81.72, pi: 65.93 }
+    source: official
+    source_url: "https://arxiv.org/abs/2510.17722"
+  - model_id: doubao_seed_1_6
+    scores: { overall: 67.40, or: 53.82, mr: 57.20, cs: 93.21, ar: 55.57, ts: 81.30, pi: 63.30 }
+    source: official
+    source_url: "https://arxiv.org/abs/2510.17722"
+  - model_id: qwen3_vl_8b_thinking
+    scores: { overall: 65.98, or: 54.78, mr: 58.21, cs: 90.97, ar: 45.35, ts: 78.01, pi: 68.59 }
+    source: official
+    source_url: "https://arxiv.org/abs/2510.17722"
+  - model_id: qwen3_vl_4b_thinking
+    scores: { overall: 62.96, or: 52.18, mr: 55.26, cs: 91.37, ar: 41.67, ts: 72.00, pi: 65.31 }
+    source: official
+    source_url: "https://arxiv.org/abs/2510.17722"
+  - model_id: minicpm_v4_5
+    scores: { overall: 56.84, or: 54.53, mr: 48.57, cs: 77.86, ar: 39.46, ts: 61.29, pi: 59.35 }
+    source: official
+    source_url: "https://arxiv.org/abs/2510.17722"

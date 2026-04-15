@@ -1,0 +1,179 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import { t } from '../../../i18n/translations';
+import { getCollection } from 'astro:content';
+import { buildCategoryData, getModelsArray } from '../../../lib/data';
+import { normalizeBenchmarkScores } from '../../../lib/normalize';
+import CategoryLeaderboard from '../../../components/CategoryLeaderboard';
+
+const locale = 'en';
+
+export async function getStaticPaths() {
+  const taxonomy = await getCollection('taxonomy');
+  return taxonomy.map(entry => ({
+    params: { l1: entry.data.id },
+    props: { taxonomy: entry },
+  }));
+}
+
+const { taxonomy: taxEntry } = Astro.props;
+const benchmarks = await getCollection('benchmarks');
+const scores = await getCollection('scores');
+const modelsCollection = await getCollection('models');
+const models = getModelsArray(modelsCollection);
+
+const categoryData = buildCategoryData(taxEntry, benchmarks, scores);
+
+const subcategoryTabs = taxEntry.data.subcategories.map(sub => {
+  const subBenchmarks = sub.benchmarks
+    .map(bId => {
+      const bDef = benchmarks.find(b => b.data.id === bId);
+      const sData = scores.find(s => s.data.benchmark_id === bId);
+      if (!bDef) return null;
+      const normalized = normalizeBenchmarkScores(
+        sData?.data.results ?? [],
+        bDef.data.metrics
+      );
+      return {
+        id: bId,
+        name: bDef.data.name,
+        results: sData?.data.results ?? [],
+        normalized,
+        metrics: bDef.data.metrics,
+      };
+    })
+    .filter(Boolean);
+
+  const benchmarkInfos = subBenchmarks.map(b => ({
+    id: b!.id,
+    name: b!.name,
+  }));
+
+  const modelRows = models.map(m => {
+    const scoresMap: Record<string, number | null> = {};
+    const rawScoresMap: Record<string, number | null> = {};
+    for (const b of subBenchmarks) {
+      if (!b) continue;
+      scoresMap[b.id] = b.normalized.get(m.id) ?? null;
+      const result = b.results.find(r => r.model_id === m.id);
+      const primaryMetric = b.metrics[0];
+      rawScoresMap[b.id] = result?.scores[primaryMetric.id] ?? null;
+    }
+    return {
+      model_id: m.id,
+      model_name: m.name,
+      org: m.org,
+      color: m.color,
+      scores: scoresMap,
+      rawScores: rawScoresMap,
+    };
+  });
+
+  return {
+    id: sub.id,
+    name_zh: sub.name_zh,
+    name_en: sub.name_en,
+    description_zh: sub.description_zh,
+    description_en: sub.description_en,
+    benchmarkInfos,
+    modelRows,
+    benchmarkIds: sub.benchmarks,
+  };
+});
+---
+
+<Layout title={taxEntry.data.name_en}>
+  <nav class="mb-6 text-sm text-[var(--color-text-secondary)]">
+    <a href={`/${locale}/`} class="hover:text-[var(--color-primary)]">{t(locale, 'nav_home')}</a>
+    <span class="mx-2">/</span>
+    <span>{taxEntry.data.name_en}</span>
+  </nav>
+
+  <div class="mb-8">
+    <div class="flex items-center gap-3 mb-2">
+      <span class="w-4 h-4 rounded-full" style={`background-color: ${taxEntry.data.color}`}></span>
+      <h1 class="text-3xl font-bold">{taxEntry.data.name_en}</h1>
+    </div>
+  </div>
+
+  <div class="mb-6 border-b border-[var(--color-border)]">
+    <div class="flex gap-1 overflow-x-auto">
+      {subcategoryTabs.map((tab, i) => (
+        <button
+          class="subcategory-tab px-4 py-2.5 text-sm font-medium whitespace-nowrap border-b-2 transition-colors"
+          data-tab={tab.id}
+          data-active={i === 0 ? 'true' : 'false'}
+        >
+          {tab.name_en}
+        </button>
+      ))}
+    </div>
+  </div>
+
+  {subcategoryTabs.map((tab, i) => (
+    <div
+      class="subcategory-content"
+      data-tab-content={tab.id}
+      style={i === 0 ? '' : 'display:none'}
+    >
+      {tab.description_en && (
+        <p class="text-[var(--color-text-secondary)] mb-6">{tab.description_en}</p>
+      )}
+
+      <CategoryLeaderboard
+        client:visible
+        benchmarks={tab.benchmarkInfos}
+        models={tab.modelRows}
+        locale={locale}
+        l1Id={taxEntry.data.id}
+        labels={{
+          model: t(locale, 'model'),
+          overall_score: t(locale, 'overall_score'),
+          weight_reset: t(locale, 'weight_reset'),
+          search_placeholder: t(locale, 'search_placeholder'),
+          source_official: t(locale, 'source_official'),
+          source_community: t(locale, 'source_community'),
+          source_self_reported: t(locale, 'source_self_reported'),
+        }}
+      />
+
+      <div class="mt-6 flex flex-wrap gap-2">
+        {tab.benchmarkIds.map(bId => (
+          <a
+            href={`/${locale}/${taxEntry.data.id}/${bId}/`}
+            class="px-3 py-1.5 text-sm rounded-lg border border-[var(--color-border)] hover:border-[var(--color-primary)] hover:text-[var(--color-primary)] transition-colors"
+          >
+            {benchmarks.find(b => b.data.id === bId)?.data.name ?? bId} &rarr;
+          </a>
+        ))}
+      </div>
+    </div>
+  ))}
+
+  <script is:inline>
+    document.querySelectorAll('.subcategory-tab').forEach(tab => {
+      tab.addEventListener('click', () => {
+        const tabId = tab.getAttribute('data-tab');
+        document.querySelectorAll('.subcategory-tab').forEach(t => {
+          t.setAttribute('data-active', 'false');
+          t.style.borderBottomColor = 'transparent';
+          t.style.color = '';
+        });
+        tab.setAttribute('data-active', 'true');
+        tab.style.borderBottomColor = 'var(--color-primary)';
+        tab.style.color = 'var(--color-primary)';
+
+        document.querySelectorAll('.subcategory-content').forEach(c => {
+          c.style.display = c.getAttribute('data-tab-content') === tabId ? '' : 'none';
+        });
+      });
+
+      if (tab.getAttribute('data-active') === 'true') {
+        tab.style.borderBottomColor = 'var(--color-primary)';
+        tab.style.color = 'var(--color-primary)';
+      } else {
+        tab.style.borderBottomColor = 'transparent';
+      }
+    });
+  </script>
+</Layout>

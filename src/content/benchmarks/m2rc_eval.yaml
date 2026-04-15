@@ -1,0 +1,49 @@
+id: m2rc_eval
+name: "M2RC-Eval"
+name_zh: "M2RC-Eval"
+name_en: "M2RC-Eval"
+url: "https://arxiv.org/abs/2410.21157"
+paper: "https://arxiv.org/abs/2410.21157"
+description_zh: "M2RC-Eval 评测仓库级代码补全能力。这里选用论文直接模型对比表中的 Avg ES 作为主榜单，并保留 Avg EM 作为辅助指标。"
+description_en: "M2RC-Eval measures repository-level code completion. This page uses Avg ES from the direct model comparison table as the primary leaderboard and keeps Avg EM as a secondary metric."
+overview_zh: |
+  M2RC-Eval 聚焦仓库级代码补全，而不是脱离项目上下文的函数级补全。
+  论文构建了覆盖 18 种编程语言的多语言 benchmark，并补充了基于语法树的细粒度标注。
+  这些标注既覆盖不同难度 bucket，也覆盖不同语义补全场景。
+  论文还整理了 M2RC-INSTRUCT，用于增强现有代码模型的仓库级补全能力。
+  它的主要价值，在于同时评估“跨语言泛化”和“不同补全场景下的细粒度能力”。
+overview_en: |
+  M2RC-Eval targets repository-level code completion rather than isolated function-level completion.
+  It builds a multilingual benchmark spanning 18 programming languages with fine-grained AST-based annotations.
+  These annotations cover both bucket-level difficulty and semantic completion scenarios.
+  The paper also introduces M2RC-INSTRUCT to improve repository-level completion ability.
+  Its main value is evaluating both cross-language generalization and fine-grained completion behavior.
+glance:
+  - label_zh: "研究重点"
+    label_en: "Focus"
+    value: "仓库级代码补全"
+  - label_zh: "主指标"
+    label_en: "Primary Metric"
+    value: "Avg ES"
+  - label_zh: "展示设置"
+    label_en: "Displayed Setting"
+    value: "Table 2 direct baselines"
+metrics:
+  - id: avg_es
+    name: "Avg ES"
+    description: "Average edit similarity across languages."
+    higher_is_better: true
+    range: [0, 100]
+  - id: avg_em
+    name: "Avg EM"
+    description: "Average exact match across languages."
+    higher_is_better: true
+    range: [0, 100]
+highlights_zh:
+  - "论文区分了仓库级补全与普通单文件代码生成。"
+  - "为了避免把检索或训练增强方法混入模型榜单，这里只展示直接模型基线。"
+highlights_en:
+  - "The paper distinguishes repository-level completion from ordinary single-file generation."
+  - "To avoid mixing retrieval or training augmentations into the leaderboard, this page shows only direct model baselines."
+leaderboard_note_zh: "榜单主指标为 Table 2 中直接模型对比的 Avg ES；Avg EM 同步展示，用于补充严格匹配表现。"
+leaderboard_note_en: "The primary leaderboard metric is Avg ES from Table 2 direct model comparisons. Avg EM is shown as a complementary stricter measure."

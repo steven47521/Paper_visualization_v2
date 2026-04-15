@@ -1,0 +1,36 @@
+id: conceptmath
+name: "ConceptMath"
+name_zh: "ConceptMath"
+name_en: "ConceptMath"
+url: "https://github.com/conceptmath/conceptmath"
+paper: "https://arxiv.org/abs/2402.14660"
+description_zh: "ConceptMath 是面向双语概念级数学推理的 benchmark。页面主榜单采用论文总表的 Avg。"
+description_en: "ConceptMath is a bilingual concept-wise benchmark for mathematical reasoning. This page uses the Avg column from the paper's main table."
+glance:
+  - label_zh: "研究重点"
+    label_en: "Focus"
+    value: "双语概念级数学推理"
+  - label_zh: "主指标"
+    label_en: "Primary Metric"
+    value: "Avg"
+  - label_zh: "展示设置"
+    label_en: "Displayed Setting"
+    value: "Table 2 overall summary"
+metrics:
+  - id: avg
+    name: "Avg"
+    description: "Average ConceptMath score across systems and prompt settings."
+    higher_is_better: true
+    range: [0, 100]
+resources:
+  - label_zh: "代码仓库"
+    label_en: "Code Repository"
+    url: "https://github.com/conceptmath/conceptmath"
+highlights_zh:
+  - "该工作最重要的价值是把数学能力拆到概念层级。"
+  - "页面使用 Avg，避免把四个教育体系和多种提示方式拆成过多榜单。"
+highlights_en:
+  - "The core value of ConceptMath is concept-level diagnosis rather than one coarse math score."
+  - "The page uses Avg to avoid fragmenting the site into too many education-system and prompting variants."
+leaderboard_note_zh: "主榜单使用论文 Table 2 的 Avg。论文还包含不同语言系统和提示方式的详细拆分，本页不混合展示。"
+leaderboard_note_en: "The primary leaderboard uses Avg from Table 2. The paper also includes detailed splits by language system and prompting setup, which are not mixed here."

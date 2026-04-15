@@ -1,0 +1,43 @@
+benchmark_id: supergpqa
+updated: "2026-04-15"
+results:
+  - model_id: deepseek_r1
+    scores: { overall_sample: 61.82 }
+    source: official
+    source_url: "https://arxiv.org/abs/2502.14739"
+  - model_id: o1
+    scores: { overall_sample: 60.24 }
+    source: official
+    source_url: "https://arxiv.org/abs/2502.14739"
+  - model_id: o3_mini
+    scores: { overall_sample: 55.22 }
+    source: official
+    source_url: "https://arxiv.org/abs/2502.14739"
+  - model_id: doubao_1_5_pro
+    scores: { overall_sample: 55.09 }
+    source: official
+    source_url: "https://arxiv.org/abs/2502.14739"
+  - model_id: qwen_max
+    scores: { overall_sample: 50.08 }
+    source: official
+    source_url: "https://arxiv.org/abs/2502.14739"
+  - model_id: claude_3_5_sonnet
+    scores: { overall_sample: 48.16 }
+    source: official
+    source_url: "https://arxiv.org/abs/2502.14739"
+  - model_id: gemini_2_0_flash
+    scores: { overall_sample: 47.73 }
+    source: official
+    source_url: "https://arxiv.org/abs/2502.14739"
+  - model_id: deepseek_v3
+    scores: { overall_sample: 47.40 }
+    source: official
+    source_url: "https://arxiv.org/abs/2502.14739"
+  - model_id: gpt_4o
+    scores: { overall_sample: 44.40 }
+    source: official
+    source_url: "https://arxiv.org/abs/2502.14739"
+  - model_id: qwen2_5_72b_instruct
+    scores: { overall_sample: 40.75 }
+    source: official
+    source_url: "https://arxiv.org/abs/2502.14739"

@@ -1,0 +1,39 @@
+id: korgym
+name: "KORGym"
+name_zh: "KORGym"
+name_en: "KORGym"
+url: "https://razor233.github.io/KORGYM_HomePage/"
+paper: "https://arxiv.org/abs/2505.14552"
+description_zh: "KORGym 是面向动态游戏环境的推理评测平台。页面主榜单采用论文主表的 Avg Score。"
+description_en: "KORGym is a dynamic game platform for reasoning evaluation. This page uses the Avg Score from the paper's main table."
+glance:
+  - label_zh: "研究重点"
+    label_en: "Focus"
+    value: "动态博弈推理"
+  - label_zh: "主指标"
+    label_en: "Primary Metric"
+    value: "Avg Score"
+  - label_zh: "展示设置"
+    label_en: "Displayed Setting"
+    value: "Main benchmark table"
+metrics:
+  - id: avg_score
+    name: "Avg Score"
+    description: "Average KORGym score."
+    higher_is_better: true
+    range: [0, 100]
+resources:
+  - label_zh: "项目主页"
+    label_en: "Project Page"
+    url: "https://razor233.github.io/KORGYM_HomePage/"
+  - label_zh: "代码仓库"
+    label_en: "Code Repository"
+    url: "https://github.com/multimodal-art-projection/KORGym"
+highlights_zh:
+  - "KORGym 用动态交互式游戏替代静态题目，更强调在线决策能力。"
+  - "页面主榜单采用 Avg Score，和论文主结果保持一致。"
+highlights_en:
+  - "KORGym replaces static questions with dynamic interactive games and emphasizes online decision-making."
+  - "The page uses Avg Score to stay aligned with the paper's main results."
+leaderboard_note_zh: "榜单直接使用论文主表 Avg Score。论文还给出其他游戏子集分析，本页不额外拆分。"
+leaderboard_note_en: "The leaderboard directly uses Avg Score from the main table. The paper also provides analyses on other game subsets, which are not expanded here."

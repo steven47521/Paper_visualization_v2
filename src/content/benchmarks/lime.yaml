@@ -1,0 +1,36 @@
+id: lime
+name: "LIME"
+name_zh: "LIME"
+name_en: "LIME"
+url: "https://github.com/kangreen0210/LIME"
+paper: "https://arxiv.org/abs/2409.06851"
+description_zh: "LIME 通过筛掉无区分度和泄漏样本，构建更高效的多模态评测集。页面主榜单采用论文表中的 LIME Overall。"
+description_en: "LIME curates a more discriminative and efficient multimodal benchmark by filtering low-value and leakage-prone samples. This page uses the LIME Overall score reported in the paper."
+glance:
+  - label_zh: "研究重点"
+    label_en: "Focus"
+    value: "高效多模态综合评测"
+  - label_zh: "主指标"
+    label_en: "Primary Metric"
+    value: "LIME Overall"
+  - label_zh: "展示设置"
+    label_en: "Displayed Setting"
+    value: "Table 2 main results"
+metrics:
+  - id: overall
+    name: "LIME Overall"
+    description: "Overall score on the curated LIME benchmark."
+    higher_is_better: true
+    range: [0, 100]
+resources:
+  - label_zh: "代码仓库"
+    label_en: "Code Repository"
+    url: "https://github.com/kangreen0210/LIME"
+highlights_zh:
+  - "LIME 的核心价值不只是重新打分，而是重新筛样本。"
+  - "论文指出 LIME 总分与 WildVision Elo 相关性达到 0.91。"
+highlights_en:
+  - "LIME is valuable not merely because it rescales scores, but because it recurates the benchmark samples."
+  - "The paper reports a 0.91 correlation between LIME overall score and WildVision Elo."
+leaderboard_note_zh: "榜单采用论文 Table 2 的 LIME Overall，而不是原始 benchmark 汇总分。该选择最能体现论文“Less Is More”的核心贡献。"
+leaderboard_note_en: "The leaderboard uses LIME Overall from Table 2 rather than scores on the original benchmark collection. This best reflects the paper's 'Less Is More' contribution."

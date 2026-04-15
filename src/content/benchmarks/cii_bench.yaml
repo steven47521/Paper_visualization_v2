@@ -1,0 +1,42 @@
+id: cii_bench
+name: "CII-Bench"
+name_zh: "CII-Bench"
+name_en: "CII-Bench"
+url: "https://cii-bench.github.io/"
+paper: "https://arxiv.org/abs/2410.13854"
+description_zh: "CII-Bench 关注中文图像深层含义与文化隐喻理解。页面主榜单采用论文主表中的 Overall。"
+description_en: "CII-Bench studies deep implication understanding in Chinese images and cultural metaphors. This page uses the Overall score from the paper's main table."
+glance:
+  - label_zh: "研究重点"
+    label_en: "Focus"
+    value: "中文图像深义理解"
+  - label_zh: "主指标"
+    label_en: "Primary Metric"
+    value: "Overall"
+  - label_zh: "展示设置"
+    label_en: "Displayed Setting"
+    value: "Main benchmark table"
+metrics:
+  - id: overall
+    name: "Overall"
+    description: "Overall benchmark accuracy."
+    higher_is_better: true
+    range: [0, 100]
+resources:
+  - label_zh: "项目主页"
+    label_en: "Project Page"
+    url: "https://cii-bench.github.io/"
+downloads:
+  - label_zh: "数据集"
+    label_en: "Dataset"
+    url: "https://huggingface.co/datasets/m-a-p/CII-Bench"
+    note_zh: "官方公开的数据集页面，可用于查看 benchmark 数据。"
+    note_en: "Official dataset page for browsing the benchmark data."
+highlights_zh:
+  - "论文强调当前模型对中国传统文化和视觉隐喻的理解仍明显不足。"
+  - "页面保留总分作为主榜单，并把文化理解的背景写入补充信息。"
+highlights_en:
+  - "The paper highlights the gap between current models and deeper Chinese cultural understanding."
+  - "The page keeps Overall as the main leaderboard and surfaces the cultural-understanding angle in the supplementary section."
+leaderboard_note_zh: "主榜单采用论文主表 Overall。论文还分析了不同提示方式与文化子域表现，这里不混合到主榜单中。"
+leaderboard_note_en: "The primary leaderboard uses Overall from the main table. The paper also analyzes prompting variants and cultural subdomains, which are not mixed into the main leaderboard here."

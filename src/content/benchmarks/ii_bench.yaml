@@ -1,0 +1,45 @@
+id: ii_bench
+name: "II-Bench"
+name_zh: "II-Bench"
+name_en: "II-Bench"
+url: "https://ii-bench.github.io/"
+paper: "https://arxiv.org/abs/2406.05862"
+description_zh: "II-Bench 聚焦图像深层含义理解。页面主榜单采用论文主表中的 Overall Accuracy。"
+description_en: "II-Bench focuses on image implication understanding. This page uses the Overall Accuracy from the paper's main table."
+glance:
+  - label_zh: "研究重点"
+    label_en: "Focus"
+    value: "图像隐含义理解"
+  - label_zh: "主指标"
+    label_en: "Primary Metric"
+    value: "Overall Accuracy"
+  - label_zh: "展示设置"
+    label_en: "Displayed Setting"
+    value: "Main benchmark table"
+metrics:
+  - id: overall_accuracy
+    name: "Overall Accuracy"
+    description: "Overall accuracy on II-Bench."
+    higher_is_better: true
+    range: [0, 100]
+resources:
+  - label_zh: "项目主页"
+    label_en: "Project Page"
+    url: "https://ii-bench.github.io/"
+  - label_zh: "代码仓库"
+    label_en: "Code Repository"
+    url: "https://github.com/II-Bench/II-Bench"
+downloads:
+  - label_zh: "数据集"
+    label_en: "Dataset"
+    url: "https://huggingface.co/datasets/m-a-p/II-Bench"
+    note_zh: "官方公开的数据集页面，可用于查看与下载 benchmark 数据。"
+    note_en: "Official dataset page for browsing and downloading the benchmark data."
+highlights_zh:
+  - "该工作强调图像深层 implication，而不是表层目标识别。"
+  - "页面采用总准确率作为主榜单，便于与同类图像理解 benchmark 对齐。"
+highlights_en:
+  - "The benchmark targets deep image implications rather than surface object recognition."
+  - "The page uses overall accuracy as the primary leaderboard for easier alignment with related image-understanding benchmarks."
+leaderboard_note_zh: "榜单采用论文主表中的 Overall Accuracy。论文还提供更细任务维度，本页不拆成多个主榜。"
+leaderboard_note_en: "The leaderboard uses Overall Accuracy from the main table. The paper also provides finer task dimensions, which are not split into separate main leaderboards here."

@@ -1,0 +1,31 @@
+benchmark_id: giebench
+updated: "2026-04-15"
+results:
+  - model_id: gpt_4_turbo
+    scores: { overall: 78.6 }
+    source: official
+    source_url: "https://arxiv.org/abs/2406.14903"
+  - model_id: qwen_1_5_110b
+    scores: { overall: 73.5 }
+    source: official
+    source_url: "https://arxiv.org/abs/2406.14903"
+  - model_id: qwen2_72b
+    scores: { overall: 73.2 }
+    source: official
+    source_url: "https://arxiv.org/abs/2406.14903"
+  - model_id: yi_large
+    scores: { overall: 69.7 }
+    source: official
+    source_url: "https://arxiv.org/abs/2406.14903"
+  - model_id: qwen_1_5_72b
+    scores: { overall: 68.1 }
+    source: official
+    source_url: "https://arxiv.org/abs/2406.14903"
+  - model_id: llama_3_70b
+    scores: { overall: 67.6 }
+    source: official
+    source_url: "https://arxiv.org/abs/2406.14903"
+  - model_id: yi_1_5_9b
+    scores: { overall: 67.3 }
+    source: official
+    source_url: "https://arxiv.org/abs/2406.14903"

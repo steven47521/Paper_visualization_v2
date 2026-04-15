@@ -1,0 +1,31 @@
+benchmark_id: cot_error_detection
+updated: "2026-04-15"
+results:
+  - model_id: gpt_4_turbo_128k
+    scores: { f1_score: 69.17, any_error_acc: 57.04, first_error_acc: 40.76 }
+    source: official
+    source_url: "https://arxiv.org/abs/2502.19361"
+  - model_id: gpt_4o
+    scores: { f1_score: 50.89, any_error_acc: 36.89, first_error_acc: 30.85 }
+    source: official
+    source_url: "https://arxiv.org/abs/2502.19361"
+  - model_id: deepseek_v3
+    scores: { f1_score: 42.39, any_error_acc: 31.72, first_error_acc: 27.33 }
+    source: official
+    source_url: "https://arxiv.org/abs/2502.19361"
+  - model_id: qwen2_5_32b_instruct
+    scores: { f1_score: 42.23, any_error_acc: 30.58, first_error_acc: 26.73 }
+    source: official
+    source_url: "https://arxiv.org/abs/2502.19361"
+  - model_id: deepseek_r1
+    scores: { f1_score: 40.78, any_error_acc: 29.94, first_error_acc: 28.43 }
+    source: official
+    source_url: "https://arxiv.org/abs/2502.19361"
+  - model_id: qwen2_5_7b_instruct
+    scores: { f1_score: 30.74, any_error_acc: 22.25, first_error_acc: 18.63 }
+    source: official
+    source_url: "https://arxiv.org/abs/2502.19361"
+  - model_id: gpt_3_5_turbo
+    scores: { f1_score: 11.65, any_error_acc: 6.15, first_error_acc: 7.98 }
+    source: official
+    source_url: "https://arxiv.org/abs/2502.19361"

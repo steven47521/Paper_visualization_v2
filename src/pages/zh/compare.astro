@@ -1,0 +1,99 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { t } from '../../i18n/translations';
+import { getCollection } from 'astro:content';
+import { buildCategoryData, getModelsArray } from '../../lib/data';
+import { normalizeBenchmarkScores } from '../../lib/normalize';
+import { computeOverallRanking } from '../../lib/aggregate';
+import CompareView from '../../components/CompareView';
+
+const locale = 'zh';
+
+const taxonomy = await getCollection('taxonomy');
+const benchmarks = await getCollection('benchmarks');
+const scores = await getCollection('scores');
+const modelsCollection = await getCollection('models');
+const models = getModelsArray(modelsCollection);
+const activeModelIds = new Set(
+  scores.flatMap(scoreEntry => scoreEntry.data.results.map(result => result.model_id))
+);
+const modelsList = models
+  .filter(m => activeModelIds.has(m.id))
+  .map(m => ({ id: m.id, name: m.name, org: m.org, color: m.color }));
+
+const categories = taxonomy
+  .sort((a, b) => a.data.order - b.data.order)
+  .map(t => buildCategoryData(t, benchmarks, scores));
+
+const overallRanking = computeOverallRanking(categories, modelsList);
+
+// Build benchmark scores for comparison table
+const benchmarkScores = [];
+for (const tax of taxonomy.sort((a, b) => a.data.order - b.data.order)) {
+  for (const sub of tax.data.subcategories) {
+    for (const bId of sub.benchmarks) {
+      const bDef = benchmarks.find(b => b.data.id === bId);
+      const sData = scores.find(s => s.data.benchmark_id === bId);
+      if (!bDef || !sData) continue;
+      const primaryMetric = bDef.data.metrics[0];
+      if (!primaryMetric) continue;
+
+      const modelScores: Record<string, number | null> = {};
+      for (const m of modelsList) {
+        const result = sData.data.results.find(r => r.model_id === m.id);
+        modelScores[m.id] = result?.scores[primaryMetric.id] ?? null;
+      }
+
+      benchmarkScores.push({
+        benchmark_id: bId,
+        benchmark_name: bDef.data.name,
+        l1_id: tax.data.id,
+        l1_name: tax.data.name_zh,
+        l2_name: sub.name_zh,
+        scores: modelScores,
+      });
+    }
+  }
+}
+
+// Build L1 summaries
+const l1Summaries = taxonomy
+  .sort((a, b) => a.data.order - b.data.order)
+  .map(tax => {
+    const modelL1Scores: Record<string, number | null> = {};
+    for (const ms of overallRanking) {
+      modelL1Scores[ms.model_id] = ms.l1Scores[tax.data.id] ?? null;
+    }
+    return {
+      id: tax.data.id,
+      name: tax.data.name_zh,
+      color: tax.data.color,
+      scores: modelL1Scores,
+    };
+  });
+---
+
+<Layout title={t(locale, 'compare_title')}>
+  <nav class="mb-6 text-sm text-[var(--color-text-secondary)]">
+    <a href={`/${locale}/`} class="hover:text-[var(--color-primary)]">{t(locale, 'nav_home')}</a>
+    <span class="mx-2">/</span>
+    <span>{t(locale, 'compare_title')}</span>
+  </nav>
+
+  <h1 class="text-3xl font-bold mb-2">{t(locale, 'compare_title')}</h1>
+  <p class="text-[var(--color-text-secondary)] mb-8">{t(locale, 'compare_desc')}</p>
+
+  <CompareView
+    client:load
+    models={modelsList}
+    benchmarkScores={benchmarkScores}
+    l1Summaries={l1Summaries}
+    locale={locale}
+    labels={{
+      select_models: t(locale, 'select_models'),
+      clear_all: t(locale, 'clear_all'),
+      compare_desc: t(locale, 'compare_desc'),
+      no_data: t(locale, 'no_data'),
+    }}
+  />
+</Layout>

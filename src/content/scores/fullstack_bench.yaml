@@ -1,0 +1,35 @@
+benchmark_id: fullstack_bench
+updated: "2026-04-15"
+results:
+  - model_id: o1_preview
+    scores: { overall: 65.62 }
+    source: official
+    source_url: "https://arxiv.org/abs/2412.00535"
+  - model_id: o1_mini
+    scores: { overall: 64.73 }
+    source: official
+    source_url: "https://arxiv.org/abs/2412.00535"
+  - model_id: claude_3_5_sonnet
+    scores: { overall: 62.57 }
+    source: official
+    source_url: "https://arxiv.org/abs/2412.00535"
+  - model_id: gpt_4o
+    scores: { overall: 61.77 }
+    source: official
+    source_url: "https://arxiv.org/abs/2412.00535"
+  - model_id: doubao_coder_preview
+    scores: { overall: 58.92 }
+    source: official
+    source_url: "https://arxiv.org/abs/2412.00535"
+  - model_id: deepseek_v2_5
+    scores: { overall: 58.65 }
+    source: official
+    source_url: "https://arxiv.org/abs/2412.00535"
+  - model_id: deepseek_coder_v2_instruct
+    scores: { overall: 58.09 }
+    source: official
+    source_url: "https://arxiv.org/abs/2412.00535"
+  - model_id: qwen2_5_32b_instruct
+    scores: { overall: 56.88 }
+    source: official
+    source_url: "https://arxiv.org/abs/2412.00535"

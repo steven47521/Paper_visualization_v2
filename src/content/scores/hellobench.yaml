@@ -1,0 +1,39 @@
+benchmark_id: hellobench
+updated: "2026-04-15"
+results:
+  - model_id: gpt_4o
+    scores: { avg_score: 48.55 }
+    source: official
+    source_url: "https://arxiv.org/abs/2409.16191"
+  - model_id: mistral_large
+    scores: { avg_score: 46.77 }
+    source: official
+    source_url: "https://arxiv.org/abs/2409.16191"
+  - model_id: o1_mini
+    scores: { avg_score: 46.08 }
+    source: official
+    source_url: "https://arxiv.org/abs/2409.16191"
+  - model_id: claude_3_5_sonnet
+    scores: { avg_score: 43.77 }
+    source: official
+    source_url: "https://arxiv.org/abs/2409.16191"
+  - model_id: gemini_1_5_pro
+    scores: { avg_score: 39.24 }
+    source: official
+    source_url: "https://arxiv.org/abs/2409.16191"
+  - model_id: deepseek_v2_5
+    scores: { avg_score: 35.69 }
+    source: official
+    source_url: "https://arxiv.org/abs/2409.16191"
+  - model_id: yi_large
+    scores: { avg_score: 32.99 }
+    source: official
+    source_url: "https://arxiv.org/abs/2409.16191"
+  - model_id: qwen_max
+    scores: { avg_score: 28.36 }
+    source: official
+    source_url: "https://arxiv.org/abs/2409.16191"
+  - model_id: glm_4_plus
+    scores: { avg_score: 24.78 }
+    source: official
+    source_url: "https://arxiv.org/abs/2409.16191"

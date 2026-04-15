@@ -1,0 +1,27 @@
+benchmark_id: ii_bench
+updated: "2026-04-15"
+results:
+  - model_id: qwen_vl_max
+    scores: { overall_accuracy: 74.8 }
+    source: official
+    source_url: "https://arxiv.org/abs/2406.05862"
+  - model_id: gemini_1_5_pro
+    scores: { overall_accuracy: 73.9 }
+    source: official
+    source_url: "https://arxiv.org/abs/2406.05862"
+  - model_id: llava_1_6_34b
+    scores: { overall_accuracy: 73.8 }
+    source: official
+    source_url: "https://arxiv.org/abs/2406.05862"
+  - model_id: gpt_4o
+    scores: { overall_accuracy: 72.6 }
+    source: official
+    source_url: "https://arxiv.org/abs/2406.05862"
+  - model_id: cogvlm2
+    scores: { overall_accuracy: 70.3 }
+    source: official
+    source_url: "https://arxiv.org/abs/2406.05862"
+  - model_id: minicpm_llama3_2_5
+    scores: { overall_accuracy: 69.4 }
+    source: official
+    source_url: "https://arxiv.org/abs/2406.05862"

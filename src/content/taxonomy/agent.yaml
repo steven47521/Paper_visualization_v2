@@ -1,0 +1,34 @@
+id: agent
+name_zh: "Agent"
+name_en: "Agent"
+icon: "bot"
+color: "#475569"
+order: 4
+subcategories:
+  - id: code_agent
+    name_zh: "Code Agent"
+    name_en: "Code Agent"
+    description_zh: "聚焦代码生成、仓库级补全与软件工程代理能力。"
+    description_en: "Benchmarks for code generation, repository completion, and software engineering agents."
+    benchmarks:
+      - mceval
+      - m2rc_eval
+      - fullstack_bench
+      - swe_compass
+  - id: search_agent
+    name_zh: "Search Agent"
+    name_en: "Search Agent"
+    description_zh: "聚焦深度研究与长程信息检索代理。"
+    description_en: "Benchmarks for deep research and long-horizon information seeking agents."
+    benchmarks:
+      - finder
+      - dr3_eval
+  - id: general_agent
+    name_zh: "General Agent"
+    name_en: "General Agent"
+    description_zh: "聚焦工具使用、IT 运维与角色代理等通用智能体能力。"
+    description_en: "Benchmarks for tool use, IT operations, and role-based general agents."
+    benchmarks:
+      - mtu_bench
+      - owl
+      - roleagent

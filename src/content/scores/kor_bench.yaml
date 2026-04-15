@@ -1,0 +1,35 @@
+benchmark_id: kor_bench
+updated: "2026-04-15"
+results:
+  - model_id: o1_preview
+    scores: { overall: 72.88 }
+    source: official
+    source_url: "https://arxiv.org/abs/2410.06526"
+  - model_id: o1_mini
+    scores: { overall: 70.16 }
+    source: official
+    source_url: "https://arxiv.org/abs/2410.06526"
+  - model_id: claude_3_5_sonnet
+    scores: { overall: 58.96 }
+    source: official
+    source_url: "https://arxiv.org/abs/2410.06526"
+  - model_id: gpt_4o
+    scores: { overall: 58.00 }
+    source: official
+    source_url: "https://arxiv.org/abs/2410.06526"
+  - model_id: llama_3_1_405b
+    scores: { overall: 55.36 }
+    source: official
+    source_url: "https://arxiv.org/abs/2410.06526"
+  - model_id: qwen2_5_32b_instruct
+    scores: { overall: 54.72 }
+    source: official
+    source_url: "https://arxiv.org/abs/2410.06526"
+  - model_id: gpt_4_turbo
+    scores: { overall: 53.52 }
+    source: official
+    source_url: "https://arxiv.org/abs/2410.06526"
+  - model_id: qwen2_5_72b_instruct
+    scores: { overall: 52.16 }
+    source: official
+    source_url: "https://arxiv.org/abs/2410.06526"

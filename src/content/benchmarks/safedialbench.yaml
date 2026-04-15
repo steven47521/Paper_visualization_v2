@@ -1,0 +1,45 @@
+id: safedialbench
+name: "SafeDialBench"
+name_zh: "SafeDialBench"
+name_en: "SafeDialBench"
+url: "https://safedialbench.github.io/"
+paper: "https://arxiv.org/abs/2502.11090"
+description_zh: "SafeDialBench 评测多轮对话中的安全性与 jailbreak 抵抗能力。页面主榜单采用论文表中的 ASR，分数越低越好。"
+description_en: "SafeDialBench evaluates safety and jailbreak resistance in multi-turn dialogue. This page uses ASR from the paper, where lower is better."
+glance:
+  - label_zh: "研究重点"
+    label_en: "Focus"
+    value: "多轮对话安全"
+  - label_zh: "主指标"
+    label_en: "Primary Metric"
+    value: "ASR"
+  - label_zh: "展示设置"
+    label_en: "Displayed Setting"
+    value: "Main ASR table"
+metrics:
+  - id: asr
+    name: "ASR"
+    description: "Attack success rate. Lower is better."
+    higher_is_better: false
+    range: [0, 1]
+resources:
+  - label_zh: "项目主页"
+    label_en: "Project Page"
+    url: "https://safedialbench.github.io/"
+  - label_zh: "数据仓库"
+    label_en: "Dataset Repository"
+    url: "https://github.com/drivetosouth/SafeDialBench-Dataset"
+downloads:
+  - label_zh: "数据仓库"
+    label_en: "Dataset Repository"
+    url: "https://github.com/drivetosouth/SafeDialBench-Dataset"
+    note_zh: "官方公开的数据仓库，包含 SafeDialBench 的数据与使用说明。"
+    note_en: "Official public dataset repository containing SafeDialBench data and usage instructions."
+highlights_zh:
+  - "这是当前站点里少数“越低越好”的 benchmark。"
+  - "页面排序和高亮已按 ASR 反向处理。"
+highlights_en:
+  - "This is one of the few benchmarks on the site where lower is better."
+  - "The page sorts and highlights the leaderboard with the ASR direction reversed."
+leaderboard_note_zh: "主榜单使用 ASR，越低越好。为了和其他 benchmark 一致展示，页面仍保留统一榜单样式，但排序方向已反转。"
+leaderboard_note_en: "The primary leaderboard uses ASR, where lower is better. To preserve a consistent site layout, the page keeps the same table style but reverses the sorting direction."

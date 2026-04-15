@@ -1,0 +1,63 @@
+id: mtu_bench
+name: "MTU-Bench"
+name_zh: "MTU-Bench"
+name_en: "MTU-Bench"
+url: "https://github.com/MTU-Bench-Team/MTU-Bench"
+paper: "https://arxiv.org/abs/2410.11710"
+description_zh: "MTU-Bench 评测多粒度工具使用能力。页面主榜单采用最具挑战性的 Multi-turn Multi-tool（M-M）设置，并同时展示其他三种粒度结果。"
+description_en: "MTU-Bench evaluates tool use at multiple granularities. This page uses the most challenging Multi-turn Multi-tool (M-M) setting as the primary leaderboard and also keeps the other three settings."
+overview_zh: |
+  MTU-Bench 面向工具使用能力评测，并强调不同交互粒度下的能力差异。
+  它覆盖单轮/多轮、单工具/多工具以及分布外任务等多种使用场景。
+  与不少基准不同，论文尽量避免依赖 GPT 或人工打分，而是使用可自动计算的客观指标。
+  数据由已有高质量任务转换而来，并配套提出了 MTU-Instruct 用于能力增强。
+  这使它既能覆盖更丰富的工具场景，也能显著降低大规模评测成本。
+overview_en: |
+  MTU-Bench evaluates tool-use ability while emphasizing differences across multiple interaction granularities.
+  It covers single-turn and multi-turn settings, single-tool and multi-tool settings, as well as out-of-distribution tasks.
+  Unlike many prior benchmarks, it avoids GPT-based or human scoring and uses objective metrics derived from ground truth.
+  The benchmark is built by transforming existing high-quality tasks and is paired with MTU-Instruct for improvement.
+  This makes it both broader in coverage and cheaper to evaluate at scale.
+glance:
+  - label_zh: "研究重点"
+    label_en: "Focus"
+    value: "多粒度工具使用"
+  - label_zh: "主指标"
+    label_en: "Primary Metric"
+    value: "M-M"
+  - label_zh: "展示设置"
+    label_en: "Displayed Setting"
+    value: "Main benchmark summary table"
+metrics:
+  - id: m_m
+    name: "M-M"
+    description: "Multi-turn multi-tool performance."
+    higher_is_better: true
+    range: [0, 100]
+  - id: s_s
+    name: "S-S"
+    description: "Single-turn single-tool performance."
+    higher_is_better: true
+    range: [0, 100]
+  - id: m_s
+    name: "M-S"
+    description: "Multi-turn single-tool performance."
+    higher_is_better: true
+    range: [0, 100]
+  - id: s_m
+    name: "S-M"
+    description: "Single-turn multi-tool performance."
+    higher_is_better: true
+    range: [0, 100]
+resources:
+  - label_zh: "代码仓库"
+    label_en: "Code Repository"
+    url: "https://github.com/MTU-Bench-Team/MTU-Bench"
+highlights_zh:
+  - "M-M 是该基准最难的组合设置，更能体现复杂工具编排能力。"
+  - "页面保留四个粒度结果，方便理解模型为何在综合榜上领先或落后。"
+highlights_en:
+  - "M-M is the hardest setting and best reflects complex tool orchestration ability."
+  - "All four granularities are kept so the page can explain why models lead or lag on the aggregate leaderboard."
+leaderboard_note_zh: "主榜单使用 M-M。论文没有给出单一统一总分，因此这里选择最能代表复杂工具使用能力的一项作为主指标。"
+leaderboard_note_en: "The primary leaderboard uses M-M. The paper does not report a single unified overall score, so this page chooses the most representative hard setting as the main metric."

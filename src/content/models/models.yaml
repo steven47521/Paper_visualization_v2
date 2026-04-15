@@ -1,0 +1,581 @@
+models:
+  - id: gpt_3_5_turbo
+    name: "GPT-3.5 Turbo"
+    org: "OpenAI"
+    color: "#10a37f"
+    tags: ["proprietary"]
+  - id: gpt_4
+    name: "GPT-4"
+    org: "OpenAI"
+    color: "#10a37f"
+    tags: ["proprietary"]
+  - id: gpt_4_turbo
+    name: "GPT-4 Turbo"
+    org: "OpenAI"
+    color: "#10a37f"
+    tags: ["proprietary"]
+  - id: gpt_4o
+    name: "GPT-4o"
+    org: "OpenAI"
+    color: "#10a37f"
+    tags: ["proprietary", "multimodal"]
+  - id: gpt_4_1
+    name: "GPT-4.1"
+    org: "OpenAI"
+    color: "#10a37f"
+    tags: ["proprietary"]
+  - id: gpt_4_vision_preview
+    name: "GPT-4 Vision Preview"
+    org: "OpenAI"
+    color: "#10a37f"
+    tags: ["proprietary", "multimodal"]
+  - id: gpt_4_turbo_128k
+    name: "GPT-4 Turbo 128K"
+    org: "OpenAI"
+    color: "#10a37f"
+    tags: ["proprietary"]
+  - id: o1_preview
+    name: "o1-preview"
+    org: "OpenAI"
+    color: "#10a37f"
+    tags: ["reasoning", "proprietary"]
+  - id: o1_mini
+    name: "o1-mini"
+    org: "OpenAI"
+    color: "#10a37f"
+    tags: ["reasoning", "proprietary"]
+  - id: o1
+    name: "o1"
+    org: "OpenAI"
+    color: "#10a37f"
+    tags: ["reasoning", "proprietary"]
+  - id: o3_mini
+    name: "o3-mini"
+    org: "OpenAI"
+    color: "#10a37f"
+    tags: ["reasoning", "proprietary"]
+  - id: claude_3_5_sonnet
+    name: "Claude 3.5 Sonnet"
+    org: "Anthropic"
+    color: "#d97706"
+    tags: ["proprietary"]
+  - id: claude_sonnet_4
+    name: "Claude Sonnet 4"
+    org: "Anthropic"
+    color: "#d97706"
+    tags: ["proprietary"]
+  - id: gemini_1_5_pro
+    name: "Gemini 1.5 Pro"
+    org: "Google"
+    color: "#4285f4"
+    tags: ["proprietary", "multimodal"]
+  - id: gemini_2_0_flash
+    name: "Gemini 2.0 Flash"
+    org: "Google"
+    color: "#4285f4"
+    tags: ["proprietary", "multimodal"]
+  - id: gemini_2_5_pro
+    name: "Gemini 2.5 Pro"
+    org: "Google"
+    color: "#4285f4"
+    tags: ["proprietary", "multimodal"]
+  - id: gemini_2_5_flash
+    name: "Gemini 2.5 Flash"
+    org: "Google"
+    color: "#4285f4"
+    tags: ["proprietary", "multimodal"]
+  - id: qwen_max
+    name: "Qwen-Max"
+    org: "Alibaba"
+    color: "#ff6a00"
+    tags: ["proprietary"]
+  - id: qwen_14b
+    name: "Qwen-14B"
+    org: "Alibaba"
+    color: "#ff6a00"
+    tags: ["open_weight"]
+  - id: qwen_72b
+    name: "Qwen-72B"
+    org: "Alibaba"
+    color: "#ff6a00"
+    tags: ["open_weight"]
+  - id: qwen2_72b_instruct
+    name: "Qwen2-72B-Instruct"
+    org: "Alibaba"
+    color: "#ff6a00"
+    tags: ["open_weight"]
+  - id: qwen2_32b_instruct
+    name: "Qwen2-32B-Instruct"
+    org: "Alibaba"
+    color: "#ff6a00"
+    tags: ["open_weight"]
+  - id: qwen2_14b_instruct
+    name: "Qwen2-14B-Instruct"
+    org: "Alibaba"
+    color: "#ff6a00"
+    tags: ["open_weight"]
+  - id: qwen2_7b_instruct
+    name: "Qwen2-7B-Instruct"
+    org: "Alibaba"
+    color: "#ff6a00"
+    tags: ["open_weight"]
+  - id: qwen2_5_72b_instruct
+    name: "Qwen2.5-72B-Instruct"
+    org: "Alibaba"
+    color: "#ff6a00"
+    tags: ["open_weight"]
+  - id: qwen2_5_32b_instruct
+    name: "Qwen2.5-32B-Instruct"
+    org: "Alibaba"
+    color: "#ff6a00"
+    tags: ["open_weight"]
+  - id: qwen2_5_14b_instruct
+    name: "Qwen2.5-14B-Instruct"
+    org: "Alibaba"
+    color: "#ff6a00"
+    tags: ["open_weight"]
+  - id: qwen2_5_7b_instruct
+    name: "Qwen2.5-7B-Instruct"
+    org: "Alibaba"
+    color: "#ff6a00"
+    tags: ["open_weight"]
+  - id: qwen3_32b
+    name: "Qwen3-32B"
+    org: "Alibaba"
+    color: "#ff6a00"
+    tags: ["open_weight"]
+  - id: qwen3_235b
+    name: "Qwen3-235B"
+    org: "Alibaba"
+    color: "#ff6a00"
+    tags: ["open_weight"]
+  - id: qwen3_coder_480b
+    name: "Qwen3-Coder-480B-Instruct"
+    org: "Alibaba"
+    color: "#ff6a00"
+    tags: ["open_weight", "coder"]
+  - id: qwen3_coder_30b
+    name: "Qwen3-Coder-30B-Instruct"
+    org: "Alibaba"
+    color: "#ff6a00"
+    tags: ["open_weight", "coder"]
+  - id: qwen3_vl_32b_thinking
+    name: "Qwen3-VL-32B-Thinking"
+    org: "Alibaba"
+    color: "#ff6a00"
+    tags: ["open_weight", "multimodal"]
+  - id: qwen3_vl_8b_thinking
+    name: "Qwen3-VL-8B-Thinking"
+    org: "Alibaba"
+    color: "#ff6a00"
+    tags: ["open_weight", "multimodal"]
+  - id: qwen3_vl_4b_thinking
+    name: "Qwen3-VL-4B-Thinking"
+    org: "Alibaba"
+    color: "#ff6a00"
+    tags: ["open_weight", "multimodal"]
+  - id: qwen_vl_max
+    name: "Qwen-VL-MAX"
+    org: "Alibaba"
+    color: "#ff6a00"
+    tags: ["proprietary", "multimodal"]
+  - id: qwen_vl_chat
+    name: "Qwen-VL-Chat"
+    org: "Alibaba"
+    color: "#ff6a00"
+    tags: ["open_weight", "multimodal"]
+  - id: qwen2_vl_72b
+    name: "Qwen2-VL-72B"
+    org: "Alibaba"
+    color: "#ff6a00"
+    tags: ["open_weight", "multimodal"]
+  - id: qwen2_vl_7b
+    name: "Qwen2-VL-7B"
+    org: "Alibaba"
+    color: "#ff6a00"
+    tags: ["open_weight", "multimodal"]
+  - id: qwen_2_5_omni
+    name: "Qwen-2.5-Omni"
+    org: "Alibaba"
+    color: "#ff6a00"
+    tags: ["open_weight", "multimodal"]
+  - id: deepseek_v2_5
+    name: "DeepSeek-V2.5"
+    org: "DeepSeek"
+    color: "#4a90d9"
+    tags: ["open_weight"]
+  - id: deepseek_v3
+    name: "DeepSeek-V3"
+    org: "DeepSeek"
+    color: "#4a90d9"
+    tags: ["open_weight"]
+  - id: deepseek_r1
+    name: "DeepSeek-R1"
+    org: "DeepSeek"
+    color: "#4a90d9"
+    tags: ["reasoning", "open_weight"]
+  - id: deepseek_math_7b
+    name: "DeepSeekMath-7B"
+    org: "DeepSeek"
+    color: "#4a90d9"
+    tags: ["open_weight", "math"]
+  - id: deepseek_coder_6_7b
+    name: "DeepSeekCoder-6.7B"
+    org: "DeepSeek"
+    color: "#4a90d9"
+    tags: ["open_weight", "coder"]
+  - id: deepseek_coder_v2_instruct
+    name: "DeepSeekCoder-V2-Instruct"
+    org: "DeepSeek"
+    color: "#4a90d9"
+    tags: ["open_weight", "coder"]
+  - id: deepseek_chat_v2
+    name: "DeepSeek-Chat-V2"
+    org: "DeepSeek"
+    color: "#4a90d9"
+    tags: ["open_weight"]
+  - id: glm_4_plus
+    name: "GLM-4-Plus"
+    org: "Zhipu AI"
+    color: "#2563eb"
+    tags: ["proprietary"]
+  - id: glm_4v
+    name: "GLM-4V"
+    org: "Zhipu AI"
+    color: "#2563eb"
+    tags: ["proprietary", "multimodal"]
+  - id: glm_4_7
+    name: "GLM-4.7"
+    org: "Zhipu AI"
+    color: "#2563eb"
+    tags: ["proprietary"]
+  - id: glm_4v_9b
+    name: "GLM-4V-9B"
+    org: "Zhipu AI"
+    color: "#2563eb"
+    tags: ["open_weight", "multimodal"]
+  - id: chatglm2_6b
+    name: "ChatGLM2-6B"
+    org: "Zhipu AI"
+    color: "#2563eb"
+    tags: ["open_weight"]
+  - id: chatglm3_6b
+    name: "ChatGLM3-6B"
+    org: "Zhipu AI"
+    color: "#2563eb"
+    tags: ["open_weight"]
+  - id: yi_large
+    name: "Yi-Large"
+    org: "01.AI"
+    color: "#8b5cf6"
+    tags: ["proprietary"]
+  - id: yi_large_turbo
+    name: "Yi-Large-Turbo"
+    org: "01.AI"
+    color: "#8b5cf6"
+    tags: ["proprietary"]
+  - id: yi_34b
+    name: "Yi-34B"
+    org: "01.AI"
+    color: "#8b5cf6"
+    tags: ["open_weight"]
+  - id: yi_1_5_34b
+    name: "Yi-1.5-34B"
+    org: "01.AI"
+    color: "#8b5cf6"
+    tags: ["open_weight"]
+  - id: yi_1_5_9b
+    name: "Yi-1.5-9B"
+    org: "01.AI"
+    color: "#8b5cf6"
+    tags: ["open_weight"]
+  - id: llama_2_13b
+    name: "LLaMA2-13B"
+    org: "Meta"
+    color: "#0668e1"
+    tags: ["open_weight"]
+  - id: llama_2_7b
+    name: "LLaMA2-7B"
+    org: "Meta"
+    color: "#0668e1"
+    tags: ["open_weight"]
+  - id: llama_2_70b
+    name: "LLaMA2-70B"
+    org: "Meta"
+    color: "#0668e1"
+    tags: ["open_weight"]
+  - id: llama_3_8b
+    name: "Llama-3-8B"
+    org: "Meta"
+    color: "#0668e1"
+    tags: ["open_weight"]
+  - id: llama_3_70b
+    name: "Llama-3-70B"
+    org: "Meta"
+    color: "#0668e1"
+    tags: ["open_weight"]
+  - id: llama_3_1_405b
+    name: "Llama-3.1-405B"
+    org: "Meta"
+    color: "#0668e1"
+    tags: ["open_weight"]
+  - id: llama_3_1_70b_instruct
+    name: "Llama-3.1-70B-Instruct"
+    org: "Meta"
+    color: "#0668e1"
+    tags: ["open_weight"]
+  - id: llama_3_1_8b_instruct
+    name: "Llama-3.1-8B-Instruct"
+    org: "Meta"
+    color: "#0668e1"
+    tags: ["open_weight"]
+  - id: llava_1_6_34b
+    name: "LLaVA-1.6-34B"
+    org: "LLaVA"
+    color: "#0f766e"
+    tags: ["open_weight", "multimodal"]
+  - id: llava_onevision_7b
+    name: "LLaVA-OneVision-7B"
+    org: "LLaVA"
+    color: "#0f766e"
+    tags: ["open_weight", "multimodal"]
+  - id: mistral_large
+    name: "Mistral-Large"
+    org: "Mistral"
+    color: "#111827"
+    tags: ["open_weight"]
+  - id: mistral_7b
+    name: "Mistral-7B"
+    org: "Mistral"
+    color: "#111827"
+    tags: ["open_weight"]
+  - id: mixtral_8x7b
+    name: "Mixtral-8x7B"
+    org: "Mistral"
+    color: "#111827"
+    tags: ["open_weight"]
+  - id: mixtral_8x22b
+    name: "Mixtral-8x22B"
+    org: "Mistral"
+    color: "#111827"
+    tags: ["open_weight"]
+  - id: minicpm_llama3_2_5
+    name: "MiniCPM-Llama3-2.5"
+    org: "OpenBMB"
+    color: "#be123c"
+    tags: ["open_weight", "multimodal"]
+  - id: minicpm_v2_6
+    name: "MiniCPM-v2.6"
+    org: "OpenBMB"
+    color: "#be123c"
+    tags: ["open_weight", "multimodal"]
+  - id: minicpm_o_2_6
+    name: "MiniCPM-o 2.6"
+    org: "OpenBMB"
+    color: "#be123c"
+    tags: ["open_weight", "multimodal"]
+  - id: minicpm_v4_5
+    name: "MiniCPM-V4.5"
+    org: "OpenBMB"
+    color: "#be123c"
+    tags: ["open_weight", "multimodal"]
+  - id: internvl2_40b
+    name: "InternVL2-40B"
+    org: "OpenGVLab"
+    color: "#16a34a"
+    tags: ["open_weight", "multimodal"]
+  - id: internvl2_8b
+    name: "InternVL2-8B"
+    org: "OpenGVLab"
+    color: "#16a34a"
+    tags: ["open_weight", "multimodal"]
+  - id: internvl2_76b
+    name: "InternVL2-Llama3-76B"
+    org: "OpenGVLab"
+    color: "#16a34a"
+    tags: ["open_weight", "multimodal"]
+  - id: cogvlm2
+    name: "CogVLM2"
+    org: "THUDM"
+    color: "#9333ea"
+    tags: ["open_weight", "multimodal"]
+  - id: openomni
+    name: "OpenOmni"
+    org: "OpenOmni"
+    color: "#0f766e"
+    tags: ["open_weight", "multimodal"]
+  - id: baichuan_omni_1_5
+    name: "Baichuan-Omni-1.5"
+    org: "Baichuan"
+    color: "#dc2626"
+    tags: ["open_weight", "multimodal"]
+  - id: unifiedio2_xlarge
+    name: "UnifiedIO2-xlarge"
+    org: "Google"
+    color: "#4285f4"
+    tags: ["multimodal"]
+  - id: rolegpt
+    name: "RoleGPT"
+    org: "RoleLLM"
+    color: "#7c3aed"
+    tags: ["role_playing"]
+  - id: rolellama_7b
+    name: "RoleLLaMA-7B"
+    org: "RoleLLM"
+    color: "#7c3aed"
+    tags: ["role_playing", "open_weight"]
+  - id: rolellama2_13b_chat
+    name: "RoleLLaMA2 (13B-Chat)"
+    org: "RoleLLM"
+    color: "#7c3aed"
+    tags: ["role_playing", "open_weight"]
+  - id: roleglm
+    name: "RoleGLM"
+    org: "RoleLLM"
+    color: "#7c3aed"
+    tags: ["role_playing", "open_weight"]
+  - id: character_ai
+    name: "Character.AI"
+    org: "Character.AI"
+    color: "#7c3aed"
+    tags: ["role_playing"]
+  - id: owl_13b
+    name: "OWL-13B"
+    org: "OWL"
+    color: "#475569"
+    tags: ["agent"]
+  - id: code_llama_7b
+    name: "Code Llama-7B"
+    org: "Meta"
+    color: "#0668e1"
+    tags: ["coder", "open_weight"]
+  - id: starcoder_7b
+    name: "StarCoder-7B"
+    org: "BigCode"
+    color: "#4b5563"
+    tags: ["coder", "open_weight"]
+  - id: doubao_1_5_pro
+    name: "Doubao-1.5-Pro"
+    org: "ByteDance"
+    color: "#ef4444"
+    tags: ["proprietary"]
+  - id: doubao_seed_1_6
+    name: "Doubao-Seed-1.6"
+    org: "ByteDance"
+    color: "#ef4444"
+    tags: ["proprietary", "multimodal"]
+  - id: doubao_coder_preview
+    name: "Doubao-Coder-Preview"
+    org: "ByteDance"
+    color: "#ef4444"
+    tags: ["proprietary", "coder"]
+  - id: tongyi_deepresearch
+    name: "Tongyi-DeepResearch"
+    org: "Alibaba"
+    color: "#ff6a00"
+    tags: ["agent"]
+  - id: miroflow_english
+    name: "MiroFlow-English"
+    org: "MiroFlow"
+    color: "#0ea5e9"
+    tags: ["agent"]
+  - id: openmanus
+    name: "OpenManus"
+    org: "OpenManus"
+    color: "#0ea5e9"
+    tags: ["agent"]
+  - id: webthinker
+    name: "WebThinker"
+    org: "WebThinker"
+    color: "#0ea5e9"
+    tags: ["agent"]
+  - id: gpt_4_5
+    name: "GPT-4.5"
+    org: "OpenAI"
+    color: "#10a37f"
+    tags: ["proprietary"]
+  - id: claude_opus_4
+    name: "Claude Opus 4"
+    org: "Anthropic"
+    color: "#d97706"
+    tags: ["proprietary"]
+  - id: kimi_k2
+    name: "Kimi K2"
+    org: "Moonshot AI"
+    color: "#06b6d4"
+    tags: ["proprietary", "agent"]
+  - id: qwen_7b
+    name: "Qwen-7B"
+    org: "Alibaba"
+    color: "#ff6a00"
+    tags: ["open_weight"]
+  - id: qwen_7b_chat
+    name: "Qwen-7B-Chat"
+    org: "Alibaba"
+    color: "#ff6a00"
+    tags: ["open_weight"]
+  - id: qwen1_5_14b
+    name: "Qwen1.5-14B"
+    org: "Alibaba"
+    color: "#ff6a00"
+    tags: ["open_weight"]
+  - id: qwen_1_5_72b
+    name: "Qwen1.5-72B"
+    org: "Alibaba"
+    color: "#ff6a00"
+    tags: ["open_weight"]
+  - id: qwen_1_5_110b
+    name: "Qwen1.5-110B"
+    org: "Alibaba"
+    color: "#ff6a00"
+    tags: ["open_weight"]
+  - id: qwen2_72b
+    name: "Qwen2-72B"
+    org: "Alibaba"
+    color: "#ff6a00"
+    tags: ["open_weight"]
+  - id: qwen_3_72b
+    name: "Qwen3-72B"
+    org: "Alibaba"
+    color: "#ff6a00"
+    tags: ["open_weight"]
+  - id: qwq_32b
+    name: "QwQ-32B"
+    org: "Alibaba"
+    color: "#ff6a00"
+    tags: ["open_weight", "reasoning"]
+  - id: glm4_9b_chat
+    name: "GLM-4-9B-Chat"
+    org: "Zhipu AI"
+    color: "#2563eb"
+    tags: ["open_weight"]
+  - id: chatglm_6b
+    name: "ChatGLM-6B"
+    org: "Zhipu AI"
+    color: "#2563eb"
+    tags: ["open_weight"]
+  - id: yi_34b_chat
+    name: "Yi-34B-Chat"
+    org: "01.AI"
+    color: "#8b5cf6"
+    tags: ["open_weight"]
+  - id: llama_4_405b
+    name: "Llama-4-405B"
+    org: "Meta"
+    color: "#0668e1"
+    tags: ["open_weight"]
+  - id: internlm_7b
+    name: "InternLM-7B"
+    org: "Shanghai AI Lab"
+    color: "#16a34a"
+    tags: ["open_weight"]
+  - id: vicuna_13b
+    name: "Vicuna-13B"
+    org: "LMSYS"
+    color: "#4b5563"
+    tags: ["open_weight"]
+  - id: alpaca_7b
+    name: "Alpaca-7B"
+    org: "Stanford"
+    color: "#4b5563"
+    tags: ["open_weight"]

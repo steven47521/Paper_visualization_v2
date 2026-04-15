@@ -1,0 +1,23 @@
+benchmark_id: mt_bench_101
+updated: "2026-04-15"
+results:
+  - model_id: gpt_4
+    scores: { avg_score: 8.86 }
+    source: official
+    source_url: "https://arxiv.org/abs/2402.14762"
+  - model_id: yi_34b
+    scores: { avg_score: 8.10 }
+    source: official
+    source_url: "https://arxiv.org/abs/2402.14762"
+  - model_id: gpt_3_5_turbo
+    scores: { avg_score: 7.99 }
+    source: official
+    source_url: "https://arxiv.org/abs/2402.14762"
+  - model_id: qwen_14b
+    scores: { avg_score: 7.82 }
+    source: official
+    source_url: "https://arxiv.org/abs/2402.14762"
+  - model_id: mixtral_8x7b
+    scores: { avg_score: 7.38 }
+    source: official
+    source_url: "https://arxiv.org/abs/2402.14762"

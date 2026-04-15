@@ -1,0 +1,32 @@
+id: supergpqa
+name: "SuperGPQA"
+name_zh: "SuperGPQA"
+name_en: "SuperGPQA"
+url: "https://arxiv.org/abs/2502.14739"
+paper: "https://arxiv.org/abs/2502.14739"
+description_zh: "SuperGPQA 评估 285 个研究生学科上的知识与推理能力。页面主榜单采用 Overall (sample)。"
+description_en: "SuperGPQA evaluates knowledge and reasoning across 285 graduate disciplines. This page uses Overall (sample)."
+glance:
+  - label_zh: "研究重点"
+    label_en: "Focus"
+    value: "跨学科高阶知识"
+  - label_zh: "主指标"
+    label_en: "Primary Metric"
+    value: "Overall (sample)"
+  - label_zh: "展示设置"
+    label_en: "Displayed Setting"
+    value: "Main leaderboard"
+metrics:
+  - id: overall_sample
+    name: "Overall (sample)"
+    description: "Overall sample-level accuracy."
+    higher_is_better: true
+    range: [0, 100]
+highlights_zh:
+  - "该 benchmark 不局限于常见理工学科，而是扩展到 285 个研究生学科。"
+  - "页面选用 sample-level overall，更直观地对应总体正确率。"
+highlights_en:
+  - "The benchmark extends far beyond common STEM areas to 285 graduate-level disciplines."
+  - "The page uses the sample-level overall because it maps most directly to total accuracy."
+leaderboard_note_zh: "主榜单采用 Overall (sample)。论文还给出 subfield / field / discipline 多层级结果，本页不混合不同层次。"
+leaderboard_note_en: "The primary leaderboard uses Overall (sample). The paper also reports subfield, field, and discipline-level results, which are not mixed here."

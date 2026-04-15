@@ -1,0 +1,66 @@
+id: mt_video_bench
+name: "MT-Video-Bench"
+name_zh: "MT-Video-Bench"
+name_en: "MT-Video-Bench"
+url: "https://mt-video-bench.github.io/"
+paper: "https://arxiv.org/abs/2510.17722"
+description_zh: "MT-Video-Bench 面向多轮视频对话中的感知与交互评测。页面主榜单采用官方主表中的 Overall，并保留六个子维度指标。"
+description_en: "MT-Video-Bench evaluates perception and interaction in multi-turn video dialogues. This page uses Overall from the main table and keeps the six sub-dimensions as auxiliary metrics."
+glance:
+  - label_zh: "研究重点"
+    label_en: "Focus"
+    value: "多轮视频理解"
+  - label_zh: "主指标"
+    label_en: "Primary Metric"
+    value: "Overall"
+  - label_zh: "展示设置"
+    label_en: "Displayed Setting"
+    value: "Main benchmark leaderboard"
+metrics:
+  - id: overall
+    name: "Overall"
+    description: "Overall multi-turn video benchmark score."
+    higher_is_better: true
+    range: [0, 100]
+  - id: or
+    name: "OR"
+    description: "Object-related perceptivity."
+    higher_is_better: true
+    range: [0, 100]
+  - id: mr
+    name: "MR"
+    description: "Multi-scene reasoning."
+    higher_is_better: true
+    range: [0, 100]
+  - id: cs
+    name: "CS"
+    description: "Cross-scene consistency."
+    higher_is_better: true
+    range: [0, 100]
+  - id: ar
+    name: "AR"
+    description: "Answering robustness."
+    higher_is_better: true
+    range: [0, 100]
+  - id: ts
+    name: "TS"
+    description: "Topic shifting."
+    higher_is_better: true
+    range: [0, 100]
+  - id: pi
+    name: "PI"
+    description: "Prompt interaction."
+    higher_is_better: true
+    range: [0, 100]
+resources:
+  - label_zh: "项目主页"
+    label_en: "Project Page"
+    url: "https://mt-video-bench.github.io/"
+highlights_zh:
+  - "论文显示高性能模型在多轮视频对话场景下仍远未饱和。"
+  - "页面保留六个子项，方便观察模型是“看不清”还是“聊不稳”。"
+highlights_en:
+  - "The paper shows that even strong models remain far from saturated in multi-turn video dialogue."
+  - "The six sub-metrics help distinguish whether a model struggles more with perception or conversational interaction."
+leaderboard_note_zh: "主榜单采用论文主表 Overall。子维度 OR/MR/CS/AR/TS/PI 同步保留，用于支持页面下方的论文相关补充。"
+leaderboard_note_en: "The primary leaderboard uses Overall from the main table. The OR/MR/CS/AR/TS/PI subdimensions are kept to support the paper-oriented supplementary sections below."

@@ -1,0 +1,32 @@
+id: o1_reasoning_patterns
+name: "o1 Reasoning Patterns"
+name_zh: "o1 Reasoning Patterns"
+name_en: "o1 Reasoning Patterns"
+url: "https://arxiv.org/abs/2410.13639"
+paper: "https://arxiv.org/abs/2410.13639"
+description_zh: "该工作对 OpenAI o1 系列推理模式做比较研究。页面主榜单只展示论文中的 direct model 结果，不混入 test-time augmentation。"
+description_en: "This work compares the reasoning patterns of OpenAI's o1 models. This page shows only the direct model results from the paper and excludes test-time augmentation methods."
+glance:
+  - label_zh: "研究重点"
+    label_en: "Focus"
+    value: "推理模式比较"
+  - label_zh: "主指标"
+    label_en: "Primary Metric"
+    value: "Overall"
+  - label_zh: "展示设置"
+    label_en: "Displayed Setting"
+    value: "Direct model comparison"
+metrics:
+  - id: overall
+    name: "Overall"
+    description: "Overall score of direct model inference."
+    higher_is_better: true
+    range: [0, 100]
+highlights_zh:
+  - "论文同时分析了 step-wise BoN、self-refine 等 test-time 方法。"
+  - "页面主榜单只保留 direct model，避免把方法增益误当成模型能力。"
+highlights_en:
+  - "The paper also analyzes step-wise BoN, self-refine, and other test-time strategies."
+  - "The page keeps only direct model results so method gain is not mistaken for model ability."
+leaderboard_note_zh: "主榜单仅保留 direct model 结果。论文中的 test-time workflow 属于方法比较，不直接纳入模型榜单。"
+leaderboard_note_en: "The primary leaderboard keeps only direct model results. The test-time workflows in the paper are method comparisons and are not directly merged into the model leaderboard."

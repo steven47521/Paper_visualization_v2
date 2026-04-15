@@ -1,0 +1,31 @@
+benchmark_id: mtu_bench
+updated: "2026-04-15"
+results:
+  - model_id: qwen_max
+    scores: { m_m: 45.08, s_s: 77.88, m_s: 42.11, s_m: 24.01 }
+    source: official
+    source_url: "https://arxiv.org/abs/2410.11710"
+  - model_id: gpt_4
+    scores: { m_m: 41.36, s_s: 77.88, m_s: 44.61, s_m: 58.07 }
+    source: official
+    source_url: "https://arxiv.org/abs/2410.11710"
+  - model_id: glm_4_plus
+    scores: { m_m: 39.53, s_s: 82.69, m_s: 47.61, s_m: 30.90 }
+    source: official
+    source_url: "https://arxiv.org/abs/2410.11710"
+  - model_id: deepseek_v2_5
+    scores: { m_m: 30.62, s_s: 80.77, m_s: 44.94, s_m: 40.01 }
+    source: official
+    source_url: "https://arxiv.org/abs/2410.11710"
+  - model_id: qwen2_72b_instruct
+    scores: { m_m: 25.13, s_s: 68.40, m_s: 38.42, s_m: 37.14 }
+    source: official
+    source_url: "https://arxiv.org/abs/2410.11710"
+  - model_id: llama_3_70b
+    scores: { m_m: 20.56, s_s: 71.43, m_s: 40.40, s_m: 20.67 }
+    source: official
+    source_url: "https://arxiv.org/abs/2410.11710"
+  - model_id: gpt_3_5_turbo
+    scores: { m_m: 11.87, s_s: 41.96, m_s: 30.86, s_m: 18.39 }
+    source: official
+    source_url: "https://arxiv.org/abs/2410.11710"

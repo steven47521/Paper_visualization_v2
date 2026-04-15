@@ -1,0 +1,30 @@
+id: multimodal
+name_zh: "Multimodal"
+name_en: "Multimodal"
+icon: "image"
+color: "#0891b2"
+order: 3
+subcategories:
+  - id: image_understanding
+    name_zh: "Image Understanding"
+    name_en: "Image Understanding"
+    description_zh: "关注图像含义、深层隐喻与跨文化视觉理解。"
+    description_en: "Benchmarks for image implication, deep semantics, and cross-cultural visual understanding."
+    benchmarks:
+      - ii_bench
+      - lime
+      - cii_bench
+  - id: video_understanding
+    name_zh: "Video Understanding"
+    name_en: "Video Understanding"
+    description_zh: "关注多轮视频对话中的感知、记忆与交互能力。"
+    description_en: "Benchmarks for perception, memory, and interaction in multi-turn video dialogue."
+    benchmarks:
+      - mt_video_bench
+  - id: general_multimodal
+    name_zh: "General Multimodal"
+    name_en: "General Multimodal"
+    description_zh: "关注跨图像、音频与多模态统一建模能力。"
+    description_en: "Benchmarks for unified modeling across image, audio, and multiple modalities."
+    benchmarks:
+      - omnibench

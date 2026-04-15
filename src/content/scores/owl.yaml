@@ -1,0 +1,27 @@
+benchmark_id: owl
+updated: "2026-04-15"
+results:
+  - model_id: owl_13b
+    scores: { average_score: 8.86 }
+    source: official
+    source_url: "https://arxiv.org/abs/2309.09298"
+  - model_id: llama_2_13b
+    scores: { average_score: 8.57 }
+    source: official
+    source_url: "https://arxiv.org/abs/2309.09298"
+  - model_id: qwen_7b
+    scores: { average_score: 8.41 }
+    source: official
+    source_url: "https://arxiv.org/abs/2309.09298"
+  - model_id: chatglm2_6b
+    scores: { average_score: 8.27 }
+    source: official
+    source_url: "https://arxiv.org/abs/2309.09298"
+  - model_id: internlm_7b
+    scores: { average_score: 8.19 }
+    source: official
+    source_url: "https://arxiv.org/abs/2309.09298"
+  - model_id: chatglm_6b
+    scores: { average_score: 8.12 }
+    source: official
+    source_url: "https://arxiv.org/abs/2309.09298"

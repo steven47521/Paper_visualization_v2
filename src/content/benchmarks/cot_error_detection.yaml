@@ -1,0 +1,42 @@
+id: cot_error_detection
+name: "Long CoT Error Detection"
+name_zh: "Long CoT Error Detection"
+name_en: "Long CoT Error Detection"
+url: "https://arxiv.org/abs/2502.19361"
+paper: "https://arxiv.org/abs/2502.19361"
+description_zh: "该工作评测模型在长链式推理中定位错误的能力。页面主榜单采用论文表中的 F1，并保留首错检测与任意错检测准确率。"
+description_en: "This work evaluates whether models can detect errors in long chain-of-thought reasoning. This page uses F1 as the primary leaderboard and keeps first-error and any-error detection accuracy as auxiliary metrics."
+glance:
+  - label_zh: "研究重点"
+    label_en: "Focus"
+    value: "长链推理纠错"
+  - label_zh: "主指标"
+    label_en: "Primary Metric"
+    value: "F1"
+  - label_zh: "展示设置"
+    label_en: "Displayed Setting"
+    value: "Main reported table"
+metrics:
+  - id: f1_score
+    name: "F1"
+    description: "Error detection F1."
+    higher_is_better: true
+    range: [0, 100]
+  - id: any_error_acc
+    name: "Any Error Acc"
+    description: "Accuracy of detecting whether any error exists."
+    higher_is_better: true
+    range: [0, 100]
+  - id: first_error_acc
+    name: "First Error Acc"
+    description: "Accuracy of finding the first error."
+    higher_is_better: true
+    range: [0, 100]
+highlights_zh:
+  - "这不是普通长上下文检索，而是对长推理过程的纠错能力评测。"
+  - "页面把 F1 放在主榜单位置，更能反映综合检测质量。"
+highlights_en:
+  - "This is not a standard long-context retrieval benchmark but an evaluation of long-reasoning error detection."
+  - "The page puts F1 in the primary leaderboard because it better reflects overall detection quality."
+leaderboard_note_zh: "榜单主指标使用 F1。论文同时报告首错与任意错检测准确率，已作为辅助指标保留。"
+leaderboard_note_en: "The leaderboard uses F1 as the primary metric. The paper's first-error and any-error detection accuracies are also kept as auxiliary metrics."

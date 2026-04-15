@@ -1,0 +1,27 @@
+benchmark_id: omnibench
+updated: "2026-04-15"
+results:
+  - model_id: qwen_2_5_omni
+    scores: { image_audio_overall: 56.13 }
+    source: official
+    source_url: "https://arxiv.org/abs/2409.15272"
+  - model_id: gemini_1_5_pro
+    scores: { image_audio_overall: 42.91 }
+    source: official
+    source_url: "https://arxiv.org/abs/2409.15272"
+  - model_id: baichuan_omni_1_5
+    scores: { image_audio_overall: 42.90 }
+    source: official
+    source_url: "https://arxiv.org/abs/2409.15272"
+  - model_id: minicpm_o_2_6
+    scores: { image_audio_overall: 40.50 }
+    source: official
+    source_url: "https://arxiv.org/abs/2409.15272"
+  - model_id: unifiedio2_xlarge
+    scores: { image_audio_overall: 38.00 }
+    source: official
+    source_url: "https://arxiv.org/abs/2409.15272"
+  - model_id: openomni
+    scores: { image_audio_overall: 37.40 }
+    source: official
+    source_url: "https://arxiv.org/abs/2409.15272"

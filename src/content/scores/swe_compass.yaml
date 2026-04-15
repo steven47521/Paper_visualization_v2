@@ -1,0 +1,23 @@
+benchmark_id: swe_compass
+updated: "2026-04-15"
+results:
+  - model_id: claude_sonnet_4
+    scores: { avg: 32.9 }
+    source: official
+    source_url: "https://arxiv.org/abs/2511.05459"
+  - model_id: qwen3_coder_480b
+    scores: { avg: 21.9 }
+    source: official
+    source_url: "https://arxiv.org/abs/2511.05459"
+  - model_id: qwen3_coder_30b
+    scores: { avg: 21.6 }
+    source: official
+    source_url: "https://arxiv.org/abs/2511.05459"
+  - model_id: qwen3_235b
+    scores: { avg: 14.7 }
+    source: official
+    source_url: "https://arxiv.org/abs/2511.05459"
+  - model_id: deepseek_v3
+    scores: { avg: 9.8 }
+    source: official
+    source_url: "https://arxiv.org/abs/2511.05459"

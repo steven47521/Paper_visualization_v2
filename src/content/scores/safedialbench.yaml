@@ -1,0 +1,35 @@
+benchmark_id: safedialbench
+updated: "2026-04-15"
+results:
+  - model_id: deepseek_r1
+    scores: { asr: 0.49 }
+    source: official
+    source_url: "https://arxiv.org/abs/2502.11090"
+  - model_id: qwq_32b
+    scores: { asr: 0.49 }
+    source: official
+    source_url: "https://arxiv.org/abs/2502.11090"
+  - model_id: yi_34b_chat
+    scores: { asr: 0.57 }
+    source: official
+    source_url: "https://arxiv.org/abs/2502.11090"
+  - model_id: qwen2_5_14b_instruct
+    scores: { asr: 0.58 }
+    source: official
+    source_url: "https://arxiv.org/abs/2502.11090"
+  - model_id: qwen2_5_7b_instruct
+    scores: { asr: 0.58 }
+    source: official
+    source_url: "https://arxiv.org/abs/2502.11090"
+  - model_id: glm4_9b_chat
+    scores: { asr: 0.59 }
+    source: official
+    source_url: "https://arxiv.org/abs/2502.11090"
+  - model_id: qwen_7b_chat
+    scores: { asr: 0.61 }
+    source: official
+    source_url: "https://arxiv.org/abs/2502.11090"
+  - model_id: chatglm3_6b
+    scores: { asr: 0.66 }
+    source: official
+    source_url: "https://arxiv.org/abs/2502.11090"

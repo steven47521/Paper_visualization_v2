@@ -1,0 +1,32 @@
+id: omnibench
+name: "OmniBench"
+name_zh: "OmniBench"
+name_en: "OmniBench"
+url: "https://arxiv.org/abs/2409.15272"
+paper: "https://arxiv.org/abs/2409.15272"
+description_zh: "OmniBench 关注未来统一 omni-language model 的跨模态能力。页面主榜单采用论文图像与音频设置下的 Overall。"
+description_en: "OmniBench targets the future of universal omni-language models. This page uses the Overall score under the image-and-audio setting."
+glance:
+  - label_zh: "研究重点"
+    label_en: "Focus"
+    value: "通用 omni 模型"
+  - label_zh: "主指标"
+    label_en: "Primary Metric"
+    value: "Image & Audio Overall"
+  - label_zh: "展示设置"
+    label_en: "Displayed Setting"
+    value: "Tri-modal leaderboard"
+metrics:
+  - id: image_audio_overall
+    name: "Image & Audio Overall"
+    description: "Overall score under the image-and-audio evaluation setting."
+    higher_is_better: true
+    range: [0, 100]
+highlights_zh:
+  - "该工作强调统一 omni 模型，而非单一视觉语言模型。"
+  - "前端页面选取图像与音频设置下的总分作为统一主榜单。"
+highlights_en:
+  - "The benchmark emphasizes unified omni models rather than ordinary vision-language systems."
+  - "The page uses the image-and-audio setting as a single consistent primary leaderboard."
+leaderboard_note_zh: "榜单使用论文 Image & Audio 设置下的 Overall。论文还提供其他模态组合，本页不混合多个设置。"
+leaderboard_note_en: "The leaderboard uses Overall under the Image & Audio setting. The paper also includes other modality combinations, which are not mixed here."

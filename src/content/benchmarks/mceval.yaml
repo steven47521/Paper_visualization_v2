@@ -1,0 +1,48 @@
+id: mceval
+name: "McEval"
+name_zh: "McEval"
+name_en: "McEval"
+url: "https://mceval.github.io/"
+paper: "https://arxiv.org/abs/2406.07436"
+description_zh: "McEval 是面向大规模多语言代码生成与理解的评测工作。页面展示的主榜单取自论文主结果表中的代码生成 Avg_all。"
+description_en: "McEval evaluates massively multilingual coding ability. The displayed leaderboard uses the code-generation Avg_all score from the paper's main results table."
+overview_zh: |
+  McEval 提出一个覆盖 40 种编程语言、约 16K 样本的大规模多语言代码评测基准。
+  它同时覆盖代码生成、补全与理解，而不是只看单一语言或单一任务。
+  论文还整理了 MCEVAL-INSTRUCT，并训练 MCODER 来支持多语言代码生成。
+  实验结果表明，闭源模型在大量语言上仍明显领先，开源模型差距没有消失。
+  这项工作的核心贡献，是把代码评测从“少数语言”推进到“真正多语言”场景。
+overview_en: |
+  McEval introduces a massively multilingual coding benchmark covering 40 programming languages and about 16K samples.
+  It evaluates code generation, completion, and understanding instead of focusing on a single language or task.
+  The paper also releases MCEVAL-INSTRUCT and trains MCODER for multilingual code generation.
+  Experiments show that closed-source models still hold a clear advantage across many languages.
+  Its main contribution is pushing code evaluation from a few languages to a genuinely multilingual setting.
+glance:
+  - label_zh: "研究重点"
+    label_en: "Focus"
+    value: "多语言代码生成"
+  - label_zh: "主指标"
+    label_en: "Primary Metric"
+    value: "Avg_all"
+  - label_zh: "展示设置"
+    label_en: "Displayed Setting"
+    value: "官方主表代码生成结果"
+metrics:
+  - id: avg_all
+    name: "Avg_all"
+    description: "Main multilingual code generation score reported in the paper."
+    higher_is_better: true
+    range: [0, 100]
+resources:
+  - label_zh: "项目主页"
+    label_en: "Project Page"
+    url: "https://mceval.github.io/"
+highlights_zh:
+  - "论文强调多语言代码能力的系统评测，而不是单一英文编程任务。"
+  - "这里展示的是论文主表中最适合前端榜单展示的一项综合指标。"
+highlights_en:
+  - "The paper focuses on systematically evaluating multilingual coding ability instead of only English coding tasks."
+  - "This page uses the most display-friendly aggregate metric reported in the main results table."
+leaderboard_note_zh: "榜单采用论文主表中代码生成任务的 Avg_all。由于论文包含更细的语言维度结果，前端页面保留综合指标作为主榜单。"
+leaderboard_note_en: "The leaderboard uses the code-generation Avg_all from the paper's main table. The paper also reports finer per-language results, but this page keeps the aggregate score as the primary leaderboard."

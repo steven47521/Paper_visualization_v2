@@ -1,0 +1,48 @@
+id: hellobench
+name: "HelloBench"
+name_zh: "HelloBench"
+name_en: "HelloBench"
+url: "https://github.com/Quehry/HelloBench"
+paper: "https://arxiv.org/abs/2409.16191"
+description_zh: "HelloBench 面向长文本生成能力评测。页面主榜单采用论文主实验表中的 AVG S。"
+description_en: "HelloBench evaluates long-form text generation. This page uses AVG S from the paper's main experiment table."
+overview_zh: |
+  HelloBench 关注的是长文本生成，而不是更常见的长上下文理解。
+  它基于 Bloom 分类法，将长文本任务划分为开放问答、摘要、聊天、续写和启发式生成五类。
+  论文同时提出 HelloEval，用更高效的人类对齐方式来评估长文质量。
+  大规模实验显示，当前模型普遍存在长度上限、重复严重和质量衰减等问题。
+  因而这项工作强调，长文本“能写更长”与“能写得好”需要分开评测。
+overview_en: |
+  HelloBench focuses on long-form generation rather than the more common long-context understanding setting.
+  It organizes tasks into five categories based on Bloom's Taxonomy, including QA, summarization, chat, completion, and heuristic generation.
+  The paper also proposes HelloEval as a more efficient human-aligned evaluation method for long text quality.
+  Large-scale experiments show that current models face length ceilings, repetition, and clear quality degradation.
+  The benchmark highlights that generating longer text and generating better long text are not the same ability.
+glance:
+  - label_zh: "研究重点"
+    label_en: "Focus"
+    value: "长文本生成"
+  - label_zh: "主指标"
+    label_en: "Primary Metric"
+    value: "AVG S"
+  - label_zh: "展示设置"
+    label_en: "Displayed Setting"
+    value: "Main proprietary-model table"
+metrics:
+  - id: avg_score
+    name: "AVG S"
+    description: "Average long-form generation score."
+    higher_is_better: true
+    range: [0, 100]
+resources:
+  - label_zh: "代码仓库"
+    label_en: "Code Repository"
+    url: "https://github.com/Quehry/HelloBench"
+highlights_zh:
+  - "该工作关注长文本质量而非仅仅长度本身。"
+  - "页面采用 AVG S，避免把长度、质量和其他属性混成多个主榜。"
+highlights_en:
+  - "The benchmark targets long-form quality rather than sheer output length."
+  - "This page uses AVG S to avoid fragmenting the main leaderboard into too many partial attributes."
+leaderboard_note_zh: "榜单使用论文主实验表的 AVG S。论文还分析不同维度与词数特征，这里不作为主榜单。"
+leaderboard_note_en: "The leaderboard uses AVG S from the main experiments table. The paper also analyzes other dimensions and word-count behavior, which are not used as the main leaderboard here."

@@ -1,0 +1,63 @@
+id: rolellm
+name: "RoleLLM"
+name_zh: "RoleLLM"
+name_en: "RoleLLM"
+url: "https://github.com/InteractiveNLP-Team/RoleLLM-public"
+paper: "https://arxiv.org/abs/2310.00746"
+description_zh: "RoleLLM 聚焦角色扮演能力的构建、评测与增强。页面主榜单采用英文主实验表中的 avg，并保留 CUS、RAW、SPE 三项细粒度指标。"
+description_en: "RoleLLM benchmarks and enhances role-playing abilities in language models. This page uses the avg score from the main English results table and keeps CUS, RAW, and SPE as finer-grained metrics."
+overview_zh: |
+  RoleLLM 不只提出 benchmark，也系统讨论了如何激发和增强模型的角色扮演能力。
+  论文把整体流程拆成角色档案构建、角色知识抽取、RoleGPT 提示和角色条件微调四个阶段。
+  基于这些环节，它构建了 RoleBench，这是一个大规模、细粒度的角色扮演数据集。
+  论文进一步训练出 RoleLLaMA 和 RoleGLM，显著提升了开放模型的角色扮演能力。
+  这项工作的核心价值，在于把“评测、提示、数据和训练”整合成一个完整框架。
+overview_en: |
+  RoleLLM goes beyond proposing a benchmark and studies how to elicit and improve role-playing ability.
+  The paper organizes the pipeline into role profile construction, role-specific knowledge extraction, RoleGPT prompting, and role-conditioned tuning.
+  Based on this pipeline, it builds RoleBench, a large-scale and fine-grained dataset for role-playing evaluation.
+  It further trains RoleLLaMA and RoleGLM, showing clear gains for open models on role-playing tasks.
+  Its main contribution is integrating evaluation, prompting, data construction, and training into one framework.
+glance:
+  - label_zh: "研究重点"
+    label_en: "Focus"
+    value: "角色生成与扮演"
+  - label_zh: "主指标"
+    label_en: "Primary Metric"
+    value: "avg"
+  - label_zh: "展示设置"
+    label_en: "Displayed Setting"
+    value: "English instruction generalization"
+metrics:
+  - id: avg
+    name: "avg"
+    description: "Average role-playing score."
+    higher_is_better: true
+    range: [0, 100]
+  - id: cus
+    name: "CUS"
+    description: "Speaking style imitation."
+    higher_is_better: true
+    range: [0, 100]
+  - id: raw
+    name: "RAW"
+    description: "Response accuracy."
+    higher_is_better: true
+    range: [0, 100]
+  - id: spe
+    name: "SPE"
+    description: "Role-specific knowledge."
+    higher_is_better: true
+    range: [0, 100]
+resources:
+  - label_zh: "代码仓库"
+    label_en: "Code Repository"
+    url: "https://github.com/InteractiveNLP-Team/RoleLLM-public"
+highlights_zh:
+  - "论文不仅提出 benchmark，还同步提出 RoleGPT、RoleBench 与角色增强方案。"
+  - "页面保留角色风格、准确性和角色知识三项细粒度指标。"
+highlights_en:
+  - "The work introduces not only a benchmark but also RoleGPT, RoleBench, and enhancement pipelines."
+  - "The page keeps style, accuracy, and role-specific knowledge as explicit dimensions."
+leaderboard_note_zh: "主榜单采用英文主实验表的 avg。论文同时报告英文、中文与泛化结果；为了前端可读性，这里固定展示英文主实验。"
+leaderboard_note_en: "The primary leaderboard uses avg from the main English experiment table. The paper also reports Chinese and generalization settings; this page fixes the English main experiment for readability."

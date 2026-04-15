@@ -1,0 +1,42 @@
+id: mt_bench_101
+name: "MT-Bench-101"
+name_zh: "MT-Bench-101"
+name_en: "MT-Bench-101"
+url: "https://github.com/mtbench101/mt-bench-101"
+paper: "https://arxiv.org/abs/2402.14762"
+description_zh: "MT-Bench-101 针对多轮对话中的细粒度指令遵循能力展开评测。页面主榜单采用论文表中的 Avg。"
+description_en: "MT-Bench-101 evaluates fine-grained instruction following in multi-turn dialogue. This page uses the Avg score from the paper."
+glance:
+  - label_zh: "研究重点"
+    label_en: "Focus"
+    value: "多轮指令遵循"
+  - label_zh: "主指标"
+    label_en: "Primary Metric"
+    value: "Avg"
+  - label_zh: "展示设置"
+    label_en: "Displayed Setting"
+    value: "Main benchmark table"
+metrics:
+  - id: avg_score
+    name: "Avg"
+    description: "Average MT-Bench-101 score."
+    higher_is_better: true
+    range: [0, 10]
+resources:
+  - label_zh: "代码仓库"
+    label_en: "Code Repository"
+    url: "https://github.com/mtbench101/mt-bench-101"
+downloads:
+  - label_zh: "Benchmark 数据"
+    label_en: "Benchmark Data"
+    url: "https://github.com/mtbench101/mt-bench-101/tree/main/data/subjective"
+    note_zh: "官方仓库中的数据目录，可直接查看 benchmark 的组织方式。"
+    note_en: "Official data directory in the repository for inspecting the benchmark structure."
+highlights_zh:
+  - "该 benchmark 不是粗粒度聊天打分，而是强调多轮细粒度能力拆解。"
+  - "页面保持论文原始 10 分制。"
+highlights_en:
+  - "The benchmark emphasizes fine-grained multi-turn capability decomposition rather than a coarse chat score."
+  - "The page preserves the paper's original 10-point scale."
+leaderboard_note_zh: "榜单直接使用论文 Avg。由于该工作本身就是细粒度拆解型 benchmark，主榜单不再额外组合其他列。"
+leaderboard_note_en: "The leaderboard directly uses the paper's Avg. Because the benchmark itself is already a fine-grained decomposition, this page does not recombine additional columns."

@@ -1,0 +1,48 @@
+id: owl
+name: "OWL"
+name_zh: "OWL"
+name_en: "OWL"
+url: "https://github.com/HC-Guo/Owl"
+paper: "https://arxiv.org/abs/2309.09298"
+description_zh: "OWL 关注 IT 运维场景中的大语言模型能力。页面主榜单采用论文给出的 Average Score。"
+description_en: "OWL studies large language models for IT operations. This page uses the Average Score reported in the paper."
+overview_zh: |
+  OWL 关注的是 IT 运维这一明确垂直场景，而不是通用聊天或通用问答。
+  论文构建了 Owl-Instruct 和 Owl-Bench，尝试训练面向运维任务的专用模型。
+  为了处理较长输入，它提出了 HMCE 上下文扩展方法，并结合 mixture-of-adapter 策略。
+  评测显示，OWL 在多项 IT 任务上明显优于当时的通用模型基线。
+  这篇工作的重点，是证明“领域专用 LLM + 专用 benchmark”在运维场景下是必要的。
+overview_en: |
+  OWL targets the IT operations domain instead of generic chat or QA scenarios.
+  The paper builds Owl-Instruct and Owl-Bench to train and evaluate a specialized model for IT tasks.
+  It proposes HMCE for extending usable context and adopts a mixture-of-adapter strategy for tuning.
+  Experiments show that OWL outperforms contemporary general-purpose baselines on multiple IT tasks.
+  Its main message is that domain-specific LLMs and benchmarks are necessary for realistic IT operations use cases.
+glance:
+  - label_zh: "研究重点"
+    label_en: "Focus"
+    value: "IT 运维代理"
+  - label_zh: "主指标"
+    label_en: "Primary Metric"
+    value: "Average Score"
+  - label_zh: "展示设置"
+    label_en: "Displayed Setting"
+    value: "Paper leaderboard"
+metrics:
+  - id: average_score
+    name: "Average Score"
+    description: "Average task score reported by the paper."
+    higher_is_better: true
+    range: [0, 10]
+resources:
+  - label_zh: "代码仓库"
+    label_en: "Code Repository"
+    url: "https://github.com/HC-Guo/Owl"
+highlights_zh:
+  - "OWL 更贴近企业运维场景，而不是通用问答。"
+  - "榜单分值范围不是百分制，因此页面保留论文原始量纲。"
+highlights_en:
+  - "OWL is closer to enterprise operations than generic QA."
+  - "The score is not a percentage, so the page preserves the paper's original scale."
+leaderboard_note_zh: "主榜单直接使用论文 Average Score。由于该工作年代较早，参评模型也以当时主流模型为主。"
+leaderboard_note_en: "The primary leaderboard directly uses the paper's Average Score. Since the work is relatively early, the evaluated models reflect the period's mainstream systems."

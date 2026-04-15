@@ -1,0 +1,45 @@
+id: chinese_safetyqa
+name: "Chinese SafetyQA"
+name_zh: "Chinese SafetyQA"
+name_en: "Chinese SafetyQA"
+url: "https://openstellarteam.github.io/ChineseSafetyQA/"
+paper: "https://arxiv.org/abs/2412.15265"
+description_zh: "Chinese SafetyQA 面向中文安全事实性评测。页面主榜单采用论文中的 F-score。"
+description_en: "Chinese SafetyQA evaluates Chinese safety factuality. This page uses the F-score reported in the paper."
+glance:
+  - label_zh: "研究重点"
+    label_en: "Focus"
+    value: "中文安全事实性"
+  - label_zh: "主指标"
+    label_en: "Primary Metric"
+    value: "F-score"
+  - label_zh: "展示设置"
+    label_en: "Displayed Setting"
+    value: "Main leaderboard"
+metrics:
+  - id: f_score
+    name: "F-score"
+    description: "F-score on Chinese SafetyQA."
+    higher_is_better: true
+    range: [0, 100]
+resources:
+  - label_zh: "项目主页"
+    label_en: "Project Page"
+    url: "https://openstellarteam.github.io/ChineseSafetyQA/"
+  - label_zh: "代码仓库"
+    label_en: "Code Repository"
+    url: "https://github.com/OpenStellarTeam/ChineseSafetyQA"
+downloads:
+  - label_zh: "数据集"
+    label_en: "Dataset"
+    url: "https://huggingface.co/datasets/OpenStellarTeam/Chinese-SafetyQA"
+    note_zh: "官方公开的数据集页面，可用于查看与下载 benchmark 数据。"
+    note_en: "Official dataset page for browsing and downloading the benchmark data."
+highlights_zh:
+  - "该工作把“安全”落到事实性问答层面，而非只看 jailbreak。"
+  - "页面与 Chinese SimpleQA 保持同一主指标，便于横向对照。"
+highlights_en:
+  - "The work grounds safety evaluation in factual QA rather than only jailbreak behavior."
+  - "The page keeps the same primary metric as Chinese SimpleQA for easier side-by-side comparison."
+leaderboard_note_zh: "主榜单使用 F-score，与论文保持一致。"
+leaderboard_note_en: "The primary leaderboard uses F-score, consistent with the paper."

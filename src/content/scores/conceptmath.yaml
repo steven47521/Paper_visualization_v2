@@ -1,0 +1,27 @@
+benchmark_id: conceptmath
+updated: "2026-04-15"
+results:
+  - model_id: gpt_4
+    scores: { avg: 78.02 }
+    source: official
+    source_url: "https://arxiv.org/abs/2402.14660"
+  - model_id: qwen_72b
+    scores: { avg: 70.73 }
+    source: official
+    source_url: "https://arxiv.org/abs/2402.14660"
+  - model_id: gpt_3_5_turbo
+    scores: { avg: 70.58 }
+    source: official
+    source_url: "https://arxiv.org/abs/2402.14660"
+  - model_id: deepseek_math_7b
+    scores: { avg: 64.02 }
+    source: official
+    source_url: "https://arxiv.org/abs/2402.14660"
+  - model_id: yi_34b
+    scores: { avg: 57.31 }
+    source: official
+    source_url: "https://arxiv.org/abs/2402.14660"
+  - model_id: qwen_14b
+    scores: { avg: 54.36 }
+    source: official
+    source_url: "https://arxiv.org/abs/2402.14660"

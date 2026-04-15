@@ -1,0 +1,27 @@
+benchmark_id: finder
+updated: "2026-04-15"
+results:
+  - model_id: miroflow_english
+    scores: { checklist_pass_rate: 72.19 }
+    source: official
+    source_url: "https://arxiv.org/abs/2512.01948"
+  - model_id: tongyi_deepresearch
+    scores: { checklist_pass_rate: 67.54 }
+    source: official
+    source_url: "https://arxiv.org/abs/2512.01948"
+  - model_id: kimi_k2
+    scores: { checklist_pass_rate: 66.59 }
+    source: official
+    source_url: "https://arxiv.org/abs/2512.01948"
+  - model_id: gemini_2_5_pro
+    scores: { checklist_pass_rate: 63.01 }
+    source: official
+    source_url: "https://arxiv.org/abs/2512.01948"
+  - model_id: openmanus
+    scores: { checklist_pass_rate: 61.34 }
+    source: official
+    source_url: "https://arxiv.org/abs/2512.01948"
+  - model_id: webthinker
+    scores: { checklist_pass_rate: 44.87 }
+    source: official
+    source_url: "https://arxiv.org/abs/2512.01948"

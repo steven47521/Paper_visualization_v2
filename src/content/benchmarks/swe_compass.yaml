@@ -1,0 +1,44 @@
+id: swe_compass
+name: "SWE-Compass"
+name_zh: "SWE-Compass"
+name_en: "SWE-Compass"
+url: "https://arxiv.org/abs/2511.05459"
+paper: "https://arxiv.org/abs/2511.05459"
+description_zh: "SWE-Compass 面向 agentic coding 能力做统一评测。页面主榜单采用论文中 Claude Code 工作流下的 AVG，以避免混合不同代理执行环境。"
+description_en: "SWE-Compass provides a unified evaluation for agentic coding ability. This page uses the AVG under the Claude Code workflow to avoid mixing different execution environments."
+overview_zh: |
+  SWE-Compass 试图把软件工程评测从零散任务，统一成更贴近真实开发流程的框架。
+  它覆盖 8 类任务、8 种编程场景和 10 种编程语言，并包含 2000 个高质量实例。
+  数据主要来自真实 GitHub Pull Request，再经过系统过滤、验证与整理。
+  论文在 SWE-Agent 和 Claude Code 两种 agent 框架下评测了多种前沿模型。
+  结果展示了不同任务类型、语言与场景之间清晰的难度层级。
+overview_en: |
+  SWE-Compass aims to unify software engineering evaluation into a framework closer to real developer workflows.
+  It spans 8 task types, 8 programming scenarios, and 10 programming languages with 2,000 curated instances.
+  Most instances are derived from authentic GitHub pull requests and refined through systematic validation.
+  The paper benchmarks strong models under both SWE-Agent and Claude Code frameworks.
+  Results reveal a clear hierarchy of difficulty across tasks, languages, and programming scenarios.
+glance:
+  - label_zh: "研究重点"
+    label_en: "Focus"
+    value: "Agentic coding"
+  - label_zh: "主指标"
+    label_en: "Primary Metric"
+    value: "AVG"
+  - label_zh: "展示设置"
+    label_en: "Displayed Setting"
+    value: "Claude Code workflow"
+metrics:
+  - id: avg
+    name: "AVG"
+    description: "Average score under the Claude Code workflow."
+    higher_is_better: true
+    range: [0, 100]
+highlights_zh:
+  - "论文同时报告 SWE-Agent 与 Claude Code 两种工作流。"
+  - "这里固定一种工作流，避免前端榜单把模型差异与系统差异混在一起。"
+highlights_en:
+  - "The paper reports results under both SWE-Agent and Claude Code workflows."
+  - "This page fixes one workflow so the leaderboard does not mix model differences with system differences."
+leaderboard_note_zh: "主榜单使用 Claude Code 工作流的 AVG。若把 SWE-Agent 与 Claude Code 混合展示，会掩盖模型与执行环境之间的边界。"
+leaderboard_note_en: "The primary leaderboard uses AVG under the Claude Code workflow. Mixing SWE-Agent and Claude Code would blur the boundary between model ability and execution environment."

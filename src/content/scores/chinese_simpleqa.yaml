@@ -1,0 +1,43 @@
+benchmark_id: chinese_simpleqa
+updated: "2026-04-15"
+results:
+  - model_id: o1_preview
+    scores: { f_score: 67.9 }
+    source: official
+    source_url: "https://arxiv.org/abs/2411.07140"
+  - model_id: doubao_1_5_pro
+    scores: { f_score: 65.3 }
+    source: official
+    source_url: "https://arxiv.org/abs/2411.07140"
+  - model_id: glm_4_plus
+    scores: { f_score: 60.9 }
+    source: official
+    source_url: "https://arxiv.org/abs/2411.07140"
+  - model_id: gpt_4o
+    scores: { f_score: 59.7 }
+    source: official
+    source_url: "https://arxiv.org/abs/2411.07140"
+  - model_id: qwen_max
+    scores: { f_score: 57.4 }
+    source: official
+    source_url: "https://arxiv.org/abs/2411.07140"
+  - model_id: gemini_1_5_pro
+    scores: { f_score: 56.7 }
+    source: official
+    source_url: "https://arxiv.org/abs/2411.07140"
+  - model_id: deepseek_v2_5
+    scores: { f_score: 55.7 }
+    source: official
+    source_url: "https://arxiv.org/abs/2411.07140"
+  - model_id: claude_3_5_sonnet
+    scores: { f_score: 53.5 }
+    source: official
+    source_url: "https://arxiv.org/abs/2411.07140"
+  - model_id: yi_large
+    scores: { f_score: 51.5 }
+    source: official
+    source_url: "https://arxiv.org/abs/2411.07140"
+  - model_id: qwen2_5_72b_instruct
+    scores: { f_score: 50.2 }
+    source: official
+    source_url: "https://arxiv.org/abs/2411.07140"

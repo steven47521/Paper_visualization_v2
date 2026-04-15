@@ -1,0 +1,31 @@
+benchmark_id: cii_bench
+updated: "2026-04-15"
+results:
+  - model_id: qwen2_vl_72b
+    scores: { overall: 64.4 }
+    source: official
+    source_url: "https://arxiv.org/abs/2410.13854"
+  - model_id: glm_4v
+    scores: { overall: 60.9 }
+    source: official
+    source_url: "https://arxiv.org/abs/2410.13854"
+  - model_id: gemini_1_5_pro
+    scores: { overall: 60.1 }
+    source: official
+    source_url: "https://arxiv.org/abs/2410.13854"
+  - model_id: internvl2_40b
+    scores: { overall: 57.9 }
+    source: official
+    source_url: "https://arxiv.org/abs/2410.13854"
+  - model_id: qwen_vl_max
+    scores: { overall: 56.9 }
+    source: official
+    source_url: "https://arxiv.org/abs/2410.13854"
+  - model_id: gpt_4o
+    scores: { overall: 54.1 }
+    source: official
+    source_url: "https://arxiv.org/abs/2410.13854"
+  - model_id: claude_3_5_sonnet
+    scores: { overall: 54.1 }
+    source: official
+    source_url: "https://arxiv.org/abs/2410.13854"

@@ -1,0 +1,39 @@
+benchmark_id: chinese_safetyqa
+updated: "2026-04-15"
+results:
+  - model_id: o1_preview
+    scores: { f_score: 73.12 }
+    source: official
+    source_url: "https://arxiv.org/abs/2412.15265"
+  - model_id: qwen_max
+    scores: { f_score: 63.49 }
+    source: official
+    source_url: "https://arxiv.org/abs/2412.15265"
+  - model_id: doubao_1_5_pro
+    scores: { f_score: 63.08 }
+    source: official
+    source_url: "https://arxiv.org/abs/2412.15265"
+  - model_id: gpt_4o
+    scores: { f_score: 59.44 }
+    source: official
+    source_url: "https://arxiv.org/abs/2412.15265"
+  - model_id: qwen2_5_72b_instruct
+    scores: { f_score: 58.73 }
+    source: official
+    source_url: "https://arxiv.org/abs/2412.15265"
+  - model_id: glm_4_plus
+    scores: { f_score: 57.79 }
+    source: official
+    source_url: "https://arxiv.org/abs/2412.15265"
+  - model_id: claude_3_5_sonnet
+    scores: { f_score: 57.03 }
+    source: official
+    source_url: "https://arxiv.org/abs/2412.15265"
+  - model_id: deepseek_v2_5
+    scores: { f_score: 55.07 }
+    source: official
+    source_url: "https://arxiv.org/abs/2412.15265"
+  - model_id: gemini_1_5_pro
+    scores: { f_score: 54.27 }
+    source: official
+    source_url: "https://arxiv.org/abs/2412.15265"

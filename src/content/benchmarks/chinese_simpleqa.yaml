@@ -1,0 +1,42 @@
+id: chinese_simpleqa
+name: "Chinese SimpleQA"
+name_zh: "Chinese SimpleQA"
+name_en: "Chinese SimpleQA"
+url: "https://github.com/OpenStellarTeam/ChineseSimpleQA"
+paper: "https://arxiv.org/abs/2411.07140"
+description_zh: "Chinese SimpleQA 聚焦中文事实性问答。页面主榜单采用论文中的 F-score。"
+description_en: "Chinese SimpleQA focuses on Chinese factual question answering. This page uses the F-score reported in the paper."
+glance:
+  - label_zh: "研究重点"
+    label_en: "Focus"
+    value: "中文事实性问答"
+  - label_zh: "主指标"
+    label_en: "Primary Metric"
+    value: "F-score"
+  - label_zh: "展示设置"
+    label_en: "Displayed Setting"
+    value: "Main leaderboard"
+metrics:
+  - id: f_score
+    name: "F-score"
+    description: "F-score on Chinese SimpleQA."
+    higher_is_better: true
+    range: [0, 100]
+resources:
+  - label_zh: "代码仓库"
+    label_en: "Code Repository"
+    url: "https://github.com/OpenStellarTeam/ChineseSimpleQA"
+downloads:
+  - label_zh: "数据集"
+    label_en: "Dataset"
+    url: "https://huggingface.co/datasets/OpenStellarTeam/Chinese-SimpleQA"
+    note_zh: "官方公开的数据集页面，可用于查看与下载 benchmark 数据。"
+    note_en: "Official dataset page for browsing and downloading the benchmark data."
+highlights_zh:
+  - "该工作强调中文事实性，而非英文知识迁移。"
+  - "页面使用 F-score，兼顾回答完整性与准确性。"
+highlights_en:
+  - "The benchmark targets Chinese factuality rather than transferred English knowledge."
+  - "The page uses F-score to balance answer correctness and completeness."
+leaderboard_note_zh: "主榜单使用论文 F-score。对于事实性 benchmark，这一指标比单独准确率更稳定。"
+leaderboard_note_en: "The primary leaderboard uses F-score. For factuality benchmarks, this metric is more stable than a single raw accuracy number."

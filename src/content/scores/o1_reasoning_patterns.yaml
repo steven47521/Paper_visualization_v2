@@ -1,0 +1,15 @@
+benchmark_id: o1_reasoning_patterns
+updated: "2026-04-15"
+results:
+  - model_id: o1_mini
+    scores: { overall: 35.77 }
+    source: official
+    source_url: "https://arxiv.org/abs/2410.13639"
+  - model_id: o1_preview
+    scores: { overall: 34.32 }
+    source: official
+    source_url: "https://arxiv.org/abs/2410.13639"
+  - model_id: gpt_4o
+    scores: { overall: 18.44 }
+    source: official
+    source_url: "https://arxiv.org/abs/2410.13639"

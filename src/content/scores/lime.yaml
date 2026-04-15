@@ -1,0 +1,31 @@
+benchmark_id: lime
+updated: "2026-04-15"
+results:
+  - model_id: internvl2_40b
+    scores: { overall: 66.85 }
+    source: official
+    source_url: "https://arxiv.org/abs/2409.06851"
+  - model_id: qwen2_vl_7b
+    scores: { overall: 65.28 }
+    source: official
+    source_url: "https://arxiv.org/abs/2409.06851"
+  - model_id: internvl2_8b
+    scores: { overall: 62.00 }
+    source: official
+    source_url: "https://arxiv.org/abs/2409.06851"
+  - model_id: llava_onevision_7b
+    scores: { overall: 61.95 }
+    source: official
+    source_url: "https://arxiv.org/abs/2409.06851"
+  - model_id: gpt_4o
+    scores: { overall: 52.63 }
+    source: official
+    source_url: "https://arxiv.org/abs/2409.06851"
+  - model_id: claude_3_5_sonnet
+    scores: { overall: 51.99 }
+    source: official
+    source_url: "https://arxiv.org/abs/2409.06851"
+  - model_id: gemini_1_5_pro
+    scores: { overall: 49.46 }
+    source: official
+    source_url: "https://arxiv.org/abs/2409.06851"

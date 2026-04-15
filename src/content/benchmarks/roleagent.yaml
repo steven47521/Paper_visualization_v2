@@ -1,0 +1,59 @@
+id: roleagent
+name: "RoleAgent"
+name_zh: "RoleAgent"
+name_en: "RoleAgent"
+url: "https://openreview.net/forum?id=hORTHzt2cE"
+paper: "https://openreview.net/forum?id=hORTHzt2cE"
+description_zh: "RoleAgent 关注高质量角色代理的构建、交互与评测。页面主榜单采用英文设置下的 General Response WR-H。"
+description_en: "RoleAgent benchmarks the building and interaction quality of role-playing agents. This page uses General Response WR-H on the English setting as the primary leaderboard."
+overview_zh: |
+  RoleAgent 试图从原始剧本中自动构建高质量角色代理，减少人工编写角色档案的成本。
+  在构建阶段，论文通过脚本解析与层级记忆系统，提炼角色的结构化信息和高层记忆。
+  在交互阶段，它使用查询拆解、记忆检索、记忆总结和响应生成来提升对话质量。
+  论文还提出了 RoleAgentBench，用于系统评测角色自我认知、反应、通用回复与总结能力。
+  核心贡献在于把“从剧本自动生成可交互角色”与“可验证评测”结合起来。
+overview_en: |
+  RoleAgent aims to automatically build high-quality role-playing agents from raw scripts without manual profile creation.
+  In the building stage, it parses scripts and constructs a hierarchical memory system for each role.
+  In the interaction stage, it improves conversations through query decomposition, memory retrieval, summarization, and response generation.
+  The paper also introduces RoleAgentBench to evaluate self-knowledge, reaction, general response, and summarization ability.
+  Its core contribution is combining scalable script-based role construction with a systematic evaluation benchmark.
+glance:
+  - label_zh: "研究重点"
+    label_en: "Focus"
+    value: "角色代理"
+  - label_zh: "主指标"
+    label_en: "Primary Metric"
+    value: "General Response WR-H"
+  - label_zh: "展示设置"
+    label_en: "Displayed Setting"
+    value: "English evaluation subset"
+metrics:
+  - id: general_response_wr_h
+    name: "General Response WR-H"
+    description: "Human win rate on general response quality."
+    higher_is_better: true
+    range: [0, 100]
+  - id: self_knowledge
+    name: "Self-Knowledge"
+    description: "Role self-knowledge score."
+    higher_is_better: true
+    range: [0, 100]
+  - id: reaction
+    name: "Reaction"
+    description: "Reaction quality score."
+    higher_is_better: true
+    range: [0, 100]
+  - id: summary_wr_h
+    name: "Summary WR-H"
+    description: "Human win rate on summarization quality."
+    higher_is_better: true
+    range: [0, 100]
+highlights_zh:
+  - "论文没有单一统一总分，因此页面选择最贴近用户体验的人评胜率作为主榜单。"
+  - "同时保留 self-knowledge 与 reaction，有助于理解角色代理的能力结构。"
+highlights_en:
+  - "The paper does not report one unified overall score, so the page uses the most user-facing human win rate as the primary leaderboard."
+  - "Self-knowledge and reaction are also preserved to reflect the structure of role-agent ability."
+leaderboard_note_zh: "主榜单使用英文评测子集的 General Response WR-H。由于论文强调多维角色代理能力，这里同步保留若干辅助指标。"
+leaderboard_note_en: "The primary leaderboard uses General Response WR-H from the English evaluation subset. Since the paper emphasizes multi-dimensional role-agent ability, a few auxiliary metrics are kept as well."

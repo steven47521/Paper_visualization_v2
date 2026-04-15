@@ -1,0 +1,32 @@
+id: kor_bench
+name: "KOR-Bench"
+name_zh: "KOR-Bench"
+name_en: "KOR-Bench"
+url: "https://arxiv.org/abs/2410.06526"
+paper: "https://arxiv.org/abs/2410.06526"
+description_zh: "KOR-Bench 以知识正交推理为核心，尽量减少背景知识对推理评估的干扰。页面主榜单采用论文主表的 Overall。"
+description_en: "KOR-Bench evaluates knowledge-orthogonal reasoning by reducing the effect of prior domain knowledge. This page uses the Overall score from the main results table."
+glance:
+  - label_zh: "研究重点"
+    label_en: "Focus"
+    value: "知识正交推理"
+  - label_zh: "主指标"
+    label_en: "Primary Metric"
+    value: "Overall"
+  - label_zh: "展示设置"
+    label_en: "Displayed Setting"
+    value: "Main chat-model leaderboard"
+metrics:
+  - id: overall
+    name: "Overall"
+    description: "Overall reasoning accuracy on KOR-Bench."
+    higher_is_better: true
+    range: [0, 100]
+highlights_zh:
+  - "该 benchmark 的目标是把“会推理”和“碰巧记得知识”尽量分开。"
+  - "页面采用主表 Overall，不混入附加综合任务设置。"
+highlights_en:
+  - "The benchmark aims to separate actual reasoning ability from memorized knowledge."
+  - "The page uses the main Overall score and does not mix in the additional integrated-task setting."
+leaderboard_note_zh: "主榜单使用论文主表 Overall。论文还提供 Multi-Q / Multi-R / Multi-RQ 等综合任务分析，本页不与主榜单混合。"
+leaderboard_note_en: "The primary leaderboard uses Overall from the main table. The paper also reports integrated-task analyses such as Multi-Q / Multi-R / Multi-RQ, which are not mixed into the main leaderboard."

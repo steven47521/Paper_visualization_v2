@@ -1,23 +1,167 @@
-<!doctype html>
-<html lang="en">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro Basics</title>
-	</head>
-	<body>
-		<slot />
-	</body>
-</html>
+---
+import '../styles/global.css';
+import { getCollection } from 'astro:content';
+import { t, getLocaleFromUrl, getLocalizedPath } from '../i18n/translations';
+import type { Locale } from '../i18n/translations';
 
-<style>
-	html,
-	body {
-		margin: 0;
-		width: 100%;
-		height: 100%;
-	}
-</style>
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const { title, description } = Astro.props;
+const locale = getLocaleFromUrl(Astro.url) as Locale;
+const otherLocale: Locale = locale === 'zh' ? 'en' : 'zh';
+const currentPath = Astro.url.pathname.replace(/^\/(zh|en)/, '');
+
+const pageTitle = title ? `${title} | ${t(locale, 'site_title')}` : t(locale, 'site_title');
+const pageDesc = description || t(locale, 'site_slogan');
+
+const taxonomyItems = (await getCollection('taxonomy'))
+  .sort((a, b) => a.data.order - b.data.order)
+  .map(item => ({
+    id: item.data.id,
+    name_zh: item.data.name_zh,
+    name_en: item.data.name_en,
+  }));
+---
+
+<!DOCTYPE html>
+<html lang={locale} data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content={pageDesc} />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <title>{pageTitle}</title>
+  <script is:inline>
+    (function() {
+      const saved = localStorage.getItem('theme');
+      const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      const theme = saved || (prefersDark ? 'dark' : 'light');
+      document.documentElement.setAttribute('data-theme', theme);
+    })();
+  </script>
+</head>
+<body class="min-h-screen flex flex-col bg-[var(--color-bg)] text-[var(--color-text)]">
+  <header class="sticky top-0 z-50 backdrop-blur-xl bg-[var(--color-bg)]/75 border-b border-[var(--color-border)]/60">
+    <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+      <a href={getLocalizedPath('/', locale)} class="flex items-center gap-2 font-bold text-xl text-[var(--color-primary)]">
+        <svg class="w-7 h-7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="12" cy="12" r="10" />
+          <path d="M12 2a10 10 0 0 1 0 20" />
+          <path d="M2 12h20" />
+          <path d="M12 2c3 3.6 5 7.4 5 10s-2 6.4-5 10" />
+          <path d="M12 2c-3 3.6-5 7.4-5 10s2 6.4 5 10" />
+        </svg>
+        Benchmark Hub
+      </a>
+
+      <div class="hidden md:flex items-center gap-5 text-sm">
+        <a href={getLocalizedPath('/', locale)} class="hover:text-[var(--color-primary)] transition-colors">
+          {t(locale, 'nav_home')}
+        </a>
+        {taxonomyItems.map(item => (
+          <a href={getLocalizedPath(`/${item.id}/`, locale)} class="hover:text-[var(--color-primary)] transition-colors">
+            {locale === 'zh' ? item.name_zh : item.name_en}
+          </a>
+        ))}
+        <a href={getLocalizedPath('/compare/', locale)} class="hover:text-[var(--color-primary)] transition-colors">
+          {t(locale, 'nav_compare')}
+        </a>
+      </div>
+
+      <div class="flex items-center gap-3">
+        <a
+          href={getLocalizedPath(currentPath || '/', otherLocale)}
+          class="px-3 py-1.5 text-sm rounded-lg border border-[var(--color-border)] hover:border-[var(--color-primary)] transition-colors"
+        >
+          {locale === 'zh' ? 'EN' : '中文'}
+        </a>
+
+        <button
+          id="theme-toggle"
+          class="p-2 rounded-lg border border-[var(--color-border)] hover:border-[var(--color-primary)] transition-colors"
+          aria-label="Toggle theme"
+        >
+          <svg class="w-5 h-5 dark-icon hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="5" />
+            <path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42" />
+          </svg>
+          <svg class="w-5 h-5 light-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
+          </svg>
+        </button>
+
+        <button id="mobile-menu-btn" class="md:hidden p-2 rounded-lg border border-[var(--color-border)]">
+          <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M3 12h18M3 6h18M3 18h18" />
+          </svg>
+        </button>
+      </div>
+    </nav>
+
+    <div id="mobile-menu" class="hidden md:hidden border-t border-[var(--color-border)] pb-4">
+      <div class="max-w-7xl mx-auto px-4 pt-2 flex flex-col gap-2">
+        <a href={getLocalizedPath('/', locale)} class="py-2 px-3 rounded-lg hover:bg-[var(--color-bg-secondary)]">
+          {t(locale, 'nav_home')}
+        </a>
+        {taxonomyItems.map(item => (
+          <a href={getLocalizedPath(`/${item.id}/`, locale)} class="py-2 px-3 rounded-lg hover:bg-[var(--color-bg-secondary)]">
+            {locale === 'zh' ? item.name_zh : item.name_en}
+          </a>
+        ))}
+        <a href={getLocalizedPath('/compare/', locale)} class="py-2 px-3 rounded-lg hover:bg-[var(--color-bg-secondary)]">
+          {t(locale, 'nav_compare')}
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <main class="flex-1 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 w-full">
+    <slot />
+  </main>
+
+  <footer class="border-t border-[var(--color-border)]/40 mt-8">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <div class="flex flex-col md:flex-row justify-between items-start gap-6">
+        <div class="max-w-md">
+          <h3 class="font-bold text-lg mb-2">Benchmark Hub</h3>
+          <p class="text-sm text-[var(--color-text-secondary)]">{t(locale, 'footer_desc')}</p>
+        </div>
+        <div class="text-sm text-[var(--color-text-secondary)]">
+          <p>{t(locale, 'footer_data_updated')}: 2026-04-15</p>
+          <p class="mt-1">&copy; 2026 Benchmark Hub</p>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script is:inline>
+    document.getElementById('theme-toggle')?.addEventListener('click', () => {
+      const current = document.documentElement.getAttribute('data-theme');
+      const next = current === 'dark' ? 'light' : 'dark';
+      document.documentElement.setAttribute('data-theme', next);
+      localStorage.setItem('theme', next);
+      updateThemeIcons(next);
+    });
+
+    function updateThemeIcons(theme) {
+      const darkIcon = document.querySelector('.dark-icon');
+      const lightIcon = document.querySelector('.light-icon');
+      if (theme === 'dark') {
+        darkIcon?.classList.remove('hidden');
+        lightIcon?.classList.add('hidden');
+      } else {
+        darkIcon?.classList.add('hidden');
+        lightIcon?.classList.remove('hidden');
+      }
+    }
+    updateThemeIcons(document.documentElement.getAttribute('data-theme') || 'light');
+
+    document.getElementById('mobile-menu-btn')?.addEventListener('click', () => {
+      document.getElementById('mobile-menu')?.classList.toggle('hidden');
+    });
+  </script>
+</body>
+</html>

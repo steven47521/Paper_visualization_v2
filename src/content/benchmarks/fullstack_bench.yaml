@@ -1,0 +1,54 @@
+id: fullstack_bench
+name: "FullStack Bench"
+name_zh: "FullStack Bench"
+name_en: "FullStack Bench"
+url: "https://github.com/bytedance/FullStackBench"
+paper: "https://arxiv.org/abs/2412.00535"
+description_zh: "FullStack Bench 评估 LLM 在全栈开发场景中的综合编码能力。页面主榜单采用论文主结果表的 Overall。"
+description_en: "FullStack Bench evaluates LLMs as full-stack coders. The displayed leaderboard uses the Overall score from the main results table."
+overview_zh: |
+  FullStack Bench 不再只考单点编程题，而是面向更完整的全栈开发能力。
+  它覆盖基础编程、数据分析、软件工程、数学与机器学习等多个应用域。
+  数据来自 16 种常用编程语言的真实世界指令和单元测试，而不是简单翻译题。
+  论文同时发布了多语言执行沙箱 SandboxFusion，用来稳定评测这些任务。
+  实验说明，全栈开发场景比传统代码 benchmark 更贴近真实使用，也更具挑战性。
+overview_en: |
+  FullStack Bench moves beyond isolated coding tasks and targets broader full-stack development ability.
+  It covers domains such as basic programming, data analysis, software engineering, math, and machine learning.
+  The benchmark uses real-world instructions and unit tests across 16 widely used programming languages.
+  The paper also releases SandboxFusion to execute and evaluate these multilingual tasks reliably.
+  Results show that full-stack evaluation is both more realistic and more challenging than traditional code benchmarks.
+glance:
+  - label_zh: "研究重点"
+    label_en: "Focus"
+    value: "全栈编码代理"
+  - label_zh: "主指标"
+    label_en: "Primary Metric"
+    value: "Overall"
+  - label_zh: "展示设置"
+    label_en: "Displayed Setting"
+    value: "官方主实验表"
+metrics:
+  - id: overall
+    name: "Overall"
+    description: "Overall full-stack coding score."
+    higher_is_better: true
+    range: [0, 100]
+resources:
+  - label_zh: "代码仓库"
+    label_en: "Code Repository"
+    url: "https://github.com/bytedance/FullStackBench"
+downloads:
+  - label_zh: "数据集"
+    label_en: "Dataset"
+    url: "https://huggingface.co/datasets/ByteDance-Seed/FullStackBench"
+    note_zh: "官方公开的数据集页面，可用于查看与下载 FullStackBench 数据。"
+    note_en: "Official dataset page for browsing and downloading FullStackBench data."
+highlights_zh:
+  - "该工作不是单一编程题，而是更贴近完整产品开发流程的综合评测。"
+  - "前端页面保留 Overall 作为主榜单，避免把领域子项拆得过细。"
+highlights_en:
+  - "The benchmark goes beyond standalone coding tasks and targets end-to-end full-stack development."
+  - "This page keeps Overall as the primary leaderboard instead of splitting every domain-specific subscore."
+leaderboard_note_zh: "榜单展示论文主实验表中的 Overall。论文还提供更细的前后端子域分数，这里不单独展开。"
+leaderboard_note_en: "The leaderboard shows the Overall score from the main experiments table. The paper also reports finer frontend/backend subscores, which are not expanded here."

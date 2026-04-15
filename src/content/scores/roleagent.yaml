@@ -1,0 +1,27 @@
+benchmark_id: roleagent
+updated: "2026-04-15"
+results:
+  - model_id: qwen_max
+    scores: { general_response_wr_h: 54.3, self_knowledge: 94.1, reaction: 92.9, summary_wr_h: 62.9 }
+    source: official
+    source_url: "https://openreview.net/forum?id=hORTHzt2cE"
+  - model_id: gpt_4
+    scores: { general_response_wr_h: 49.7, self_knowledge: 94.7, reaction: 88.9, summary_wr_h: 59.8 }
+    source: official
+    source_url: "https://openreview.net/forum?id=hORTHzt2cE"
+  - model_id: qwen1_5_14b
+    scores: { general_response_wr_h: 45.3, self_knowledge: 83.7, reaction: 71.0, summary_wr_h: 38.0 }
+    source: official
+    source_url: "https://openreview.net/forum?id=hORTHzt2cE"
+  - model_id: yi_34b
+    scores: { general_response_wr_h: 42.5, self_knowledge: 88.5, reaction: 73.8, summary_wr_h: 44.7 }
+    source: official
+    source_url: "https://openreview.net/forum?id=hORTHzt2cE"
+  - model_id: gpt_3_5_turbo
+    scores: { general_response_wr_h: 41.5, self_knowledge: 87.6, reaction: 76.7, summary_wr_h: 51.6 }
+    source: official
+    source_url: "https://openreview.net/forum?id=hORTHzt2cE"
+  - model_id: llama_3_8b
+    scores: { general_response_wr_h: 38.9, self_knowledge: 84.0, reaction: 68.1, summary_wr_h: 50.2 }
+    source: official
+    source_url: "https://openreview.net/forum?id=hORTHzt2cE"
