@@ -1,6 +1,6 @@
 ---
 import Layout from '../../layouts/Layout.astro';
-import { t } from '../../i18n/translations';
+import { getLocalizedPath, t } from '../../i18n/translations';
 import { getCollection } from 'astro:content';
 import { buildSunburstData, buildCategoryData, getModelsArray } from '../../lib/data';
 import { computeOverallRanking } from '../../lib/aggregate';
@@ -41,7 +41,7 @@ const l1Categories = taxonomy
       client:load
       data={sunburstData}
       locale={locale}
-      basePath={`/${locale}/`}
+      basePath={getLocalizedPath('/', locale)}
     />
   </section>
 
@@ -79,7 +79,7 @@ const l1Categories = taxonomy
 
         return (
           <a
-            href={`/${locale}/${cat.data.id}/`}
+            href={getLocalizedPath(`/${cat.data.id}/`, locale)}
             class="block rounded-xl border border-[var(--color-border)] bg-[var(--color-bg-card)] p-5 hover:border-[var(--color-primary)] hover:shadow-md transition-all"
           >
             <div class="flex items-center gap-2 mb-3">

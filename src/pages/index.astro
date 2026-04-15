@@ -1,3 +1,5 @@
 ---
-return Astro.redirect('/zh/');
+import { getLocalizedPath } from '../i18n/translations';
+
+return Astro.redirect(getLocalizedPath('/', 'zh'));
 ---

@@ -4,6 +4,8 @@ import react from '@astrojs/react';
 import tailwindcss from '@tailwindcss/vite';
 
 export default defineConfig({
+  site: 'https://Dabingzz.github.io',
+  base: '/Paper_visualization',
   integrations: [react()],
   vite: {
     plugins: [tailwindcss()]

@@ -112,16 +112,34 @@ export const translations = {
 export type Locale = keyof typeof translations;
 export type TranslationKey = keyof typeof translations['zh'];
 
+const BASE_PATH = import.meta.env.BASE_URL === '/'
+  ? ''
+  : import.meta.env.BASE_URL.replace(/\/$/, '');
+
 export function t(locale: Locale, key: TranslationKey): string {
   return translations[locale][key] || translations['zh'][key] || key;
 }
 
+export function stripBasePath(pathname: string): string {
+  if (!BASE_PATH) return pathname || '/';
+  if (pathname === BASE_PATH) return '/';
+  if (pathname.startsWith(`${BASE_PATH}/`)) {
+    return pathname.slice(BASE_PATH.length) || '/';
+  }
+  return pathname || '/';
+}
+
+export function withBase(path: string): string {
+  const normalizedPath = path.startsWith('/') ? path : `/${path}`;
+  return `${BASE_PATH}${normalizedPath}` || '/';
+}
+
 export function getLocaleFromUrl(url: URL): Locale {
-  const [, locale] = url.pathname.split('/');
+  const [, locale] = stripBasePath(url.pathname).split('/');
   if (locale === 'en') return 'en';
   return 'zh';
 }
 
 export function getLocalizedPath(path: string, locale: Locale): string {
-  return `/${locale}${path}`;
+  return withBase(`/${locale}${path}`);
 }

@@ -1,6 +1,6 @@
 ---
 import Layout from '../../layouts/Layout.astro';
-import { t } from '../../i18n/translations';
+import { getLocalizedPath, t } from '../../i18n/translations';
 import { getCollection } from 'astro:content';
 import { buildCategoryData, getModelsArray } from '../../lib/data';
 import { normalizeBenchmarkScores } from '../../lib/normalize';
@@ -75,7 +75,7 @@ const l1Summaries = taxonomy
 
 <Layout title={t(locale, 'compare_title')}>
   <nav class="mb-6 text-sm text-[var(--color-text-secondary)]">
-    <a href={`/${locale}/`} class="hover:text-[var(--color-primary)]">{t(locale, 'nav_home')}</a>
+    <a href={getLocalizedPath('/', locale)} class="hover:text-[var(--color-primary)]">{t(locale, 'nav_home')}</a>
     <span class="mx-2">/</span>
     <span>{t(locale, 'compare_title')}</span>
   </nav>

@@ -1,6 +1,6 @@
 ---
 import Layout from '../../../layouts/Layout.astro';
-import { t } from '../../../i18n/translations';
+import { getLocalizedPath, t } from '../../../i18n/translations';
 import { getCollection } from 'astro:content';
 import { buildCategoryData, getModelsArray } from '../../../lib/data';
 import { normalizeBenchmarkScores } from '../../../lib/normalize';
@@ -84,7 +84,7 @@ const subcategoryTabs = taxEntry.data.subcategories.map(sub => {
 
 <Layout title={taxEntry.data.name_en}>
   <nav class="mb-6 text-sm text-[var(--color-text-secondary)]">
-    <a href={`/${locale}/`} class="hover:text-[var(--color-primary)]">{t(locale, 'nav_home')}</a>
+    <a href={getLocalizedPath('/', locale)} class="hover:text-[var(--color-primary)]">{t(locale, 'nav_home')}</a>
     <span class="mx-2">/</span>
     <span>{taxEntry.data.name_en}</span>
   </nav>
@@ -140,7 +140,7 @@ const subcategoryTabs = taxEntry.data.subcategories.map(sub => {
       <div class="mt-6 flex flex-wrap gap-2">
         {tab.benchmarkIds.map(bId => (
           <a
-            href={`/${locale}/${taxEntry.data.id}/${bId}/`}
+            href={getLocalizedPath(`/${taxEntry.data.id}/${bId}/`, locale)}
             class="px-3 py-1.5 text-sm rounded-lg border border-[var(--color-border)] hover:border-[var(--color-primary)] hover:text-[var(--color-primary)] transition-colors"
           >
             {benchmarks.find(b => b.data.id === bId)?.data.name ?? bId} &rarr;

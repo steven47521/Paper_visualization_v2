@@ -1,6 +1,6 @@
 ---
 import Layout from '../../../layouts/Layout.astro';
-import { t } from '../../../i18n/translations';
+import { getLocalizedPath, t } from '../../../i18n/translations';
 import { getCollection } from 'astro:content';
 import { buildBenchmarkDetailData, getModelsArray } from '../../../lib/data';
 import LeaderboardTable from '../../../components/LeaderboardTable';
@@ -65,9 +65,9 @@ const rows = detail.leaderboardRows
 
 <Layout title={detail.name}>
   <nav class="mb-6 text-sm text-[var(--color-text-secondary)]">
-    <a href={`/${locale}/`} class="hover:text-[var(--color-primary)]">{t(locale, 'nav_home')}</a>
+    <a href={getLocalizedPath('/', locale)} class="hover:text-[var(--color-primary)]">{t(locale, 'nav_home')}</a>
     <span class="mx-2">/</span>
-    <a href={`/${locale}/${taxEntry.data.id}/`} class="hover:text-[var(--color-primary)]">{taxEntry.data.name_zh}</a>
+    <a href={getLocalizedPath(`/${taxEntry.data.id}/`, locale)} class="hover:text-[var(--color-primary)]">{taxEntry.data.name_zh}</a>
     <span class="mx-2">/</span>
     <span>{benchmark.data.name}</span>
   </nav>
@@ -257,7 +257,7 @@ const rows = detail.leaderboardRows
 
   <div class="mt-8">
     <a
-      href={`/${locale}/${taxEntry.data.id}/`}
+      href={getLocalizedPath(`/${taxEntry.data.id}/`, locale)}
       class="text-sm text-[var(--color-primary)] hover:underline"
     >
       &larr; {t(locale, 'back_to_category')}
