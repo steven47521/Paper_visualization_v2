@@ -96,6 +96,27 @@ export interface ModelEntry {
   };
 }
 
+export interface HomepageProjectionBenchmark {
+  id: string;
+  name: string;
+  metrics: MetricDef[];
+  results: ScoreEntry[];
+}
+
+export interface HomepageProjectionSubcategory {
+  id: string;
+  name: string;
+  description?: string;
+  benchmarks: HomepageProjectionBenchmark[];
+}
+
+export interface HomepageProjectionCategory {
+  id: string;
+  name: string;
+  color: string;
+  subcategories: HomepageProjectionSubcategory[];
+}
+
 function mergeLinks<T extends { url: string }>(primary: T[], fallback: T[]) {
   const seen = new Set(primary.map(item => item.url));
   return primary.concat(fallback.filter(item => !seen.has(item.url)));
@@ -227,6 +248,45 @@ export function buildCategoryData(
     color: taxonomyEntry.data.color,
     benchmarks: benchmarkDataList,
   };
+}
+
+/**
+ * Build homepage projection data for interactive filtering on the main leaderboard.
+ */
+export function buildHomepageProjectionData(
+  taxonomy: TaxonomyEntry[],
+  benchmarks: BenchmarkEntry[],
+  scores: ScoreCollectionEntry[],
+  locale: 'zh' | 'en'
+): HomepageProjectionCategory[] {
+  const benchmarkMap = new Map(benchmarks.map(entry => [entry.data.id, entry.data]));
+  const scoreMap = new Map(scores.map(entry => [entry.data.benchmark_id, entry.data]));
+
+  return taxonomy
+    .sort((a, b) => a.data.order - b.data.order)
+    .map(category => ({
+      id: category.data.id,
+      name: locale === 'zh' ? category.data.name_zh : category.data.name_en,
+      color: category.data.color,
+      subcategories: category.data.subcategories.map(subcategory => ({
+        id: subcategory.id,
+        name: locale === 'zh' ? subcategory.name_zh : subcategory.name_en,
+        description: locale === 'zh' ? subcategory.description_zh : subcategory.description_en,
+        benchmarks: subcategory.benchmarks
+          .map(benchmarkId => {
+            const benchmark = benchmarkMap.get(benchmarkId);
+            if (!benchmark) return null;
+
+            return {
+              id: benchmark.id,
+              name: locale === 'zh' ? benchmark.name_zh : benchmark.name_en,
+              metrics: benchmark.metrics,
+              results: scoreMap.get(benchmark.id)?.results ?? [],
+            };
+          })
+          .filter((benchmark): benchmark is HomepageProjectionBenchmark => benchmark !== null),
+      })),
+    }));
 }
 
 /**

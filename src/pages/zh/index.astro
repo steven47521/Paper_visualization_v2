@@ -2,7 +2,12 @@
 import Layout from '../../layouts/Layout.astro';
 import { getLocalizedPath, t } from '../../i18n/translations';
 import { getCollection } from 'astro:content';
-import { buildSunburstData, buildCategoryData, getModelsArray } from '../../lib/data';
+import {
+  buildSunburstData,
+  buildCategoryData,
+  buildHomepageProjectionData,
+  getModelsArray,
+} from '../../lib/data';
 import { computeOverallRanking } from '../../lib/aggregate';
 import SunburstChart from '../../components/SunburstChart';
 import HomepageLeaderboard from '../../components/HomepageLeaderboard';
@@ -19,14 +24,22 @@ const sunburstData = buildSunburstData(taxonomy, benchmarks, locale);
 
 const categories = taxonomy
   .sort((a, b) => a.data.order - b.data.order)
-  .map(t => buildCategoryData(t, benchmarks, scores));
+  .map(entry => buildCategoryData(entry, benchmarks, scores));
 
-const modelsList = models.map(m => ({ id: m.id, name: m.name, org: m.org, color: m.color }));
+const homepageProjectionData = buildHomepageProjectionData(
+  taxonomy,
+  benchmarks,
+  scores,
+  locale
+);
+
+const modelsList = models.map(model => ({
+  id: model.id,
+  name: model.name,
+  org: model.org,
+  color: model.color,
+}));
 const overallRanking = computeOverallRanking(categories, modelsList);
-
-const l1Categories = taxonomy
-  .sort((a, b) => a.data.order - b.data.order)
-  .map(t => ({ id: t.data.id, name: t.data.name_zh, color: t.data.color }));
 ---
 
 <Layout title={t(locale, 'nav_home')}>
@@ -51,8 +64,8 @@ const l1Categories = taxonomy
     <h2 class="text-xl font-semibold mb-5">{t(locale, 'overall_ranking')}</h2>
     <HomepageLeaderboard
       client:load
-      initialScores={overallRanking}
-      l1Categories={l1Categories}
+      categories={homepageProjectionData}
+      models={models}
       locale={locale}
       labels={{
         overall_ranking: t(locale, 'overall_ranking'),
@@ -70,37 +83,49 @@ const l1Categories = taxonomy
   <section class="mb-12">
     <h2 class="text-xl font-semibold mb-5">{t(locale, 'category_quickview')}</h2>
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-      {taxonomy.sort((a, b) => a.data.order - b.data.order).map(cat => {
-        const catData = categories.find(c => c.id === cat.data.id);
+      {taxonomy.sort((a, b) => a.data.order - b.data.order).map(category => {
         const topModels = overallRanking
-          .filter(m => m.l1Scores[cat.data.id] !== null)
-          .sort((a, b) => (b.l1Scores[cat.data.id] ?? 0) - (a.l1Scores[cat.data.id] ?? 0))
+          .filter(model => model.l1Scores[category.data.id] !== null)
+          .sort(
+            (a, b) =>
+              (b.l1Scores[category.data.id] ?? 0) - (a.l1Scores[category.data.id] ?? 0)
+          )
           .slice(0, 5);
 
         return (
           <a
-            href={getLocalizedPath(`/${cat.data.id}/`, locale)}
+            href={getLocalizedPath(`/${category.data.id}/`, locale)}
             class="block rounded-xl border border-[var(--color-border)] bg-[var(--color-bg-card)] p-5 hover:border-[var(--color-primary)] hover:shadow-md transition-all"
           >
             <div class="flex items-center gap-2 mb-3">
-              <span class="w-3 h-3 rounded-full" style={`background-color: ${cat.data.color}`}></span>
-              <h3 class="font-semibold">{cat.data.name_zh}</h3>
+              <span
+                class="w-3 h-3 rounded-full"
+                style={`background-color: ${category.data.color}`}
+              ></span>
+              <h3 class="font-semibold">{category.data.name_zh}</h3>
             </div>
             <div class="space-y-1.5">
-              {topModels.map((m, i) => (
+              {topModels.map((model, index) => (
                 <div class="flex items-center justify-between text-sm">
                   <span class="flex items-center gap-1.5">
-                    <span class="text-xs text-[var(--color-text-secondary)] w-4">{i + 1}</span>
-                    <span class="w-2 h-2 rounded-full" style={`background-color: ${m.color}`}></span>
-                    <span class="truncate">{m.model_name}</span>
+                    <span class="text-xs text-[var(--color-text-secondary)] w-4">
+                      {index + 1}
+                    </span>
+                    <span
+                      class="w-2 h-2 rounded-full"
+                      style={`background-color: ${model.color}`}
+                    ></span>
+                    <span class="truncate">{model.model_name}</span>
                   </span>
                   <span class="font-mono text-xs text-[var(--color-text-secondary)]">
-                    {m.l1Scores[cat.data.id]?.toFixed(1) ?? '—'}
+                    {model.l1Scores[category.data.id]?.toFixed(1) ?? '-'}
                   </span>
                 </div>
               ))}
             </div>
-            <p class="text-xs text-[var(--color-primary)] mt-3">{t(locale, 'view_all')} &rarr;</p>
+            <p class="text-xs text-[var(--color-primary)] mt-3">
+              {t(locale, 'view_all')} &rarr;
+            </p>
           </a>
         );
       })}
