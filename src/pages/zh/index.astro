@@ -3,13 +3,12 @@ import Layout from '../../layouts/Layout.astro';
 import { getLocalizedPath, t } from '../../i18n/translations';
 import { getCollection } from 'astro:content';
 import {
-  buildSunburstData,
   buildCategoryData,
   buildHomepageProjectionData,
   getModelsArray,
 } from '../../lib/data';
 import { computeOverallRanking } from '../../lib/aggregate';
-import SunburstChart from '../../components/SunburstChart';
+import TaxonomyUniverse from '../../components/TaxonomyUniverse';
 import HomepageLeaderboard from '../../components/HomepageLeaderboard';
 
 const locale = 'zh';
@@ -20,7 +19,17 @@ const scores = await getCollection('scores');
 const modelsCollection = await getCollection('models');
 const models = getModelsArray(modelsCollection);
 
-const sunburstData = buildSunburstData(taxonomy, benchmarks, locale);
+const universeTaxonomy = taxonomy
+  .sort((a, b) => a.data.order - b.data.order)
+  .map(entry => ({
+    id: entry.data.id,
+    name: locale === 'zh' ? entry.data.name_zh : entry.data.name_en,
+    color: entry.data.color,
+    subcategories: entry.data.subcategories.map((sc: { id: string; name_zh: string; name_en: string }) => ({
+      id: sc.id,
+      name: locale === 'zh' ? sc.name_zh : sc.name_en,
+    })),
+  }));
 
 const categories = taxonomy
   .sort((a, b) => a.data.order - b.data.order)
@@ -43,24 +52,23 @@ const overallRanking = computeOverallRanking(categories, modelsList);
 ---
 
 <Layout title={t(locale, 'nav_home')}>
-  <section class="hero-section text-center pt-16 pb-8">
-    <h1 class="text-4xl md:text-5xl font-bold mb-3 tracking-tight">
-      {t(locale, 'site_title')}
-    </h1>
-    <p class="text-lg text-[var(--color-text-secondary)] mb-10 max-w-xl mx-auto">
-      {t(locale, 'site_slogan')}
-    </p>
-    <SunburstChart
-      client:load
-      data={sunburstData}
-      locale={locale}
-      basePath={getLocalizedPath('/', locale)}
-    />
-  </section>
+  <TaxonomyUniverse
+    client:load
+    taxonomy={universeTaxonomy}
+    locale={locale}
+    basePath={getLocalizedPath('/', locale)}
+    labels={{
+      eyebrow: t(locale, 'universe_eyebrow'),
+      title: t(locale, 'universe_title'),
+      sub: t(locale, 'universe_sub'),
+      dims: t(locale, 'universe_dims'),
+    }}
+  />
 
   <div class="section-divider"></div>
 
   <section class="mb-12">
+    <p class="eyebrow mb-2">{t(locale, 'eyebrow_leaderboard')}</p>
     <h2 class="text-xl font-semibold mb-5">{t(locale, 'overall_ranking')}</h2>
     <HomepageLeaderboard
       client:load
@@ -81,6 +89,7 @@ const overallRanking = computeOverallRanking(categories, modelsList);
   <div class="section-divider"></div>
 
   <section class="mb-12">
+    <p class="eyebrow mb-2">{t(locale, 'eyebrow_taxonomy')}</p>
     <h2 class="text-xl font-semibold mb-5">{t(locale, 'category_quickview')}</h2>
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
       {taxonomy.sort((a, b) => a.data.order - b.data.order).map(category => {
@@ -117,7 +126,7 @@ const overallRanking = computeOverallRanking(categories, modelsList);
                     ></span>
                     <span class="truncate">{model.model_name}</span>
                   </span>
-                  <span class="font-mono text-xs text-[var(--color-text-secondary)]">
+                  <span class="bh-mono text-xs text-[var(--color-text-secondary)]">
                     {model.l1Scores[category.data.id]?.toFixed(1) ?? '-'}
                   </span>
                 </div>
