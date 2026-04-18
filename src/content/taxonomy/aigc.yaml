@@ -6,21 +6,21 @@ color: "#ea580c"
 order: 2
 subcategories:
   - id: character_generation
-    name_zh: "Character Generation"
+    name_zh: "角色生成"
     name_en: "Character Generation"
     description_zh: "关注角色扮演、角色定制与风格一致性生成。"
     description_en: "Focuses on role playing, character customization, and style-consistent generation."
     benchmarks:
       - rolellm
   - id: long_form_generation
-    name_zh: "Long-form Generation"
+    name_zh: "长文生成"
     name_en: "Long-form Generation"
     description_zh: "关注长文本生成的内容质量、结构与可读性。"
     description_en: "Focuses on content quality, structure, and readability in long-form generation."
     benchmarks:
       - hellobench
   - id: social_generation
-    name_zh: "Social Generation"
+    name_zh: "社交生成"
     name_en: "Social Generation"
     description_zh: "关注社会身份、价值立场与同理生成能力。"
     description_en: "Focuses on social identity, value alignment, and empathetic generation."

@@ -19,30 +19,53 @@ interface Props {
     eyebrow: string;
     title: string;
     sub: string;
-    dims: string;
   };
 }
 
 interface AnchorSpec {
   x: number;
   y: number;
-  outward: number;
+  outward: number;   // degrees; 270 = up, 90 = down
   span: number;
-  dur: number;
-  dir: 'normal' | 'reverse';
+  radius: number;
+  labelBelow: boolean;
 }
 
 const ANCHORS: Record<string, AnchorSpec> = {
-  llm:        { x: 200,  y: 370, outward: 135, span: 140, dur: 48, dir: 'normal'  },
-  aigc:       { x: 640,  y: 450, outward: 90,  span: 90,  dur: 60, dir: 'reverse' },
-  multimodal: { x: 1000, y: 370, outward: 270, span: 90,  dur: 52, dir: 'normal'  },
-  agent:      { x: 1400, y: 450, outward: 45,  span: 100, dur: 56, dir: 'reverse' },
+  llm:        { x: 200,  y: 370, outward: 270, span: 160, radius: 145, labelBelow: true  },
+  aigc:       { x: 640,  y: 450, outward: 90,  span: 120, radius: 195, labelBelow: false },
+  multimodal: { x: 1000, y: 370, outward: 270, span: 110, radius: 145, labelBelow: true  },
+  agent:      { x: 1400, y: 450, outward: 90,  span: 100, radius: 185, labelBelow: false },
 };
 
-const L2_RADIUS = 130;
 const L2_LABEL_OFFSET = 26;
+const L2_OUTER_RING = 11;  // L2 marker outer ring radius
+const DISC_EDGE_GAP = 8;   // gap outside L1 disc border before line starts
+const L2_EDGE_GAP = 6;     // gap before L2 outer ring (keep spoke off the node)
+const L1_RADIUS = 58;
+const L1_HALO_RADIUS = 148;
 const VIEW_W = 1600;
 const VIEW_H = 820;
+const BASELINE_Y = 410;
+
+function gappedLine(
+  from: { x: number; y: number },
+  to: { x: number; y: number },
+  fromGap: number,
+  toGap: number
+) {
+  const dx = to.x - from.x;
+  const dy = to.y - from.y;
+  const len = Math.hypot(dx, dy) || 1;
+  const ux = dx / len;
+  const uy = dy / len;
+  return {
+    x1: from.x + ux * fromGap,
+    y1: from.y + uy * fromGap,
+    x2: to.x - ux * toGap,
+    y2: to.y - uy * toGap,
+  };
+}
 
 function polar(anchor: { x: number; y: number }, angleDeg: number, radius: number) {
   const r = (angleDeg * Math.PI) / 180;
@@ -68,15 +91,14 @@ function mulberry32(seed: number) {
 }
 
 const GRID_X = [200, 400, 600, 800, 1000, 1200, 1400];
-const BRIDGE_ORDER = ['llm', 'aigc', 'multimodal', 'agent'];
 
-export default function TaxonomyUniverse({ taxonomy, locale, basePath, labels }: Props) {
+export default function TaxonomyUniverse({ taxonomy, basePath, labels }: Props) {
   const [hoveredL1, setHoveredL1] = useState<string | null>(null);
 
   const clusters = useMemo(() => {
     return taxonomy
       .filter(l1 => ANCHORS[l1.id])
-      .map(l1 => {
+      .map((l1, index) => {
         const spec = ANCHORS[l1.id];
         const anchor = { x: spec.x, y: spec.y };
         const n = l1.subcategories.length;
@@ -84,8 +106,14 @@ export default function TaxonomyUniverse({ taxonomy, locale, basePath, labels }:
         const step = n > 1 ? spec.span / (n - 1) : 0;
         const l2s = l1.subcategories.map((sc, i) => {
           const angle = n === 1 ? spec.outward : start + step * i;
-          const pos = polar(anchor, angle, L2_RADIUS);
-          const label = polar(anchor, angle, L2_RADIUS + L2_LABEL_OFFSET);
+          const pos = polar(anchor, angle, spec.radius);
+          const label = polar(anchor, angle, spec.radius + L2_LABEL_OFFSET);
+          const spoke = gappedLine(
+            anchor,
+            pos,
+            L1_RADIUS + DISC_EDGE_GAP,
+            L2_OUTER_RING + L2_EDGE_GAP
+          );
           return {
             ...sc,
             angle,
@@ -94,52 +122,33 @@ export default function TaxonomyUniverse({ taxonomy, locale, basePath, labels }:
             labelX: label.x,
             labelY: label.y,
             textAnchor: pickTextAnchor(angle),
+            spoke,
           };
         });
-        return { l1, spec, anchor, l2s };
+        const orderStr = String(index + 1).padStart(2, '0');
+        const blockOffset = spec.labelBelow ? 1 : -1;
+        const labelBlockY = anchor.y + blockOffset * 90;
+        return { l1, spec, anchor, l2s, orderStr, labelBlockY, blockOffset };
       });
   }, [taxonomy]);
 
-  const bridges = useMemo(() => {
-    const byId = new Map(clusters.map(c => [c.l1.id, c.anchor]));
-    const out: { d: string; key: string }[] = [];
-    for (let i = 0; i < BRIDGE_ORDER.length - 1; i++) {
-      const a = byId.get(BRIDGE_ORDER[i]);
-      const b = byId.get(BRIDGE_ORDER[i + 1]);
-      if (!a || !b) continue;
-      const mid = { x: (a.x + b.x) / 2, y: (a.y + b.y) / 2 };
-      const dx = b.x - a.x;
-      const dy = b.y - a.y;
-      const len = Math.hypot(dx, dy) || 1;
-      const sign = i % 2 === 0 ? 1 : -1;
-      const ctrl = { x: mid.x + (-dy / len) * 60 * sign, y: mid.y + (dx / len) * 60 * sign };
-      out.push({
-        key: `${BRIDGE_ORDER[i]}-${BRIDGE_ORDER[i + 1]}`,
-        d: `M ${a.x} ${a.y} Q ${ctrl.x} ${ctrl.y} ${b.x} ${b.y}`,
-      });
-    }
-    return out;
-  }, [clusters]);
 
   const dots = useMemo(() => {
     const rand = mulberry32(0xbe11cafe);
     const arr: { x: number; y: number; rx: number; ry: number; dur: number }[] = [];
-    for (let i = 0; i < 22; i++) {
+    for (let i = 0; i < 18; i++) {
       const x = 60 + rand() * (VIEW_W - 120);
       const y = 40 + rand() * (VIEW_H - 80);
       const rx = 10 + rand() * 10;
       const ry = 6 + rand() * 10;
-      const dur = 20 + rand() * 20;
+      const dur = 22 + rand() * 20;
       arr.push({ x, y, rx, ry, dur });
     }
     return arr;
   }, []);
 
   const clusterOpacity = (id: string): number =>
-    hoveredL1 === null || hoveredL1 === id ? 1 : 0.65;
-
-  const mainCircleStyle = (id: string) =>
-    hoveredL1 === id ? { fillOpacity: 0.36, strokeOpacity: 1 } : { fillOpacity: 0.22, strokeOpacity: 0.55 };
+    hoveredL1 === null || hoveredL1 === id ? 1 : 0.55;
 
   return (
     <section className="universe-wrap" aria-label={labels.title}>
@@ -156,7 +165,7 @@ export default function TaxonomyUniverse({ taxonomy, locale, basePath, labels }:
         aria-label={labels.title}
         xmlns="http://www.w3.org/2000/svg"
       >
-        {/* Coordinate grid — lightest bottom layer */}
+        {/* ── Coordinate grid verticals ── */}
         <g aria-hidden="true">
           {GRID_X.map(x => (
             <line
@@ -171,27 +180,60 @@ export default function TaxonomyUniverse({ taxonomy, locale, basePath, labels }:
               strokeDasharray="2 8"
             />
           ))}
-        </g>
-
-        {/* Galaxy bridges between L1 clusters */}
-        <g aria-hidden="true">
-          {bridges.map(b => (
-            <path
-              key={b.key}
-              d={b.d}
-              fill="none"
+          {/* Horizontal baseline axis */}
+          <line
+            x1={80}
+            x2={VIEW_W - 80}
+            y1={BASELINE_Y}
+            y2={BASELINE_Y}
+            stroke="var(--uv-line)"
+            strokeOpacity={0.22}
+            strokeWidth={0.75}
+            strokeDasharray="1 6"
+          />
+          {/* Baseline ticks at each anchor x */}
+          {clusters.map(c => (
+            <line
+              key={`tick-${c.l1.id}`}
+              x1={c.anchor.x}
+              x2={c.anchor.x}
+              y1={BASELINE_Y - 6}
+              y2={BASELINE_Y + 6}
               stroke="var(--uv-line)"
+              strokeOpacity={0.5}
               strokeWidth={1}
-              strokeOpacity={0.4}
             />
           ))}
         </g>
 
-        {/* Floating model dots — deterministic */}
+        {/* ── Editorial corner brackets ── */}
+        <g aria-hidden="true" stroke="var(--uv-line)" strokeOpacity={0.45} strokeWidth={1} fill="none">
+          <path d="M 40 80 L 40 40 L 80 40" />
+          <path d={`M ${VIEW_W - 80} 40 L ${VIEW_W - 40} 40 L ${VIEW_W - 40} 80`} />
+          <path d={`M 40 ${VIEW_H - 80} L 40 ${VIEW_H - 40} L 80 ${VIEW_H - 40}`} />
+          <path d={`M ${VIEW_W - 80} ${VIEW_H - 40} L ${VIEW_W - 40} ${VIEW_H - 40} L ${VIEW_W - 40} ${VIEW_H - 80}`} />
+        </g>
+
+        {/* ── Corner meta readouts (editorial framing) ── */}
+        <g
+          aria-hidden="true"
+          fill="var(--uv-label-muted)"
+          fontFamily="var(--font-mono)"
+          fontSize={10}
+          style={{ letterSpacing: '0.18em', textTransform: 'uppercase' }}
+        >
+          <text x={56} y={32}>BH · FIELD MAP</text>
+          <text x={VIEW_W - 56} y={32} textAnchor="end">v2026.04</text>
+          <text x={56} y={VIEW_H - 16}>{`N = ${taxonomy.length} DOMAINS`}</text>
+          <text x={VIEW_W - 56} y={VIEW_H - 16} textAnchor="end">BENCHMARK HUB</text>
+        </g>
+
+
+        {/* ── Floating decorative dots ── */}
         <g aria-hidden="true">
           {dots.map((d, i) => (
             <g key={`dot-${i}`} transform={`translate(${d.x} ${d.y})`}>
-              <circle r={2} fill="var(--uv-label-muted)" fillOpacity={0.35}>
+              <circle r={2} fill="var(--uv-label-muted)" fillOpacity={0.3}>
                 <animateMotion
                   path={`M ${-d.rx} 0 a ${d.rx} ${d.ry} 0 1 0 ${d.rx * 2} 0 a ${d.rx} ${d.ry} 0 1 0 ${-d.rx * 2} 0`}
                   dur={`${d.dur.toFixed(1)}s`}
@@ -202,121 +244,141 @@ export default function TaxonomyUniverse({ taxonomy, locale, basePath, labels }:
           ))}
         </g>
 
-        {/* Clusters */}
-        {clusters.map(({ l1, spec, anchor, l2s }) => {
+        {/* ── Clusters ── */}
+        {clusters.map(({ l1, anchor, l2s, orderStr, labelBlockY, blockOffset }, idx) => {
           const hover = hoveredL1 === l1.id;
-          const main = mainCircleStyle(l1.id);
-          const rotateStyle: CSSProperties = {
-            transformOrigin: `${anchor.x}px ${anchor.y}px`,
-            transformBox: 'view-box' as unknown as CSSProperties['transformBox'],
-            animationName: 'uvRotate',
-            animationDuration: `${spec.dur}s`,
-            animationDirection: spec.dir,
-            animationIterationCount: 'infinite',
-            animationTimingFunction: 'linear',
-          };
-
           return (
             <g
               key={l1.id}
-              style={{ opacity: clusterOpacity(l1.id), transition: 'opacity 0.2s' }}
+              style={{ opacity: clusterOpacity(l1.id), transition: 'opacity 0.3s' }}
               onMouseEnter={() => setHoveredL1(l1.id)}
               onMouseLeave={() => setHoveredL1(prev => (prev === l1.id ? null : prev))}
             >
-              {/* L1 outer glow + middle ring (static) */}
-              <circle cx={anchor.x} cy={anchor.y} r={110} fill={l1.color} fillOpacity={0.04} />
-              <circle cx={anchor.x} cy={anchor.y} r={88} fill={l1.color} fillOpacity={0.10} />
+              {/* Soft halo — gentle breathing via CSS opacity keyframes */}
+              <circle
+                cx={anchor.x}
+                cy={anchor.y}
+                r={L1_HALO_RADIUS}
+                fill={l1.color}
+                fillOpacity={0.05}
+                className="uv-halo"
+                style={{ animationDelay: `${idx * 1.6}s` } as CSSProperties}
+              />
+              {/* Dot-dash spokes (·——·——·) from L1 disc edge to each L2 */}
+              {l2s.map(l2 => (
+                <line
+                  key={`spoke-${l2.id}`}
+                  x1={l2.spoke.x1}
+                  y1={l2.spoke.y1}
+                  x2={l2.spoke.x2}
+                  y2={l2.spoke.y2}
+                  stroke={l1.color}
+                  strokeOpacity={hover ? 0.8 : 0.6}
+                  strokeWidth={1.2}
+                  strokeDasharray="0.1 5 8 5"
+                  strokeLinecap="round"
+                  style={{ transition: 'stroke-opacity 0.25s' }}
+                />
+              ))}
 
-              {/* Rotating: L2 connections, circles, labels */}
-              <g className="uv-cluster-rotate" style={rotateStyle}>
-                {l2s.map(l2 => (
-                  <line
-                    key={`line-${l2.id}`}
-                    x1={anchor.x}
-                    y1={anchor.y}
-                    x2={l2.x}
-                    y2={l2.y}
+              {/* L2 target-style markers + labels */}
+              {l2s.map(l2 => (
+                <a
+                  key={`l2-${l2.id}`}
+                  href={`${basePath}${l1.id}/#${l2.id}`}
+                  aria-label={`${l1.name} — ${l2.name}`}
+                >
+                  <title>{l2.name}</title>
+                  {/* outer hollow ring */}
+                  <circle
+                    cx={l2.x}
+                    cy={l2.y}
+                    r={11}
+                    fill="transparent"
                     stroke={l1.color}
-                    strokeOpacity={0.28}
+                    strokeOpacity={0.55}
                     strokeWidth={1}
+                    style={{ cursor: 'pointer' }}
                   />
-                ))}
-                {l2s.map(l2 => (
-                  <a
-                    key={`l2-${l2.id}`}
-                    href={`${basePath}${l1.id}/#${l2.id}`}
-                    aria-label={`${l1.name} — ${l2.name}`}
+                  {/* inner solid dot */}
+                  <circle
+                    cx={l2.x}
+                    cy={l2.y}
+                    r={3.5}
+                    fill={l1.color}
+                    fillOpacity={0.95}
+                    style={{ cursor: 'pointer' }}
+                  />
+                  <text
+                    x={l2.labelX}
+                    y={l2.labelY}
+                    fontSize={11}
+                    fontWeight={500}
+                    fill="var(--uv-label)"
+                    textAnchor={l2.textAnchor}
+                    dominantBaseline="middle"
+                    style={{ pointerEvents: 'none', letterSpacing: '0.01em' }}
                   >
-                    <circle
-                      cx={l2.x}
-                      cy={l2.y}
-                      r={12}
-                      fill={l1.color}
-                      fillOpacity={0.18}
-                      stroke={l1.color}
-                      strokeOpacity={0.6}
-                      strokeWidth={1.2}
-                      style={{ cursor: 'pointer' }}
-                    />
-                    <text
-                      x={l2.labelX}
-                      y={l2.labelY}
-                      fontSize={12}
-                      fontWeight={600}
-                      fill="var(--uv-label)"
-                      textAnchor={l2.textAnchor}
-                      dominantBaseline="middle"
-                      style={{ pointerEvents: 'none' }}
-                    >
-                      {l2.name}
-                    </text>
-                  </a>
-                ))}
-              </g>
+                    {l2.name}
+                  </text>
+                </a>
+              ))}
 
-              {/* L1 main circle (static, drawn above rotating lines) */}
-              <a
-                href={`${basePath}${l1.id}/`}
-                aria-label={l1.name}
-              >
+              {/* L1 disc + large mono order number */}
+              <a href={`${basePath}${l1.id}/`} aria-label={l1.name}>
+                <title>{l1.name}</title>
                 <circle
                   cx={anchor.x}
                   cy={anchor.y}
-                  r={68}
+                  r={L1_RADIUS}
                   fill={l1.color}
+                  fillOpacity={hover ? 0.3 : 0.18}
                   stroke={l1.color}
-                  strokeWidth={1.5}
+                  strokeOpacity={hover ? 1 : 0.7}
+                  strokeWidth={1.4}
                   style={{
                     cursor: 'pointer',
-                    transition: 'fill-opacity 0.2s, stroke-opacity 0.2s',
-                    ...main,
+                    transition: 'fill-opacity 0.25s, stroke-opacity 0.25s',
                   }}
+                />
+                {/* inner hairline for dimensional detail */}
+                <circle
+                  cx={anchor.x}
+                  cy={anchor.y}
+                  r={L1_RADIUS - 10}
+                  fill="none"
+                  stroke={l1.color}
+                  strokeOpacity={0.35}
+                  strokeWidth={0.6}
                 />
                 <text
                   x={anchor.x}
-                  y={anchor.y + 5}
-                  fontSize={17}
-                  fontWeight={700}
-                  fill="var(--uv-anchor-text)"
+                  y={anchor.y + 14}
                   textAnchor="middle"
-                  style={{ pointerEvents: 'none', userSelect: 'none' }}
+                  fontFamily="var(--font-mono)"
+                  fontSize={40}
+                  fontWeight={500}
+                  fill="var(--uv-anchor-text)"
+                  style={{ pointerEvents: 'none', userSelect: 'none', letterSpacing: '0.02em' }}
+                >
+                  {orderStr}
+                </text>
+              </a>
+
+              {/* Label block: only the big L1 name */}
+              <g transform={`translate(${anchor.x} ${labelBlockY})`} style={{ pointerEvents: 'none' }}>
+                <text
+                  x={0}
+                  y={blockOffset > 0 ? 20 : 0}
+                  textAnchor="middle"
+                  fontSize={32}
+                  fontWeight={700}
+                  fill="var(--uv-label-active)"
+                  style={{ letterSpacing: '-0.01em' }}
                 >
                   {l1.name}
                 </text>
-                <text
-                  x={anchor.x}
-                  y={anchor.y + 27}
-                  fontSize={11}
-                  fill="var(--uv-label-muted)"
-                  textAnchor="middle"
-                  fontFamily="var(--font-mono)"
-                  style={{ pointerEvents: 'none', userSelect: 'none' }}
-                >
-                  {l2s.length} {labels.dims}
-                </text>
-              </a>
-              {/* mark hover variable for unused linter silence */}
-              {hover ? null : null}
+              </g>
             </g>
           );
         })}

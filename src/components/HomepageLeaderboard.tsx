@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import LeaderboardTable from './LeaderboardTable';
 import WeightSliders from './WeightSliders';
 import { computeWeightedScore } from '../lib/aggregate';
@@ -69,6 +69,7 @@ interface FilterChipGroupProps {
   allLabel: string;
   onChange: (value: string | null) => void;
   color?: string;
+  locale?: 'zh' | 'en';
 }
 
 const FAMILY_PATTERNS: Array<{ id: string; label: string; pattern: RegExp }> = [
@@ -109,13 +110,72 @@ function FilterChipGroup({
   allLabel,
   onChange,
   color,
+  locale = 'zh',
 }: FilterChipGroupProps) {
+  const chipsRef = useRef<HTMLDivElement>(null);
+  const [overflow, setOverflow] = useState(false);
+  const [expanded, setExpanded] = useState(false);
+  const [rowHeight, setRowHeight] = useState<number>(34);
+
+  useEffect(() => {
+    const el = chipsRef.current;
+    if (!el) return;
+
+    const check = () => {
+      const children = Array.from(el.children) as HTMLElement[];
+      if (children.length === 0) {
+        setOverflow(false);
+        return;
+      }
+      const firstTop = children[0].offsetTop;
+      // Use the tallest child in the first row so tall chips are not clipped.
+      const firstRow = children.filter(c => Math.abs(c.offsetTop - firstTop) <= 2);
+      const firstRowMaxH = Math.max(...firstRow.map(c => c.offsetHeight));
+      // Small buffer so rounded-full shadows / fractional heights aren't cropped.
+      setRowHeight(firstRowMaxH + 4);
+      const hasOverflow = children.some(child => child.offsetTop > firstTop + 2);
+      setOverflow(hasOverflow);
+    };
+
+    check();
+    const ro = new ResizeObserver(check);
+    ro.observe(el);
+    return () => ro.disconnect();
+  }, [options.length, allLabel]);
+
+  useEffect(() => {
+    if (!overflow) setExpanded(false);
+  }, [overflow]);
+
+  const collapsed = overflow && !expanded;
+  const expandLabel = locale === 'zh' ? '展开' : 'Expand';
+  const collapseLabel = locale === 'zh' ? '收起' : 'Collapse';
+
   return (
     <div className="flex flex-col gap-2">
-      <div className="text-xs font-medium uppercase tracking-[0.18em] text-[var(--color-text-secondary)]">
-        {title}
+      <div className="flex items-center justify-between gap-3">
+        <div className="text-xs font-medium uppercase tracking-[0.18em] text-[var(--color-text-secondary)]">
+          {title}
+        </div>
+        {overflow && (
+          <button
+            type="button"
+            onClick={() => setExpanded(e => !e)}
+            className="text-xs text-[var(--color-text-secondary)] transition-colors hover:text-[var(--color-primary)]"
+          >
+            {expanded ? collapseLabel : expandLabel}
+          </button>
+        )}
       </div>
-      <div className="flex flex-wrap gap-2">
+      <div
+        ref={chipsRef}
+        className="flex flex-wrap gap-2"
+        style={
+          collapsed
+            ? { maxHeight: `${rowHeight}px`, overflow: 'hidden' }
+            : undefined
+        }
+      >
         <button
           type="button"
           onClick={() => onChange(null)}
@@ -566,6 +626,7 @@ export default function HomepageLeaderboard({
               }
             }}
             color={selectedCategory?.color}
+            locale={locale}
           />
 
           {selectedCategory && (
@@ -579,6 +640,7 @@ export default function HomepageLeaderboard({
               allLabel={selectedCategory.name}
               onChange={setSelectedSubcategoryId}
               color={selectedCategory.color}
+              locale={locale}
             />
           )}
 
@@ -588,6 +650,7 @@ export default function HomepageLeaderboard({
             active={selectedOrg}
             allLabel={allOrgsLabel}
             onChange={setSelectedOrg}
+            locale={locale}
           />
 
           <FilterChipGroup
@@ -596,6 +659,7 @@ export default function HomepageLeaderboard({
             active={selectedFamily}
             allLabel={allFamiliesLabel}
             onChange={setSelectedFamily}
+            locale={locale}
           />
 
           <div className="rounded-xl border border-[var(--color-border)]/60 bg-[var(--color-bg)] p-4">
@@ -695,6 +759,8 @@ export default function HomepageLeaderboard({
           searchPlaceholder={labels.search_placeholder}
           highlightMax={false}
           emptyLabel={locale === 'zh' ? '当前投影下暂无可展示模型。' : 'No models available for this projection.'}
+          pageSize={15}
+          locale={locale}
         />
       </div>
     </div>

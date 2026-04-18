@@ -1,4 +1,4 @@
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useEffect } from 'react';
 
 interface Column {
   key: string;
@@ -25,6 +25,8 @@ interface Props {
   highlightMax?: boolean;
   highlightMode?: 'max' | 'min';
   emptyLabel?: string;
+  pageSize?: number;
+  locale?: 'zh' | 'en';
 }
 
 export default function LeaderboardTable({
@@ -37,10 +39,14 @@ export default function LeaderboardTable({
   highlightMax = false,
   highlightMode = 'max',
   emptyLabel = 'No results found',
+  pageSize,
+  locale = 'zh',
 }: Props) {
   const [search, setSearch] = useState('');
   const [sortKey, setSortKey] = useState<string | null>(null);
   const [sortDir, setSortDir] = useState<'asc' | 'desc'>('desc');
+  const [page, setPage] = useState(1);
+  const [expanded, setExpanded] = useState(false);
 
   const filteredRows = useMemo(() => {
     let result = [...rows];
@@ -70,6 +76,27 @@ export default function LeaderboardTable({
 
     return result;
   }, [rows, search, sortKey, sortDir]);
+
+  const shouldPaginate = typeof pageSize === 'number' && pageSize > 0 && !expanded;
+  const totalPages = shouldPaginate
+    ? Math.max(1, Math.ceil(filteredRows.length / (pageSize as number)))
+    : 1;
+
+  useEffect(() => {
+    setPage(1);
+  }, [search, sortKey, sortDir, expanded, rows.length]);
+
+  const pagedRows = useMemo(() => {
+    if (!shouldPaginate) return filteredRows;
+    const start = (page - 1) * (pageSize as number);
+    return filteredRows.slice(start, start + (pageSize as number));
+  }, [filteredRows, page, pageSize, shouldPaginate]);
+
+  const rankOffset = shouldPaginate ? (page - 1) * (pageSize as number) : 0;
+
+  const paginationLabels = locale === 'zh'
+    ? { prev: '上一页', next: '下一页', page: '第', of: '页，共', pages: '页', showAll: '展开全部', collapse: '收起' }
+    : { prev: 'Prev', next: 'Next', page: 'Page', of: ' of ', pages: '', showAll: 'Show all', collapse: 'Collapse' };
 
   const extremeValues = useMemo(() => {
     if (!highlightMax) return {};
@@ -159,7 +186,7 @@ export default function LeaderboardTable({
             </tr>
           </thead>
           <tbody>
-            {filteredRows.map((row, idx) => (
+            {pagedRows.map((row, idx) => (
               <tr
                 key={row.model_id}
                 className={`border-b border-[var(--color-border)]/50 hover:bg-[var(--color-bg-secondary)] transition-colors ${
@@ -168,7 +195,7 @@ export default function LeaderboardTable({
                 onClick={() => onRowClick?.(row)}
               >
                 <td className="py-3 px-3 text-[var(--color-text-secondary)] font-mono">
-                  {idx + 1}
+                  {rankOffset + idx + 1}
                 </td>
                 {columns.map(col => {
                   const value = row[col.key];
@@ -220,6 +247,50 @@ export default function LeaderboardTable({
         <p className="text-center py-8 text-[var(--color-text-secondary)]">
           {emptyLabel}
         </p>
+      )}
+
+      {typeof pageSize === 'number' && pageSize > 0 && filteredRows.length > pageSize && (
+        <div className="mt-4 flex items-center justify-between gap-4 flex-wrap border-t border-[var(--color-border)]/60 pt-4 text-xs text-[var(--color-text-secondary)]">
+          <div className="bh-mono">
+            {expanded
+              ? `${filteredRows.length} / ${filteredRows.length}`
+              : `${(page - 1) * pageSize + 1}–${Math.min(page * pageSize, filteredRows.length)} / ${filteredRows.length}`}
+          </div>
+          <div className="flex items-center gap-2">
+            {!expanded && (
+              <>
+                <button
+                  type="button"
+                  disabled={page <= 1}
+                  onClick={() => setPage(p => Math.max(1, p - 1))}
+                  className="rounded-md border border-[var(--color-border)] px-3 py-1.5 text-xs transition-colors hover:border-[var(--color-primary)]/60 hover:text-[var(--color-text)] disabled:opacity-40 disabled:cursor-not-allowed"
+                >
+                  {paginationLabels.prev}
+                </button>
+                <span className="bh-mono px-1">
+                  {locale === 'zh'
+                    ? `${paginationLabels.page} ${page} ${paginationLabels.of} ${totalPages} ${paginationLabels.pages}`
+                    : `${paginationLabels.page} ${page}${paginationLabels.of}${totalPages}`}
+                </span>
+                <button
+                  type="button"
+                  disabled={page >= totalPages}
+                  onClick={() => setPage(p => Math.min(totalPages, p + 1))}
+                  className="rounded-md border border-[var(--color-border)] px-3 py-1.5 text-xs transition-colors hover:border-[var(--color-primary)]/60 hover:text-[var(--color-text)] disabled:opacity-40 disabled:cursor-not-allowed"
+                >
+                  {paginationLabels.next}
+                </button>
+              </>
+            )}
+            <button
+              type="button"
+              onClick={() => setExpanded(e => !e)}
+              className="rounded-md border border-[var(--color-border)] px-3 py-1.5 text-xs transition-colors hover:border-[var(--color-primary)]/60 hover:text-[var(--color-primary)]"
+            >
+              {expanded ? paginationLabels.collapse : paginationLabels.showAll}
+            </button>
+          </div>
+        </div>
       )}
     </div>
   );
