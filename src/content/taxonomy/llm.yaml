@@ -6,28 +6,28 @@ color: "#2563eb"
 order: 1
 subcategories:
   - id: instruction_following
-    name_zh: "Instruction Following"
+    name_zh: "指令遵循"
     name_en: "Instruction Following"
     description_zh: "关注多轮对话中的细粒度指令遵循能力。"
     description_en: "Benchmarks for fine-grained instruction following in multi-turn dialogue."
     benchmarks:
       - mt_bench_101
   - id: long_context
-    name_zh: "Long Context"
+    name_zh: "长上下文"
     name_en: "Long Context"
     description_zh: "关注超长上下文中的定位、保持与错误检测能力。"
     description_en: "Benchmarks for retrieval, persistence, and error detection in long contexts."
     benchmarks:
       - cot_error_detection
   - id: mathematical_reasoning
-    name_zh: "Mathematical Reasoning"
+    name_zh: "数学推理"
     name_en: "Mathematical Reasoning"
     description_zh: "关注概念级数学推理与双语数学能力。"
     description_en: "Benchmarks for concept-wise bilingual mathematical reasoning."
     benchmarks:
       - conceptmath
   - id: reasoning
-    name_zh: "Reasoning"
+    name_zh: "推理"
     name_en: "Reasoning"
     description_zh: "关注知识正交推理、推理模式分析与动态博弈式推理。"
     description_en: "Benchmarks for knowledge-orthogonal reasoning, reasoning-pattern analysis, and dynamic game reasoning."
@@ -36,21 +36,21 @@ subcategories:
       - o1_reasoning_patterns
       - korgym
   - id: structured_data_understanding
-    name_zh: "Structured Data Understanding"
+    name_zh: "结构化数据"
     name_en: "Structured Data Understanding"
     description_zh: "关注表格与结构化数据理解能力。"
     description_en: "Benchmarks for table and structured data understanding."
     benchmarks:
       - tablebench
   - id: factuality
-    name_zh: "Factuality"
+    name_zh: "事实性"
     name_en: "Factuality"
     description_zh: "关注中文事实性问答与事实核验能力。"
     description_en: "Benchmarks for Chinese factual QA and factual consistency."
     benchmarks:
       - chinese_simpleqa
   - id: safety
-    name_zh: "Safety"
+    name_zh: "安全"
     name_en: "Safety"
     description_zh: "关注安全事实性与多轮对话攻防能力。"
     description_en: "Benchmarks for safety factuality and multi-turn dialogue safety."
@@ -58,7 +58,7 @@ subcategories:
       - chinese_safetyqa
       - safedialbench
   - id: domain_knowledge
-    name_zh: "Domain Knowledge"
+    name_zh: "领域知识"
     name_en: "Domain Knowledge"
     description_zh: "关注跨学科高阶知识与研究生水平问答能力。"
     description_en: "Benchmarks for graduate-level knowledge across many disciplines."

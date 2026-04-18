@@ -3,13 +3,12 @@ import Layout from '../../layouts/Layout.astro';
 import { getLocalizedPath, t } from '../../i18n/translations';
 import { getCollection } from 'astro:content';
 import {
-  buildSunburstData,
   buildCategoryData,
   buildHomepageProjectionData,
   getModelsArray,
 } from '../../lib/data';
 import { computeOverallRanking } from '../../lib/aggregate';
-import SunburstChart from '../../components/SunburstChart';
+import TaxonomyUniverse from '../../components/TaxonomyUniverse';
 import HomepageLeaderboard from '../../components/HomepageLeaderboard';
 
 const locale = 'zh';
@@ -20,7 +19,17 @@ const scores = await getCollection('scores');
 const modelsCollection = await getCollection('models');
 const models = getModelsArray(modelsCollection);
 
-const sunburstData = buildSunburstData(taxonomy, benchmarks, locale);
+const universeTaxonomy = taxonomy
+  .sort((a, b) => a.data.order - b.data.order)
+  .map(entry => ({
+    id: entry.data.id,
+    name: locale === 'zh' ? entry.data.name_zh : entry.data.name_en,
+    color: entry.data.color,
+    subcategories: entry.data.subcategories.map((sc: { id: string; name_zh: string; name_en: string }) => ({
+      id: sc.id,
+      name: sc.name_zh,
+    })),
+  }));
 
 const categories = taxonomy
   .sort((a, b) => a.data.order - b.data.order)
@@ -40,27 +49,40 @@ const modelsList = models.map(model => ({
   color: model.color,
 }));
 const overallRanking = computeOverallRanking(categories, modelsList);
+
+const sortedTaxonomy = taxonomy.sort((a, b) => a.data.order - b.data.order);
+const totalDims = sortedTaxonomy.reduce(
+  (acc, c) => acc + c.data.subcategories.length,
+  0
+);
+const totalBenchmarks = sortedTaxonomy.reduce(
+  (acc, c) =>
+    acc +
+    c.data.subcategories.reduce(
+      (s: number, sc: { benchmarks: string[] }) => s + sc.benchmarks.length,
+      0
+    ),
+  0
+);
 ---
 
 <Layout title={t(locale, 'nav_home')}>
-  <section class="hero-section text-center pt-16 pb-8">
-    <h1 class="text-4xl md:text-5xl font-bold mb-3 tracking-tight">
-      {t(locale, 'site_title')}
-    </h1>
-    <p class="text-lg text-[var(--color-text-secondary)] mb-10 max-w-xl mx-auto">
-      {t(locale, 'site_slogan')}
-    </p>
-    <SunburstChart
-      client:load
-      data={sunburstData}
-      locale={locale}
-      basePath={getLocalizedPath('/', locale)}
-    />
-  </section>
+  <TaxonomyUniverse
+    client:load
+    taxonomy={universeTaxonomy}
+    locale={locale}
+    basePath={getLocalizedPath('/', locale)}
+    labels={{
+      eyebrow: t(locale, 'universe_eyebrow'),
+      title: t(locale, 'universe_title'),
+      sub: t(locale, 'universe_sub'),
+    }}
+  />
 
   <div class="section-divider"></div>
 
   <section class="mb-12">
+    <p class="eyebrow mb-2">{t(locale, 'eyebrow_leaderboard')}</p>
     <h2 class="text-xl font-semibold mb-5">{t(locale, 'overall_ranking')}</h2>
     <HomepageLeaderboard
       client:load
@@ -81,9 +103,21 @@ const overallRanking = computeOverallRanking(categories, modelsList);
   <div class="section-divider"></div>
 
   <section class="mb-12">
-    <h2 class="text-xl font-semibold mb-5">{t(locale, 'category_quickview')}</h2>
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-      {taxonomy.sort((a, b) => a.data.order - b.data.order).map(category => {
+    <div class="category-section-header">
+      <div class="title-block">
+        <p class="eyebrow">{t(locale, 'eyebrow_taxonomy')}</p>
+        <h2>{t(locale, 'category_quickview')}</h2>
+      </div>
+      <div class="scale-readout">
+        <strong>{sortedTaxonomy.length}</strong> {t(locale, 'card_domain_label')}
+        <span class="readout-sep">·</span>
+        <strong>{totalDims}</strong> {t(locale, 'card_dim_unit')}
+        <span class="readout-sep">·</span>
+        <strong>{totalBenchmarks}</strong> {t(locale, 'card_bench_unit')}
+      </div>
+    </div>
+    <div class="category-grid">
+      {sortedTaxonomy.map(category => {
         const topModels = overallRanking
           .filter(model => model.l1Scores[category.data.id] !== null)
           .sort(
@@ -91,41 +125,52 @@ const overallRanking = computeOverallRanking(categories, modelsList);
               (b.l1Scores[category.data.id] ?? 0) - (a.l1Scores[category.data.id] ?? 0)
           )
           .slice(0, 5);
+        const dimCount = category.data.subcategories.length;
+        const benchCount = category.data.subcategories.reduce(
+          (s: number, sc: { benchmarks: string[] }) => s + sc.benchmarks.length,
+          0
+        );
+        const order = String(category.data.order).padStart(2, '0');
 
         return (
           <a
             href={getLocalizedPath(`/${category.data.id}/`, locale)}
-            class="block rounded-xl border border-[var(--color-border)] bg-[var(--color-bg-card)] p-5 hover:border-[var(--color-primary)] hover:shadow-md transition-all"
+            class="category-card"
+            style={`--accent: ${category.data.color}`}
+            aria-label={category.data.name_zh}
           >
-            <div class="flex items-center gap-2 mb-3">
-              <span
-                class="w-3 h-3 rounded-full"
-                style={`background-color: ${category.data.color}`}
-              ></span>
-              <h3 class="font-semibold">{category.data.name_zh}</h3>
+            <div class="category-card-eyebrow">
+              <span class="label-group">
+                <span class="domain-dot" aria-hidden="true"></span>
+                <span>{t(locale, 'card_domain_label')}</span>
+              </span>
+              <span class="order">{order}</span>
             </div>
-            <div class="space-y-1.5">
-              {topModels.map((model, index) => (
-                <div class="flex items-center justify-between text-sm">
-                  <span class="flex items-center gap-1.5">
-                    <span class="text-xs text-[var(--color-text-secondary)] w-4">
-                      {index + 1}
-                    </span>
-                    <span
-                      class="w-2 h-2 rounded-full"
-                      style={`background-color: ${model.color}`}
-                    ></span>
-                    <span class="truncate">{model.model_name}</span>
-                  </span>
-                  <span class="font-mono text-xs text-[var(--color-text-secondary)]">
-                    {model.l1Scores[category.data.id]?.toFixed(1) ?? '-'}
-                  </span>
-                </div>
-              ))}
-            </div>
-            <p class="text-xs text-[var(--color-primary)] mt-3">
-              {t(locale, 'view_all')} &rarr;
+            <h3 class="category-card-name">{category.data.name_zh}</h3>
+            <p class="category-card-meta">
+              <span class="num">{dimCount}</span> {t(locale, 'card_dim_unit')}
+              <span class="meta-sep">·</span>
+              <span class="num">{benchCount}</span> {t(locale, 'card_bench_unit')}
             </p>
+            <div class="category-card-divider"></div>
+            <ol class="category-ranking">
+              {topModels.map((model, index) => (
+                <li>
+                  <span class="rank">{String(index + 1).padStart(2, '0')}</span>
+                  <span class="model">
+                    <span class="model-dot" style={`background-color: ${model.color}`}></span>
+                    <span class="model-name">{model.model_name}</span>
+                  </span>
+                  <span class="score">
+                    {model.l1Scores[category.data.id]?.toFixed(1) ?? '—'}
+                  </span>
+                </li>
+              ))}
+            </ol>
+            <span class="category-card-footer">
+              <span>{t(locale, 'card_explore')}</span>
+              <span class="arrow" aria-hidden="true">→</span>
+            </span>
           </a>
         );
       })}
