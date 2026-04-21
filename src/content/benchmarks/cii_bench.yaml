@@ -6,6 +6,16 @@ url: "https://cii-bench.github.io/"
 paper: "https://arxiv.org/abs/2410.13854"
 description_zh: "CII-Bench 关注中文图像深层含义与文化隐喻理解。页面主榜单采用论文主表中的 Overall。"
 description_en: "CII-Bench studies deep implication understanding in Chinese images and cultural metaphors. This page uses the Overall score from the paper's main table."
+overview_zh: |
+  CII-Bench 面向中文视觉内容的高阶理解评测，重点考察模型能否理解中文互联网图片中的隐含语义、情绪和文化指涉。
+  与通用图像 benchmark 不同，这项工作特别引入了来自中文互联网和中国传统文化场景的图像，并通过人工审核与人工撰写答案保证中文语境真实性。
+  论文的大规模实验显示，当前 MLLM 与人类在该任务上仍有明显差距，尤其在中国传统文化图像和高层语义理解上表现不足。
+  同时，情绪提示能够显著提升结果，这说明模型对图像深层情感和文化线索的内在理解仍然不够稳定。
+overview_en: |
+  CII-Bench evaluates higher-order understanding of Chinese visual content, focusing on whether models can capture implied semantics, emotions, and cultural signals in Chinese images.
+  Unlike generic image benchmarks, it draws images from the Chinese internet and Chinese traditional culture, and pairs them with manually reviewed questions and answers to preserve authentic Chinese context.
+  The paper shows that current MLLMs still lag far behind humans, especially on traditional-culture images and tasks requiring deeper semantic interpretation.
+  It also finds that emotion hints can noticeably improve performance, indicating that intrinsic understanding of image sentiment and Chinese cultural cues remains weak.
 glance:
   - label_zh: "研究重点"
     label_en: "Focus"

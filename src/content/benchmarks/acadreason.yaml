@@ -1,0 +1,28 @@
+id: acadreason
+name: "ACADREASON"
+name_zh: "ACADREASON"
+name_en: "ACADREASON"
+url: "https://arxiv.org/abs/2510.11652"
+paper: "https://arxiv.org/abs/2510.11652"
+description_zh: "ACADREASON 用真实学术研究问题测试模型在跨学科研究场景中的推理与解题能力。页面主榜单采用主表中“解出题数 / 平均得分”里的平均得分。"
+description_en: "ACADREASON evaluates model reasoning on real academic research problems across disciplines. This page uses the average score from the paper's main table."
+overview_zh: "这篇工作把学术研究问题作为高难度推理载体，覆盖计算机、经济、法律、数学和哲学等领域。\n与常见考试型 benchmark 不同，ACADREASON 更强调研究问题的开放性、跨源知识整合与长链推理。\n结果表明，即使是领先模型，在真实学术问题上的整体得分仍然有限，说明高质量研究推理依然很难。"
+overview_en: "This work uses real academic research problems as a challenging testbed across computer science, economics, law, mathematics, and philosophy.\nUnlike exam-style benchmarks, ACADREASON emphasizes open-ended research tasks, multi-source synthesis, and long-horizon reasoning.\nThe results show that even leading models still achieve limited overall performance on genuine academic reasoning problems."
+glance:
+  - label_zh: "研究重点"
+    label_en: "Focus"
+    value: "学术研究推理"
+  - label_zh: "主指标"
+    label_en: "Primary Metric"
+    value: "Average Score"
+  - label_zh: "领域"
+    label_en: "Domains"
+    value: "CS, Econ, Law, Math, Phi"
+metrics:
+  - id: avg_score
+    name: "Average Score"
+    description: "Average score value from the main ACADREASON results table."
+    higher_is_better: true
+    range: [0, 100]
+leaderboard_note_zh: "论文主表将结果写为“解出题数 / 平均得分”；本页使用斜杠后的平均得分做主榜单。"
+leaderboard_note_en: "The main table reports results as 'solved count / average score'; this page uses the average-score term after the slash."

@@ -1,66 +1,68 @@
 id: llm
-name_zh: "LLM"
-name_en: "LLM"
+name_zh: "LLM Benchmark"
+name_en: "LLM Benchmark"
 icon: "brain"
 color: "#2563eb"
-order: 1
+order: 5
 subcategories:
   - id: instruction_following
     name_zh: "指令遵循"
     name_en: "Instruction Following"
-    description_zh: "关注多轮对话中的细粒度指令遵循能力。"
-    description_en: "Benchmarks for fine-grained instruction following in multi-turn dialogue."
+    description_zh: "关注多轮对话和复杂反向指令场景下的指令遵循能力。"
+    description_en: "Benchmarks for instruction following in multi-turn dialogue and inverse-instruction settings."
     benchmarks:
       - mt_bench_101
+      - inverse_ifeval
   - id: long_context
     name_zh: "长上下文"
     name_en: "Long Context"
-    description_zh: "关注超长上下文中的定位、保持与错误检测能力。"
-    description_en: "Benchmarks for retrieval, persistence, and error detection in long contexts."
+    description_zh: "关注长链推理错误检测、长文本生成和长文本奖励建模。"
+    description_en: "Benchmarks for long-chain error detection, long-form generation, and long-form reward modeling."
     benchmarks:
       - cot_error_detection
-  - id: mathematical_reasoning
-    name_zh: "数学推理"
-    name_en: "Mathematical Reasoning"
-    description_zh: "关注概念级数学推理与双语数学能力。"
-    description_en: "Benchmarks for concept-wise bilingual mathematical reasoning."
+      - hellobench
+      - longform_rewardbench
+  - id: math
+    name_zh: "数学"
+    name_en: "Math"
+    description_zh: "关注概念级数学推理与形式化数学评测。"
+    description_en: "Benchmarks for concept-wise mathematical reasoning and mathematical formalization."
     benchmarks:
       - conceptmath
+      - criticlean
   - id: reasoning
     name_zh: "推理"
     name_en: "Reasoning"
-    description_zh: "关注知识正交推理、推理模式分析与动态博弈式推理。"
-    description_en: "Benchmarks for knowledge-orthogonal reasoning, reasoning-pattern analysis, and dynamic game reasoning."
+    description_zh: "关注知识正交推理、动态博弈推理、表格理解与工具使用推理。"
+    description_en: "Benchmarks for knowledge-orthogonal reasoning, dynamic reasoning games, table QA, and tool-use reasoning."
     benchmarks:
       - kor_bench
-      - o1_reasoning_patterns
       - korgym
-  - id: structured_data_understanding
-    name_zh: "结构化数据"
-    name_en: "Structured Data Understanding"
-    description_zh: "关注表格与结构化数据理解能力。"
-    description_en: "Benchmarks for table and structured data understanding."
-    benchmarks:
       - tablebench
-  - id: factuality
-    name_zh: "事实性"
-    name_en: "Factuality"
-    description_zh: "关注中文事实性问答与事实核验能力。"
-    description_en: "Benchmarks for Chinese factual QA and factual consistency."
+      - mtu_bench
+  - id: knowledge
+    name_zh: "知识"
+    name_en: "Knowledge"
+    description_zh: "关注跨学科研究生级知识问答、中文事实性问答与 IT 运维知识能力。"
+    description_en: "Benchmarks for graduate-level knowledge, Chinese factual QA, and IT operations knowledge."
     benchmarks:
+      - supergpqa
       - chinese_simpleqa
+      - owl
   - id: safety
     name_zh: "安全"
     name_en: "Safety"
-    description_zh: "关注安全事实性与多轮对话攻防能力。"
-    description_en: "Benchmarks for safety factuality and multi-turn dialogue safety."
+    description_zh: "关注短事实安全、多轮对话安全与统一安全攻击评测。"
+    description_en: "Benchmarks for short-form safety factuality, multi-turn dialogue safety, and unified safety evaluation."
     benchmarks:
       - chinese_safetyqa
       - safedialbench
-  - id: domain_knowledge
-    name_zh: "领域知识"
-    name_en: "Domain Knowledge"
-    description_zh: "关注跨学科高阶知识与研究生水平问答能力。"
-    description_en: "Benchmarks for graduate-level knowledge across many disciplines."
+      - usb
+  - id: role_playing
+    name_zh: "角色扮演"
+    name_en: "Role-playing"
+    description_zh: "关注角色扮演能力、角色构建与角色智能体评测。"
+    description_en: "Benchmarks for role-playing ability, role construction, and role-based agents."
     benchmarks:
-      - supergpqa
+      - rolellm
+      - roleagent

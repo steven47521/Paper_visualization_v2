@@ -1,0 +1,28 @@
+id: tvir
+name: "TVIR"
+name_zh: "TVIR"
+name_en: "TVIR"
+url: "https://aclanthology.org/"
+paper: "https://aclanthology.org/"
+description_zh: "TVIR 面向图文交织深度研究报告生成，联合评估文本质量与视觉证据质量。页面主榜单采用论文 Table 1 的 Overall Avg。"
+description_en: "TVIR evaluates text-visual interleaved deep-research report generation with joint textual and visual assessment. This page uses the Overall Avg from Table 1."
+overview_zh: "TVIR 关注深度研究 agent 生成图文交织研究报告的能力，而不再局限于纯文本回答。\n论文提出 TVIR-BENCH 和 TVIR-AGENT，同时从文本引用支撑、写作质量、图表质量、图文融合等维度联合评测。\n结果显示，具备显式多模态规划与写作流程的 TVIR-Agent 变体，在整体表现上领先现有深度研究系统。"
+overview_en: "TVIR targets deep-research agents that generate text-visual interleaved reports instead of text-only outputs.\nThe paper introduces TVIR-BENCH and TVIR-AGENT, and jointly evaluates citation support, writing quality, figure quality, and text-visual integration.\nThe results show that TVIR-Agent variants with explicit multimodal planning and writing pipelines outperform existing deep-research systems overall."
+glance:
+  - label_zh: "研究重点"
+    label_en: "Focus"
+    value: "图文交织研究报告"
+  - label_zh: "主指标"
+    label_en: "Primary Metric"
+    value: "Overall Avg"
+  - label_zh: "评测维度"
+    label_en: "Evaluation"
+    value: "Textual + Visual"
+metrics:
+  - id: overall_avg
+    name: "Overall Avg"
+    description: "Mean of textual assessment and visual assessment in Table 1."
+    higher_is_better: true
+    range: [0, 100]
+leaderboard_note_zh: "榜单采用 Table 1 的 Overall Avg，只保留具有完整视觉评估的系统；纯文本 Gemini-3-Pro Deep Research 未纳入主榜单。"
+leaderboard_note_en: "The leaderboard uses the Overall Avg from Table 1 and keeps only systems with complete visual evaluation; the text-only Gemini-3-Pro Deep Research row is excluded."

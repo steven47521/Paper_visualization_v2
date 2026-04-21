@@ -1,0 +1,32 @@
+id: mm_browsecomp
+name: "MM-BrowseComp"
+name_zh: "MM-BrowseComp"
+name_en: "MM-BrowseComp"
+url: "https://github.com/MMBrowseComp/MM-BrowseComp"
+paper: "https://arxiv.org/abs/2508.13186"
+description_zh: "MM-BrowseComp 评测多模态浏览智能体在开放网页环境中的检索、理解与行动能力。页面主榜单采用论文主表中的 Overall。"
+description_en: "MM-BrowseComp evaluates multimodal browsing agents in open web environments. This page uses the Overall score from the main table."
+overview_zh: "这篇工作面向需要同时理解文本、图片和视频的浏览型智能体任务。\n论文不仅考察开放式答案质量，还关注支持性答案、跨模态证据整合以及不同领域下的真实网页检索表现。\n结果表明，真正具备工具增强能力的系统与纯 VLM 之间仍有明显差距，多模态浏览依然具有很高门槛。"
+overview_en: "This work targets browsing-agent tasks that require joint understanding of text, images, and videos.\nIt evaluates not only open-answer quality, but also support answers, cross-modal evidence integration, and domain-diverse web retrieval performance.\nThe results show a clear gap between genuinely tool-augmented systems and plain VLMs, highlighting the difficulty of multimodal browsing."
+glance:
+  - label_zh: "研究重点"
+    label_en: "Focus"
+    value: "多模态网页浏览"
+  - label_zh: "主指标"
+    label_en: "Primary Metric"
+    value: "Overall"
+  - label_zh: "任务环境"
+    label_en: "Environment"
+    value: "Open web"
+metrics:
+  - id: overall
+    name: "Overall"
+    description: "Overall score reported in the main MM-BrowseComp table."
+    higher_is_better: true
+    range: [0, 100]
+resources:
+  - label_zh: "代码仓库"
+    label_en: "Code Repository"
+    url: "https://github.com/MMBrowseComp/MM-BrowseComp"
+leaderboard_note_zh: "榜单采用论文主表 Overall 列，保留代表性的工具增强系统与多模态模型对比。"
+leaderboard_note_en: "The leaderboard uses the Overall column from the main table and keeps representative tool-augmented systems and multimodal models."

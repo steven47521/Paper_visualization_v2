@@ -1,0 +1,27 @@
+benchmark_id: nl2repo_bench
+updated: "2026-04-21"
+results:
+  - model_id: claude_sonnet_4_5_claude_code
+    scores: { overall_score: 40.2 }
+    source: official
+    source_url: "https://arxiv.org/abs/2512.12730"
+  - model_id: claude_sonnet_4_5
+    scores: { overall_score: 39.9 }
+    source: official
+    source_url: "https://arxiv.org/abs/2512.12730"
+  - model_id: claude_sonnet_4_5_cursor
+    scores: { overall_score: 39.2 }
+    source: official
+    source_url: "https://arxiv.org/abs/2512.12730"
+  - model_id: claude_sonnet_4
+    scores: { overall_score: 37.0 }
+    source: official
+    source_url: "https://arxiv.org/abs/2512.12730"
+  - model_id: gemini_3_pro_cursor
+    scores: { overall_score: 34.2 }
+    source: official
+    source_url: "https://arxiv.org/abs/2512.12730"
+  - model_id: deepseek_v3_2
+    scores: { overall_score: 27.6 }
+    source: official
+    source_url: "https://arxiv.org/abs/2512.12730"

@@ -1,0 +1,28 @@
+id: vidcapbench
+name: "VidCapBench"
+name_zh: "VidCapBench"
+name_en: "VidCapBench"
+url: "https://arxiv.org/abs/2502.12782"
+paper: "https://arxiv.org/abs/2502.12782"
+description_zh: "VidCapBench 从审美、内容、运动和物理规律等维度评测视频描述质量。页面主榜单采用 VidCapBench-AE 的 Overall Acc。"
+description_en: "VidCapBench evaluates video caption quality across aesthetics, content, motion, and physical laws. This page uses the Overall Acc on VidCapBench-AE."
+overview_zh: "这篇工作试图解决传统视频 caption benchmark 对视频质量维度覆盖不足的问题。\nVidCapBench 通过自动评测与人工评测相结合，同时关注审美、内容、运动与物理规律等方面。\n主结果显示，不同模型在整体准确率上仍然不高，说明高质量视频描述需要更强的细粒度感知与表达。"
+overview_en: "This work addresses the limited coverage of quality dimensions in traditional video-caption benchmarks.\nVidCapBench combines automated and human evaluation, covering aesthetics, content, motion, and physical laws.\nThe main results show relatively low overall accuracy across models, indicating that high-quality video captioning still requires stronger fine-grained perception and expression."
+glance:
+  - label_zh: "研究重点"
+    label_en: "Focus"
+    value: "综合视频描述评测"
+  - label_zh: "主指标"
+    label_en: "Primary Metric"
+    value: "Overall Acc"
+  - label_zh: "展示设置"
+    label_en: "Displayed Setting"
+    value: "VidCapBench-AE"
+metrics:
+  - id: overall_acc
+    name: "Overall Acc"
+    description: "Overall accuracy on VidCapBench-AE."
+    higher_is_better: true
+    range: [0, 100]
+leaderboard_note_zh: "榜单采用 VidCapBench-AE 的 Overall Acc，不额外组合 Precision、Coverage 和 Conciseness。"
+leaderboard_note_en: "The leaderboard uses Overall Acc on VidCapBench-AE and does not recombine Precision, Coverage, or Conciseness."

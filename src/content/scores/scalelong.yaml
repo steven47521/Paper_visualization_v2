@@ -1,0 +1,27 @@
+benchmark_id: scalelong
+updated: "2026-04-21"
+results:
+  - model_id: gemini_2_5_pro
+    scores: { overall: 67.9 }
+    source: official
+    source_url: "https://arxiv.org/abs/2505.23922"
+  - model_id: doubao_1_5_vl_pro
+    scores: { overall: 58.7 }
+    source: official
+    source_url: "https://arxiv.org/abs/2505.23922"
+  - model_id: gpt_4o
+    scores: { overall: 55.4 }
+    source: official
+    source_url: "https://arxiv.org/abs/2505.23922"
+  - model_id: gemini_2_0_flash
+    scores: { overall: 55.0 }
+    source: official
+    source_url: "https://arxiv.org/abs/2505.23922"
+  - model_id: phi_4
+    scores: { overall: 45.2 }
+    source: official
+    source_url: "https://arxiv.org/abs/2505.23922"
+  - model_id: flash_vstream
+    scores: { overall: 44.1 }
+    source: official
+    source_url: "https://arxiv.org/abs/2505.23922"

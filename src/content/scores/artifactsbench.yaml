@@ -1,0 +1,27 @@
+benchmark_id: artifactsbench
+updated: "2026-04-21"
+results:
+  - model_id: claude_4_0_sonnet
+    scores: { avg_score: 55.76 }
+    source: official
+    source_url: "https://arxiv.org/abs/2507.04952"
+  - model_id: deepseek_r1_0528
+    scores: { avg_score: 51.62 }
+    source: official
+    source_url: "https://arxiv.org/abs/2507.04952"
+  - model_id: hunyuan_turbos_preview
+    scores: { avg_score: 50.97 }
+    source: official
+    source_url: "https://arxiv.org/abs/2507.04952"
+  - model_id: gpt_4_1_2025_04_14
+    scores: { avg_score: 48.23 }
+    source: official
+    source_url: "https://arxiv.org/abs/2507.04952"
+  - model_id: seed_thinking_1_5
+    scores: { avg_score: 47.92 }
+    source: official
+    source_url: "https://arxiv.org/abs/2507.04952"
+  - model_id: deepseek_v3_0324
+    scores: { avg_score: 45.56 }
+    source: official
+    source_url: "https://arxiv.org/abs/2507.04952"

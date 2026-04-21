@@ -1,0 +1,15 @@
+benchmark_id: vidic
+updated: "2026-04-21"
+results:
+  - model_id: gpt_5_mini
+    scores: { average: 95.22 }
+    source: official
+    source_url: "https://arxiv.org/abs/2512.03405"
+  - model_id: deepseek_v3
+    scores: { average: 89.37 }
+    source: official
+    source_url: "https://arxiv.org/abs/2512.03405"
+  - model_id: qwen3_32b
+    scores: { average: 87.23 }
+    source: official
+    source_url: "https://arxiv.org/abs/2512.03405"

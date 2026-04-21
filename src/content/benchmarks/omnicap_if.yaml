@@ -1,0 +1,28 @@
+id: omnicap_if
+name: "OmniCap-IF"
+name_zh: "OmniCap-IF"
+name_en: "OmniCap-IF"
+url: "https://openreview.net/"
+paper: "https://openreview.net/"
+description_zh: "OmniCap-IF 评测全模态视频描述中的指令遵循能力。页面主榜单采用主表中的 Overall CSR。"
+description_en: "OmniCap-IF evaluates instruction following in omni-modal captioning. This page uses the Overall CSR from the main table."
+overview_zh: "这篇工作把指令遵循扩展到全模态视频描述，要求模型同时满足格式、内容与跨模态约束。\n论文主张 omni caption 不应只看生成质量，还要衡量模型是否真正遵从复杂指令要求。\n主结果显示，领先闭源 omni 模型整体更强，但开源 omni 模型在该方向上也开始具备可竞争性。"
+overview_en: "This work extends instruction following to omni-modal video captioning, requiring models to satisfy format, content, and cross-modal constraints together.\nIt argues that omni captioning should evaluate not only generation quality, but also whether complex instructions are truly followed.\nThe main results show stronger overall performance from leading closed-source omni models, while open-source omni models are becoming competitive."
+glance:
+  - label_zh: "研究重点"
+    label_en: "Focus"
+    value: "全模态描述中的指令遵循"
+  - label_zh: "主指标"
+    label_en: "Primary Metric"
+    value: "Overall CSR"
+  - label_zh: "评测能力"
+    label_en: "Abilities"
+    value: "Format + Content"
+metrics:
+  - id: overall_csr
+    name: "Overall CSR"
+    description: "Overall CSR score from the main OmniCap-IF table."
+    higher_is_better: true
+    range: [0, 100]
+leaderboard_note_zh: "榜单采用主表中的 Overall CSR。"
+leaderboard_note_en: "The leaderboard uses the Overall CSR from the main table."

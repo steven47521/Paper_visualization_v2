@@ -6,6 +6,16 @@ url: "https://mt-video-bench.github.io/"
 paper: "https://arxiv.org/abs/2510.17722"
 description_zh: "MT-Video-Bench 面向多轮视频对话中的感知与交互评测。页面主榜单采用官方主表中的 Overall，并保留六个子维度指标。"
 description_en: "MT-Video-Bench evaluates perception and interaction in multi-turn video dialogues. This page uses Overall from the main table and keeps the six sub-dimensions as auxiliary metrics."
+overview_zh: |
+  MT-Video-Bench 将视频理解评测从单轮问答推进到多轮对话，关注模型在真实交互式视频场景中的持续理解与响应能力。
+  benchmark 围绕感知性和交互性构建 6 类核心能力，整理了 1000 组来自不同领域的多轮视频对话，并对齐到体育分析、视频辅导等真实应用。
+  论文对开源和闭源 MLLM 的评测表明，它们在多轮视频理解上存在显著性能差异，同时也暴露出长期上下文跟踪和交互稳定性的不足。
+  这使得 MT-Video-Bench 成为连接视频 QA 与真实视频 agent 场景的重要过渡型 benchmark。
+overview_en: |
+  MT-Video-Bench moves video evaluation from single-turn QA to multi-turn dialogue, focusing on sustained understanding and interaction over videos.
+  It defines six core competencies around perceptivity and interactivity, and curates 1,000 multi-turn video dialogues from diverse domains aligned with realistic applications such as sports analysis and intelligent tutoring.
+  The paper shows large performance gaps between open-source and closed-source MLLMs, while also exposing weaknesses in long-horizon tracking and interactive consistency.
+  MT-Video-Bench therefore serves as an important bridge between standard video QA and more realistic video-agent settings.
 glance:
   - label_zh: "研究重点"
     label_en: "Focus"

@@ -1,0 +1,32 @@
+id: longform_rewardbench
+name: "Long-form RewardBench"
+name_zh: "Long-form RewardBench"
+name_en: "Long-form RewardBench"
+url: "https://github.com/HuihuiChyan/Long-formRMB"
+paper: "https://arxiv.org/abs/2603.12963"
+description_zh: "Long-form RewardBench 面向长文本奖励模型评测。页面主榜单采用论文主表中的 Long-form-RM Score。"
+description_en: "Long-form RewardBench evaluates reward models for long-form generation. This page uses the Long-form-RM Score from the main table."
+overview_zh: "这篇工作关注长文本场景下的奖励模型，而不是普通短回答偏好判断。\n论文覆盖问答、检索增强、聊天、写作和推理等子集，测试奖励模型在长输出上的排序能力。\n主结果显示，长文本奖励建模的格局与传统 RewardBench 并不完全相同，长上下文下的稳健性仍是难点。"
+overview_en: "This work focuses on reward models for long-form outputs rather than ordinary short-response preference judgments.\nIt covers QA, RAG, chat, writing, and reasoning subsets to test ranking quality on long responses.\nThe results show that the long-form reward-model landscape differs from traditional RewardBench, and robustness in long contexts remains challenging."
+glance:
+  - label_zh: "研究重点"
+    label_en: "Focus"
+    value: "长文本奖励模型"
+  - label_zh: "主指标"
+    label_en: "Primary Metric"
+    value: "Long-form-RM Score"
+  - label_zh: "子任务"
+    label_en: "Subsets"
+    value: "QA, RAG, Chat, Writing, Reasoning"
+metrics:
+  - id: score
+    name: "Long-form-RM Score"
+    description: "Overall Long-form RewardBench score."
+    higher_is_better: true
+    range: [0, 100]
+resources:
+  - label_zh: "代码仓库"
+    label_en: "Code Repository"
+    url: "https://github.com/HuihuiChyan/Long-formRMB"
+leaderboard_note_zh: "榜单采用论文主表的 Long-form-RM Score 列。"
+leaderboard_note_en: "The leaderboard uses the Long-form-RM Score column from the main table."

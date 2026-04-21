@@ -1,0 +1,32 @@
+id: omnivideobench
+name: "OmniVideoBench"
+name_zh: "OmniVideoBench"
+name_en: "OmniVideoBench"
+url: "https://github.com/NJU-LINK/OmniVideoBench"
+paper: "https://arxiv.org/abs/2510.10689"
+description_zh: "OmniVideoBench 面向带音频的视频理解，评测全模态模型在音视频联合场景中的能力。页面主榜单采用主表中的 Avg。"
+description_en: "OmniVideoBench evaluates omni-models on audio-visual video understanding. This page uses the Avg score from the main table."
+overview_zh: "这篇工作聚焦音频与视频联合理解，强调音乐、语音、环境声和不同视频时长下的统一评测。\n论文把问题设置为真正的 audio-visual understanding，而不是只看图像帧或只做文本问答。\n结果表明，即使是强 omni 模型，在长时长与复杂音频类型下仍然存在明显性能下降。"
+overview_en: "This work focuses on joint audio-visual understanding across music, speech, sound effects, and varying video durations.\nIt frames the task as genuine omni understanding rather than frame-only perception or text-only QA.\nThe results show clear performance drops even for strong omni models on longer videos and more complex audio conditions."
+glance:
+  - label_zh: "研究重点"
+    label_en: "Focus"
+    value: "音视频联合理解"
+  - label_zh: "主指标"
+    label_en: "Primary Metric"
+    value: "Avg"
+  - label_zh: "模态"
+    label_en: "Modalities"
+    value: "Video + Audio"
+metrics:
+  - id: avg_score
+    name: "Avg"
+    description: "Average accuracy reported in the main OmniVideoBench table."
+    higher_is_better: true
+    range: [0, 100]
+resources:
+  - label_zh: "代码仓库"
+    label_en: "Code Repository"
+    url: "https://github.com/NJU-LINK/OmniVideoBench"
+leaderboard_note_zh: "榜单采用 OmniVideoBench 主表中的 Avg 列。"
+leaderboard_note_en: "The leaderboard uses the Avg column from the main OmniVideoBench table."

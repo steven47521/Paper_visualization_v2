@@ -6,6 +6,16 @@ url: "https://openstellarteam.github.io/ChineseSafetyQA/"
 paper: "https://arxiv.org/abs/2412.15265"
 description_zh: "Chinese SafetyQA 面向中文安全事实性评测。页面主榜单采用论文中的 F-score。"
 description_en: "Chinese SafetyQA evaluates Chinese safety factuality. This page uses the F-score reported in the paper."
+overview_zh: |
+  Chinese SafetyQA 聚焦中文语境下的安全事实性问答，核心问题是模型能否准确、无害地回答与法律、政策、伦理等相关的短问题。
+  该 benchmark 延续 SimpleQA 风格，强调中文、多领域、高质量、静态答案和易评测流程，并额外把“安全相关”与“无害”作为数据建设原则。
+  论文基于这一数据集系统比较主流 LLM 的安全知识掌握情况，并分析 RAG 能力、攻击鲁棒性等因素与安全事实性的关系。
+  结果说明安全对齐并不等于安全知识充分，面向本地合规部署仍需要更细粒度的中文安全评测。
+overview_en: |
+  Chinese SafetyQA targets safety-related factual short-form QA in Chinese, asking whether models can answer legal, policy, and ethics questions accurately and harmlessly.
+  The benchmark follows the SimpleQA style while emphasizing Chinese coverage, diversity, quality control, static reference answers, and easy evaluation, and it further adds safety relevance and harmlessness as construction principles.
+  The paper uses this benchmark to compare mainstream LLMs and analyze how safety factuality relates to capabilities such as RAG and robustness under attacks.
+  The results suggest that alignment alone does not guarantee sufficient safety knowledge, and region-specific Chinese safety evaluation remains necessary before compliant deployment.
 glance:
   - label_zh: "研究重点"
     label_en: "Focus"

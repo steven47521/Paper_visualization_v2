@@ -2,9 +2,7 @@
 import Layout from '../../../layouts/Layout.astro';
 import { getLocalizedPath, t } from '../../../i18n/translations';
 import { getCollection } from 'astro:content';
-import { buildCategoryData, getModelsArray } from '../../../lib/data';
-import { normalizeBenchmarkScores } from '../../../lib/normalize';
-import CategoryLeaderboard from '../../../components/CategoryLeaderboard';
+import BenchmarkCardGrid from '../../../components/BenchmarkCardGrid.astro';
 
 const locale = 'zh';
 
@@ -19,56 +17,41 @@ export async function getStaticPaths() {
 const { taxonomy: taxEntry } = Astro.props;
 const benchmarks = await getCollection('benchmarks');
 const scores = await getCollection('scores');
-const modelsCollection = await getCollection('models');
-const models = getModelsArray(modelsCollection);
 
-const categoryData = buildCategoryData(taxEntry, benchmarks, scores);
+function summarizeText(text: string | undefined, fallback: string) {
+  const normalized = (text || fallback).replace(/\s+/g, ' ').trim();
+  if (normalized.length <= 170) return normalized;
+  return `${normalized.slice(0, 167).trimEnd()}...`;
+}
 
-// Build data for each subcategory tab
 const subcategoryTabs = taxEntry.data.subcategories.map(sub => {
-  const subBenchmarks = sub.benchmarks
+  const benchmarkCards = sub.benchmarks
     .map(bId => {
       const bDef = benchmarks.find(b => b.data.id === bId);
       const sData = scores.find(s => s.data.benchmark_id === bId);
       if (!bDef) return null;
-      const normalized = normalizeBenchmarkScores(
-        sData?.data.results ?? [],
-        bDef.data.metrics
-      );
+
+      const resourceLabels = [
+        ...(bDef.data.resources ?? []).map(item => item.label_zh),
+        ...(bDef.data.paper ? ['Paper'] : []),
+        ...(!bDef.data.resources?.some(item => item.url === bDef.data.url) && bDef.data.url
+          ? [bDef.data.url.includes('github.com') ? 'Code' : 'Project']
+          : []),
+      ].slice(0, 3);
+
       return {
         id: bId,
-        name: bDef.data.name,
-        results: sData?.data.results ?? [],
-        normalized,
-        metrics: bDef.data.metrics,
+        name: bDef.data.name_zh,
+        description: bDef.data.description_zh,
+        snippet: summarizeText(bDef.data.overview_zh, bDef.data.description_zh),
+        primaryMetric: bDef.data.metrics[0]?.name,
+        focus: bDef.data.glance?.[0]?.value,
+        modelCount: sData?.data.results.length ?? 0,
+        resourceLabels,
+        updated: sData?.data.updated,
       };
     })
     .filter(Boolean);
-
-  const benchmarkInfos = subBenchmarks.map(b => ({
-    id: b!.id,
-    name: b!.name,
-  }));
-
-  const modelRows = models.map(m => {
-    const scoresMap: Record<string, number | null> = {};
-    const rawScoresMap: Record<string, number | null> = {};
-    for (const b of subBenchmarks) {
-      if (!b) continue;
-      scoresMap[b.id] = b.normalized.get(m.id) ?? null;
-      const result = b.results.find(r => r.model_id === m.id);
-      const primaryMetric = b.metrics[0];
-      rawScoresMap[b.id] = result?.scores[primaryMetric.id] ?? null;
-    }
-    return {
-      model_id: m.id,
-      model_name: m.name,
-      org: m.org,
-      color: m.color,
-      scores: scoresMap,
-      rawScores: rawScoresMap,
-    };
-  });
 
   return {
     id: sub.id,
@@ -76,9 +59,7 @@ const subcategoryTabs = taxEntry.data.subcategories.map(sub => {
     name_en: sub.name_en,
     description_zh: sub.description_zh,
     description_en: sub.description_en,
-    benchmarkInfos,
-    modelRows,
-    benchmarkIds: sub.benchmarks,
+    benchmarkCards,
   };
 });
 ---
@@ -119,37 +100,14 @@ const subcategoryTabs = taxEntry.data.subcategories.map(sub => {
       data-tab-content={tab.id}
       style={i === 0 ? '' : 'display:none'}
     >
-      {tab.description_zh && (
-        <p class="text-[var(--color-text-secondary)] mb-6">{tab.description_zh}</p>
-      )}
-
-      <CategoryLeaderboard
-        client:visible
-        benchmarks={tab.benchmarkInfos}
-        models={tab.modelRows}
+      <BenchmarkCardGrid
         locale={locale}
         l1Id={taxEntry.data.id}
-        labels={{
-          model: t(locale, 'model'),
-          overall_score: t(locale, 'overall_score'),
-          weight_reset: t(locale, 'weight_reset'),
-          search_placeholder: t(locale, 'search_placeholder'),
-          source_official: t(locale, 'source_official'),
-          source_community: t(locale, 'source_community'),
-          source_self_reported: t(locale, 'source_self_reported'),
-        }}
+        accentColor={taxEntry.data.color}
+        sectionName={tab.name_zh}
+        sectionDescription={tab.description_zh}
+        items={tab.benchmarkCards}
       />
-
-      <div class="mt-6 flex flex-wrap gap-2">
-        {tab.benchmarkIds.map(bId => (
-          <a
-            href={getLocalizedPath(`/${taxEntry.data.id}/${bId}/`, locale)}
-            class="px-3 py-1.5 text-sm rounded-lg border border-[var(--color-border)] hover:border-[var(--color-primary)] hover:text-[var(--color-primary)] transition-colors"
-          >
-            {benchmarks.find(b => b.data.id === bId)?.data.name ?? bId} &rarr;
-          </a>
-        ))}
-      </div>
     </div>
   ))}
 

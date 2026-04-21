@@ -6,6 +6,16 @@ url: "https://github.com/conceptmath/conceptmath"
 paper: "https://arxiv.org/abs/2402.14660"
 description_zh: "ConceptMath 是面向双语概念级数学推理的 benchmark。页面主榜单采用论文总表的 Avg。"
 description_en: "ConceptMath is a bilingual concept-wise benchmark for mathematical reasoning. This page uses the Avg column from the paper's main table."
+overview_zh: |
+  ConceptMath 将数学推理评测从“平均准确率”进一步拆解到概念层级，目标是识别模型在具体数学概念上的能力强弱与失误模式。
+  该 benchmark 同时覆盖中英文，按照概念树组织题目，使研究者既能看总体表现，也能观察模型在基础概念和细分知识点上的波动。
+  论文实验表明，不少模型即使在传统数学榜单上平均分较高，也会在某些基础概念上出现明显短板甚至灾难性失败。
+  这使得 ConceptMath 不只是一个排行榜，也成为发现弱项、指导定向微调和课程式增强的重要工具。
+overview_en: |
+  ConceptMath moves math evaluation beyond average accuracy by measuring performance at the level of individual mathematical concepts.
+  The benchmark is bilingual in Chinese and English and organizes problems under a concept hierarchy, so models can be analyzed both globally and at fine granularity.
+  The paper shows that many models with strong average scores on traditional math benchmarks still exhibit severe weaknesses, or even catastrophic failures, on specific basic concepts.
+  As a result, ConceptMath serves not only as a leaderboard but also as a diagnostic tool for targeted improvement and concept-level fine-tuning.
 glance:
   - label_zh: "研究重点"
     label_en: "Focus"

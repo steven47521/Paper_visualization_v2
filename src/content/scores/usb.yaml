@@ -1,0 +1,27 @@
+benchmark_id: usb
+updated: "2026-04-21"
+results:
+  - model_id: claude35_sonnet2
+    scores: { total_asrt: 15.57 }
+    source: official
+    source_url: "https://arxiv.org/abs/2505.23793"
+  - model_id: gemini_1_5_pro
+    scores: { total_asrt: 37.83 }
+    source: official
+    source_url: "https://arxiv.org/abs/2505.23793"
+  - model_id: gpt_4o
+    scores: { total_asrt: 40.93 }
+    source: official
+    source_url: "https://arxiv.org/abs/2505.23793"
+  - model_id: gemini_2_0_flash
+    scores: { total_asrt: 46.51 }
+    source: official
+    source_url: "https://arxiv.org/abs/2505.23793"
+  - model_id: qwen_vl_max
+    scores: { total_asrt: 56.87 }
+    source: official
+    source_url: "https://arxiv.org/abs/2505.23793"
+  - model_id: llava_v1_5_13b
+    scores: { total_asrt: 72.72 }
+    source: official
+    source_url: "https://arxiv.org/abs/2505.23793"

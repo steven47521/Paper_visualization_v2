@@ -1,0 +1,27 @@
+benchmark_id: vidcapbench
+updated: "2026-04-21"
+results:
+  - model_id: gemini_1_5_pro_002
+    scores: { overall_acc: 17.1 }
+    source: official
+    source_url: "https://arxiv.org/abs/2502.12782"
+  - model_id: gpt_4o_20240806
+    scores: { overall_acc: 16.8 }
+    source: official
+    source_url: "https://arxiv.org/abs/2502.12782"
+  - model_id: mplug_owl3_7b
+    scores: { overall_acc: 14.5 }
+    source: official
+    source_url: "https://arxiv.org/abs/2502.12782"
+  - model_id: aria
+    scores: { overall_acc: 14.1 }
+    source: official
+    source_url: "https://arxiv.org/abs/2502.12782"
+  - model_id: cogvlm2_caption
+    scores: { overall_acc: 13.1 }
+    source: official
+    source_url: "https://arxiv.org/abs/2502.12782"
+  - model_id: qwen2_vl_72b
+    scores: { overall_acc: 12.2 }
+    source: official
+    source_url: "https://arxiv.org/abs/2502.12782"

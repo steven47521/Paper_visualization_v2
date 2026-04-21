@@ -1,0 +1,27 @@
+benchmark_id: web_compass
+updated: "2026-04-21"
+results:
+  - model_id: claude_opus_4_5
+    scores: { overall: 67.40 }
+    source: official
+    source_url: "https://nju-link.github.io/WebCompass/"
+  - model_id: gemini_3_pro_preview
+    scores: { overall: 66.68 }
+    source: official
+    source_url: "https://nju-link.github.io/WebCompass/"
+  - model_id: gemini_3_flash_preview
+    scores: { overall: 65.42 }
+    source: official
+    source_url: "https://nju-link.github.io/WebCompass/"
+  - model_id: gpt_5_2
+    scores: { overall: 61.90 }
+    source: official
+    source_url: "https://nju-link.github.io/WebCompass/"
+  - model_id: claude_sonnet_4_5
+    scores: { overall: 57.12 }
+    source: official
+    source_url: "https://nju-link.github.io/WebCompass/"
+  - model_id: qwen3_vl_235b_a22b_instruct
+    scores: { overall: 41.14 }
+    source: official
+    source_url: "https://nju-link.github.io/WebCompass/"

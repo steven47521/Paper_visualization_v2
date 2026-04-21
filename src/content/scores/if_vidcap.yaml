@@ -1,0 +1,27 @@
+benchmark_id: if_vidcap
+updated: "2026-04-21"
+results:
+  - model_id: gemini_2_5_pro
+    scores: { overall_csr: 74.53 }
+    source: official
+    source_url: "https://arxiv.org/abs/2510.18726"
+  - model_id: gemini_2_5_flash
+    scores: { overall_csr: 72.63 }
+    source: official
+    source_url: "https://arxiv.org/abs/2510.18726"
+  - model_id: qwen3_vl_instruct
+    scores: { overall_csr: 71.65 }
+    source: official
+    source_url: "https://arxiv.org/abs/2510.18726"
+  - model_id: internvl_3_5_241b
+    scores: { overall_csr: 71.17 }
+    source: official
+    source_url: "https://arxiv.org/abs/2510.18726"
+  - model_id: gpt_4o
+    scores: { overall_csr: 70.74 }
+    source: official
+    source_url: "https://arxiv.org/abs/2510.18726"
+  - model_id: gemini_2_0_flash
+    scores: { overall_csr: 67.45 }
+    source: official
+    source_url: "https://arxiv.org/abs/2510.18726"

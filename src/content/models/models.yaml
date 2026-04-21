@@ -579,3 +579,428 @@ models:
     org: "Stanford"
     color: "#4b5563"
     tags: ["open_weight"]
+  - id: gpt_5
+    name: "GPT-5"
+    org: "OpenAI"
+    color: "#10a37f"
+    tags: ["proprietary"]
+  - id: gpt_5_high
+    name: "GPT-5-high"
+    org: "OpenAI"
+    color: "#10a37f"
+    tags: ["proprietary", "reasoning"]
+  - id: gpt_5_1
+    name: "GPT-5.1"
+    org: "OpenAI"
+    color: "#10a37f"
+    tags: ["proprietary"]
+  - id: gpt_5_2
+    name: "GPT-5.2"
+    org: "OpenAI"
+    color: "#10a37f"
+    tags: ["proprietary"]
+  - id: gpt_5_mini
+    name: "GPT-5 Mini"
+    org: "OpenAI"
+    color: "#10a37f"
+    tags: ["proprietary"]
+  - id: gpt_oss
+    name: "GPT-OSS"
+    org: "OpenAI"
+    color: "#10a37f"
+    tags: ["open_weight"]
+  - id: gpt_oss_120b
+    name: "GPT-OSS-120B"
+    org: "OpenAI"
+    color: "#10a37f"
+    tags: ["open_weight"]
+  - id: o3
+    name: "o3"
+    org: "OpenAI"
+    color: "#10a37f"
+    tags: ["proprietary", "reasoning"]
+  - id: o3_high
+    name: "o3-high"
+    org: "OpenAI"
+    color: "#10a37f"
+    tags: ["proprietary", "reasoning"]
+  - id: o4_mini
+    name: "o4-mini"
+    org: "OpenAI"
+    color: "#10a37f"
+    tags: ["proprietary", "reasoning"]
+  - id: o4_mini_high
+    name: "o4-mini-high"
+    org: "OpenAI"
+    color: "#10a37f"
+    tags: ["proprietary", "reasoning"]
+  - id: gpt_4_1_2025_04_14
+    name: "GPT-4.1-2025-04-14"
+    org: "OpenAI"
+    color: "#10a37f"
+    tags: ["proprietary"]
+  - id: gpt_4o_20240806
+    name: "GPT-4o-2024-08-06"
+    org: "OpenAI"
+    color: "#10a37f"
+    tags: ["proprietary", "multimodal"]
+  - id: deepseek_v3_1
+    name: "DeepSeek-V3.1"
+    org: "DeepSeek"
+    color: "#4a90d9"
+    tags: ["open_weight"]
+  - id: deepseek_v3_2
+    name: "DeepSeek-V3.2"
+    org: "DeepSeek"
+    color: "#4a90d9"
+    tags: ["open_weight"]
+  - id: deepseek_v3_0324
+    name: "DeepSeek-V3-0324"
+    org: "DeepSeek"
+    color: "#4a90d9"
+    tags: ["open_weight"]
+  - id: deepseek_r1_0528
+    name: "DeepSeek-R1-0528"
+    org: "DeepSeek"
+    color: "#4a90d9"
+    tags: ["open_weight", "reasoning"]
+  - id: qwen3_14b
+    name: "Qwen3-14B"
+    org: "Alibaba"
+    color: "#ff6a00"
+    tags: ["open_weight"]
+  - id: qwen2_5_vl_72b
+    name: "Qwen2.5-VL-72B"
+    org: "Alibaba"
+    color: "#ff6a00"
+    tags: ["open_weight", "multimodal"]
+  - id: qwen2_5_vl_32b
+    name: "Qwen2.5-VL-32B"
+    org: "Alibaba"
+    color: "#ff6a00"
+    tags: ["open_weight", "multimodal"]
+  - id: qwen3_vl_instruct
+    name: "Qwen3-VL-Instruct"
+    org: "Alibaba"
+    color: "#ff6a00"
+    tags: ["open_weight", "multimodal"]
+  - id: qwen3_vl_235b_a22b_instruct
+    name: "Qwen3-VL-235B-A22B-Instruct"
+    org: "Alibaba"
+    color: "#ff6a00"
+    tags: ["open_weight", "multimodal"]
+  - id: qwen3_omni_30b_a3b
+    name: "Qwen3-Omni-30B-A3B"
+    org: "Alibaba"
+    color: "#ff6a00"
+    tags: ["open_weight", "multimodal"]
+  - id: qwen3_omni_30b_a3b_thinking
+    name: "Qwen3-Omni-30B-A3B-Thinking"
+    org: "Alibaba"
+    color: "#ff6a00"
+    tags: ["open_weight", "multimodal"]
+  - id: qwen3_omni_30b_a3b_instruct
+    name: "Qwen3-Omni-30B-A3B-Instruct"
+    org: "Alibaba"
+    color: "#ff6a00"
+    tags: ["open_weight", "multimodal"]
+  - id: qwen3_max
+    name: "Qwen3-Max"
+    org: "Alibaba"
+    color: "#ff6a00"
+    tags: ["proprietary"]
+  - id: claude_sonnet_4_5
+    name: "Claude Sonnet 4.5"
+    org: "Anthropic"
+    color: "#d97706"
+    tags: ["proprietary"]
+  - id: claude_opus_4_5
+    name: "Claude Opus 4.5"
+    org: "Anthropic"
+    color: "#d97706"
+    tags: ["proprietary"]
+  - id: claude_4_sonnet
+    name: "Claude 4 Sonnet"
+    org: "Anthropic"
+    color: "#d97706"
+    tags: ["proprietary"]
+  - id: claude_4_0_sonnet
+    name: "Claude 4.0 Sonnet"
+    org: "Anthropic"
+    color: "#d97706"
+    tags: ["proprietary"]
+  - id: claude_4_opus_thinking
+    name: "Claude 4 Opus Thinking"
+    org: "Anthropic"
+    color: "#d97706"
+    tags: ["proprietary", "reasoning"]
+  - id: claude35_sonnet2
+    name: "Claude 3.5 Sonnet 2"
+    org: "Anthropic"
+    color: "#d97706"
+    tags: ["proprietary", "multimodal"]
+  - id: claude_sonnet_4_5_claude_code
+    name: "Claude Sonnet 4.5 (Claude Code)"
+    org: "Anthropic"
+    color: "#d97706"
+    tags: ["proprietary", "coder"]
+  - id: claude_sonnet_4_5_cursor
+    name: "Claude Sonnet 4.5 (Cursor)"
+    org: "Cursor"
+    color: "#d97706"
+    tags: ["proprietary", "coder"]
+  - id: claude_4_5_sonnet_search
+    name: "Claude 4.5 Sonnet w/Search"
+    org: "Anthropic"
+    color: "#d97706"
+    tags: ["proprietary", "agent"]
+  - id: claude_opus_4_20250514
+    name: "Claude Opus 4 (2025-05-14)"
+    org: "Anthropic"
+    color: "#d97706"
+    tags: ["proprietary"]
+  - id: gemini_3_pro
+    name: "Gemini 3 Pro"
+    org: "Google"
+    color: "#4285f4"
+    tags: ["proprietary", "multimodal"]
+  - id: gemini_3_pro_cursor
+    name: "Gemini 3 Pro (Cursor)"
+    org: "Cursor"
+    color: "#4285f4"
+    tags: ["proprietary", "multimodal", "coder"]
+  - id: gemini_3_pro_preview
+    name: "Gemini 3 Pro Preview"
+    org: "Google"
+    color: "#4285f4"
+    tags: ["proprietary", "multimodal"]
+  - id: gemini_3_flash_preview
+    name: "Gemini 3 Flash Preview"
+    org: "Google"
+    color: "#4285f4"
+    tags: ["proprietary", "multimodal"]
+  - id: gemini_3_0_pro
+    name: "Gemini 3.0 Pro"
+    org: "Google"
+    color: "#4285f4"
+    tags: ["proprietary", "multimodal"]
+  - id: gemini_3_0_flash
+    name: "Gemini 3.0 Flash"
+    org: "Google"
+    color: "#4285f4"
+    tags: ["proprietary", "multimodal"]
+  - id: gemini_3_1_pro
+    name: "Gemini 3.1 Pro"
+    org: "Google"
+    color: "#4285f4"
+    tags: ["proprietary", "multimodal"]
+  - id: gemini_3_flash
+    name: "Gemini 3 Flash"
+    org: "Google"
+    color: "#4285f4"
+    tags: ["proprietary", "multimodal"]
+  - id: gemini_2_pro
+    name: "Gemini 2 Pro"
+    org: "Google"
+    color: "#4285f4"
+    tags: ["proprietary", "multimodal"]
+  - id: gemini_2_flash
+    name: "Gemini 2 Flash"
+    org: "Google"
+    color: "#4285f4"
+    tags: ["proprietary", "multimodal"]
+  - id: gemini_2_5_pro_preview_0506
+    name: "Gemini 2.5 Pro Preview 05-06"
+    org: "Google"
+    color: "#4285f4"
+    tags: ["proprietary", "multimodal"]
+  - id: gemini_2_5_flash_preview_0520
+    name: "Gemini 2.5 Flash Preview 05-20"
+    org: "Google"
+    color: "#4285f4"
+    tags: ["proprietary", "multimodal"]
+  - id: gemini_2_5_flash_preview_0417
+    name: "Gemini 2.5 Flash Preview 04-17"
+    org: "Google"
+    color: "#4285f4"
+    tags: ["proprietary", "multimodal"]
+  - id: gemini_1_5_pro_002
+    name: "Gemini 1.5 Pro 002"
+    org: "Google"
+    color: "#4285f4"
+    tags: ["proprietary", "multimodal"]
+  - id: glm_4_6
+    name: "GLM-4.6"
+    org: "Zhipu AI"
+    color: "#2563eb"
+    tags: ["proprietary"]
+  - id: kimi_k2_0905
+    name: "Kimi-K2-0905"
+    org: "Moonshot AI"
+    color: "#06b6d4"
+    tags: ["proprietary", "agent"]
+  - id: kimi_k2_thinking
+    name: "Kimi-K2-Thinking"
+    org: "Moonshot AI"
+    color: "#06b6d4"
+    tags: ["proprietary", "agent", "reasoning"]
+  - id: doubao_1_5_vl_pro
+    name: "Doubao 1.5-VL-Pro"
+    org: "ByteDance"
+    color: "#ef4444"
+    tags: ["proprietary", "multimodal"]
+  - id: doubao_1_8_pro
+    name: "Doubao-1.8-Pro"
+    org: "ByteDance"
+    color: "#ef4444"
+    tags: ["proprietary"]
+  - id: seed_thinking_1_5
+    name: "Seed-Thinking-1.5"
+    org: "ByteDance"
+    color: "#ef4444"
+    tags: ["proprietary", "reasoning"]
+  - id: seedance_1_5
+    name: "Seedance-1.5"
+    org: "ByteDance"
+    color: "#ef4444"
+    tags: ["proprietary", "multimodal"]
+  - id: hunyuan_turbos_preview
+    name: "Hunyuan-Turbos-Preview"
+    org: "Tencent"
+    color: "#0ea5e9"
+    tags: ["proprietary"]
+  - id: phi_4
+    name: "Phi-4"
+    org: "Microsoft"
+    color: "#2563eb"
+    tags: ["open_weight"]
+  - id: flash_vstream
+    name: "Flash-VStream"
+    org: "Flash-VStream"
+    color: "#0ea5e9"
+    tags: ["open_weight", "multimodal"]
+  - id: internvl3_78b
+    name: "InternVL3-78B"
+    org: "OpenGVLab"
+    color: "#16a34a"
+    tags: ["open_weight", "multimodal"]
+  - id: internvl2_5_78b
+    name: "InternVL2.5-78B"
+    org: "OpenGVLab"
+    color: "#16a34a"
+    tags: ["open_weight", "multimodal"]
+  - id: internvl2_5_38b
+    name: "InternVL2.5-38B"
+    org: "OpenGVLab"
+    color: "#16a34a"
+    tags: ["open_weight", "multimodal"]
+  - id: internvl_3_5_241b
+    name: "InternVL-3.5-241B"
+    org: "OpenGVLab"
+    color: "#16a34a"
+    tags: ["open_weight", "multimodal"]
+  - id: mplug_owl3_7b
+    name: "mPLUG-Owl3-7B"
+    org: "mPLUG"
+    color: "#475569"
+    tags: ["open_weight", "multimodal"]
+  - id: aria
+    name: "Aria"
+    org: "Aria"
+    color: "#475569"
+    tags: ["open_weight", "multimodal"]
+  - id: cogvlm2_caption
+    name: "CogVLM2-Caption"
+    org: "THUDM"
+    color: "#9333ea"
+    tags: ["open_weight", "multimodal"]
+  - id: mimo_v2_omni
+    name: "MiMo-V2-Omni"
+    org: "MiMo"
+    color: "#475569"
+    tags: ["open_weight", "multimodal"]
+  - id: veo_3_1
+    name: "Veo-3.1"
+    org: "Google"
+    color: "#4285f4"
+    tags: ["proprietary", "multimodal", "generation"]
+  - id: sora_2
+    name: "Sora-2"
+    org: "OpenAI"
+    color: "#10a37f"
+    tags: ["proprietary", "multimodal", "generation"]
+  - id: kling_2_6
+    name: "Kling-2.6"
+    org: "Kuaishou"
+    color: "#f97316"
+    tags: ["proprietary", "multimodal", "generation"]
+  - id: wan_2_6
+    name: "Wan-2.6"
+    org: "Wan"
+    color: "#14b8a6"
+    tags: ["proprietary", "multimodal", "generation"]
+  - id: wan_2_5
+    name: "Wan-2.5"
+    org: "Wan"
+    color: "#14b8a6"
+    tags: ["proprietary", "multimodal", "generation"]
+  - id: skywork_reward_v2_llama_3_2_3b
+    name: "Skywork-Reward-V2-Llama-3.2-3B"
+    org: "Skywork"
+    color: "#8b5cf6"
+    tags: ["reward_model"]
+  - id: allenai_llama_3_1_70b_instruct_rm_rb2
+    name: "AllenAI Llama-3.1-70B-Instruct-RM-RB2"
+    org: "AllenAI"
+    color: "#4b5563"
+    tags: ["reward_model", "open_weight"]
+  - id: allenai_tulu_3_70b_sft_rm_rb2
+    name: "AllenAI Tulu-3-70B-SFT-RM-RB2"
+    org: "AllenAI"
+    color: "#4b5563"
+    tags: ["reward_model", "open_weight"]
+  - id: codetracer_gpt_5
+    name: "CodeTracer (GPT-5)"
+    org: "CodeTracer"
+    color: "#10a37f"
+    tags: ["agent", "coder"]
+  - id: codetracer_claude_sonnet_4
+    name: "CodeTracer (Claude Sonnet 4)"
+    org: "CodeTracer"
+    color: "#d97706"
+    tags: ["agent", "coder"]
+  - id: codetracer_deepseek_v3_2
+    name: "CodeTracer (DeepSeek-V3.2)"
+    org: "CodeTracer"
+    color: "#4a90d9"
+    tags: ["agent", "coder"]
+  - id: tvir_agent_qwen3_max
+    name: "TVIR-Agent (Qwen3-Max)"
+    org: "TVIR-Agent"
+    color: "#ff6a00"
+    tags: ["agent", "multimodal"]
+  - id: tvir_agent_glm_4_7
+    name: "TVIR-Agent (GLM-4.7)"
+    org: "TVIR-Agent"
+    color: "#2563eb"
+    tags: ["agent", "multimodal"]
+  - id: tvir_agent_claude_4_5_sonnet
+    name: "TVIR-Agent (Claude 4.5 Sonnet)"
+    org: "TVIR-Agent"
+    color: "#d97706"
+    tags: ["agent", "multimodal"]
+  - id: manus_1_6
+    name: "Manus-1.6"
+    org: "Manus"
+    color: "#0ea5e9"
+    tags: ["agent"]
+  - id: genspark_deep_research
+    name: "Genspark Deep Research"
+    org: "Genspark"
+    color: "#475569"
+    tags: ["agent"]
+  - id: llava_v1_5_13b
+    name: "LLaVA-v1.5-13B"
+    org: "LLaVA"
+    color: "#0f766e"
+    tags: ["open_weight", "multimodal"]

@@ -1,0 +1,32 @@
+id: criticlean
+name: "CriticLean"
+name_zh: "CriticLean"
+name_en: "CriticLean"
+url: "https://github.com/multimodal-art-projection/CriticLean"
+paper: "https://arxiv.org/abs/2507.06181"
+description_zh: "CriticLean 面向数学形式化中的 critic 能力评测。页面主榜单采用主表中的 ACC。"
+description_en: "CriticLean evaluates critic ability for mathematical formalization. This page uses ACC from the main table."
+overview_zh: "这篇工作围绕形式化数学过程中的 critic 能力展开，评测模型区分正确与错误推理或证明片段的能力。\nCriticLeanBench 同时结合 critic、Lean 和测试信号，使评测更接近真实数学形式化流程。\n主结果表明，具备强推理能力的模型在 critic 任务上占优，但整体准确率仍未达到可以完全替代人工审阅的程度。"
+overview_en: "This work studies critic ability in mathematical formalization, evaluating whether models can distinguish correct from incorrect reasoning or proof fragments.\nCriticLeanBench combines critic signals, Lean verification, and testing, making the setup closer to realistic formalization workflows.\nThe results show that strong reasoning models perform best, but overall accuracy is still far from replacing human review."
+glance:
+  - label_zh: "研究重点"
+    label_en: "Focus"
+    value: "数学形式化 critic"
+  - label_zh: "主指标"
+    label_en: "Primary Metric"
+    value: "ACC"
+  - label_zh: "评测结构"
+    label_en: "Structure"
+    value: "Critic + Lean + Test"
+metrics:
+  - id: acc
+    name: "ACC"
+    description: "Accuracy on the main CriticLean results table."
+    higher_is_better: true
+    range: [0, 100]
+resources:
+  - label_zh: "代码仓库"
+    label_en: "Code Repository"
+    url: "https://github.com/multimodal-art-projection/CriticLean"
+leaderboard_note_zh: "榜单采用论文主表的 ACC 列。"
+leaderboard_note_en: "The leaderboard uses the ACC column from the main table."

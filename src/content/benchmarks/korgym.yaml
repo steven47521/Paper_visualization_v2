@@ -6,6 +6,16 @@ url: "https://razor233.github.io/KORGYM_HomePage/"
 paper: "https://arxiv.org/abs/2505.14552"
 description_zh: "KORGym 是面向动态游戏环境的推理评测平台。页面主榜单采用论文主表的 Avg Score。"
 description_en: "KORGym is a dynamic game platform for reasoning evaluation. This page uses the Avg Score from the paper's main table."
+overview_zh: |
+  KORGym 将静态推理 benchmark 扩展为动态游戏化平台，用多轮、交互式任务来测量模型在复杂环境中的通用推理能力。
+  平台提供五十多个文本或视觉游戏，并支持强化学习式场景，因此不仅能测答案正确性，也能观察策略选择、交互稳定性和模态差异。
+  论文基于 KORGym 对多种 LLM 与 VLM 做了系统评测，发现同一家族模型往往呈现相似推理模式，而闭源系统整体依然占优。
+  这项工作把 reasoning benchmark 从单轮静态问题推进到更接近真实交互环境的评测范式。
+overview_en: |
+  KORGym extends reasoning evaluation from static benchmarks to a dynamic game platform with interactive multi-turn tasks.
+  It offers more than fifty text or vision games and supports reinforcement-learning-style scenarios, so evaluation can capture strategy, interaction, and modality effects rather than final answers alone.
+  The paper uses KORGym to study a wide range of LLMs and VLMs, showing recurring reasoning patterns within model families and a continued advantage for closed-source systems.
+  In this sense, KORGym pushes reasoning evaluation toward settings that are closer to realistic interactive environments.
 glance:
   - label_zh: "研究重点"
     label_en: "Focus"

@@ -1,0 +1,35 @@
+id: multi_docker_eval
+name: "Multi-Docker-Eval"
+name_zh: "Multi-Docker-Eval"
+name_en: "Multi-Docker-Eval"
+url: "https://github.com/Z2sJ4t/Multi-Docker-Eval"
+paper: "https://arxiv.org/abs/2512.06915"
+description_zh: "Multi-Docker-Eval 关注代码智能体自动构建软件环境的能力。页面主榜单采用 SWE-Builder 框架下的 F2P。"
+description_en: "Multi-Docker-Eval studies automatic environment building for software engineering agents. This page uses F2P under the SWE-Builder setting."
+overview_zh: "这篇工作不再只看代码修改本身，而是把评测延伸到测试环境的自动构建。\n作者提出 Multi-Docker-Eval，用多语言、多仓库实例衡量模型能否把项目真正拉起并进入可测试状态。\n结果表明，环境搭建仍是 agentic software engineering 中的重要瓶颈，不同模型在成功率和开销上差异明显。"
+overview_en: "This work extends software-engineering evaluation beyond code edits to the automatic construction of runnable environments.\nMulti-Docker-Eval measures whether models can bring diverse repositories into a test-ready state across languages and setups.\nThe results show that environment building remains a major bottleneck for agentic software engineering, with large differences in success rate and cost."
+glance:
+  - label_zh: "研究重点"
+    label_en: "Focus"
+    value: "自动环境构建"
+  - label_zh: "主指标"
+    label_en: "Primary Metric"
+    value: "F2P (%)"
+  - label_zh: "展示设置"
+    label_en: "Displayed Setting"
+    value: "SWE-Builder"
+metrics:
+  - id: f2p
+    name: "F2P"
+    description: "First-to-pass rate on the SWE-Builder framework."
+    higher_is_better: true
+    range: [0, 100]
+resources:
+  - label_zh: "代码仓库"
+    label_en: "Code Repository"
+    url: "https://github.com/Z2sJ4t/Multi-Docker-Eval"
+  - label_zh: "数据集"
+    label_en: "Dataset"
+    url: "https://huggingface.co/datasets/litble/Multi-Docker-Eval"
+leaderboard_note_zh: "榜单采用论文在 SWE-Builder 设置下的 F2P (%)，用于衡量环境搭建成功率。"
+leaderboard_note_en: "The leaderboard uses F2P (%) under the SWE-Builder setting to reflect environment-building success."

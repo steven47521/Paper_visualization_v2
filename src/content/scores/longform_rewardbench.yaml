@@ -1,0 +1,27 @@
+benchmark_id: longform_rewardbench
+updated: "2026-04-21"
+results:
+  - model_id: skywork_reward_v2_llama_3_2_3b
+    scores: { score: 74.9 }
+    source: official
+    source_url: "https://arxiv.org/abs/2603.12963"
+  - model_id: gpt_4_1_2025_04_14
+    scores: { score: 74.6 }
+    source: official
+    source_url: "https://arxiv.org/abs/2603.12963"
+  - model_id: claude_opus_4_20250514
+    scores: { score: 74.4 }
+    source: official
+    source_url: "https://arxiv.org/abs/2603.12963"
+  - model_id: allenai_llama_3_1_70b_instruct_rm_rb2
+    scores: { score: 74.4 }
+    source: official
+    source_url: "https://arxiv.org/abs/2603.12963"
+  - model_id: allenai_tulu_3_70b_sft_rm_rb2
+    scores: { score: 73.9 }
+    source: official
+    source_url: "https://arxiv.org/abs/2603.12963"
+  - model_id: gemini_2_5_flash_preview_0417
+    scores: { score: 73.6 }
+    source: official
+    source_url: "https://arxiv.org/abs/2603.12963"

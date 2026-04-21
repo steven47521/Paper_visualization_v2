@@ -1,0 +1,28 @@
+id: worldtravel
+name: "WorldTravel"
+name_zh: "WorldTravel"
+name_en: "WorldTravel"
+url: "https://arxiv.org/abs/2602.08367"
+paper: "https://arxiv.org/abs/2602.08367"
+description_zh: "WorldTravel 评测多模态旅行规划智能体在真实约束下生成可行行程的能力。页面主榜单采用论文多模态设置下的 Feasibility Rate。"
+description_en: "WorldTravel evaluates multimodal travel-planning agents under tightly coupled real-world constraints. This page uses the Feasibility Rate from the multimodal setting."
+overview_zh: "这篇工作把旅行规划建模为一个强约束、多步骤、需要结合图文信息与实际营业规则的智能体任务。\n论文强调“可行性”而非表面回答质量，要求系统真正满足时间、预约、停留时长和开放窗口等条件。\n主结果表明，即使领先模型在多模态设置下的可行率仍然不高，说明真实世界计划型 agent 仍远未成熟。"
+overview_en: "This work frames travel planning as a tightly constrained agent task that requires multimodal information and real-world scheduling rules.\nIt focuses on feasibility rather than superficial answer quality, requiring plans to satisfy time slots, reservation constraints, dwell time, and opening windows.\nThe main results show that even leading models still achieve low feasible-plan rates in the multimodal setting."
+glance:
+  - label_zh: "研究重点"
+    label_en: "Focus"
+    value: "真实约束旅行规划"
+  - label_zh: "主指标"
+    label_en: "Primary Metric"
+    value: "Feasibility Rate (%)"
+  - label_zh: "展示设置"
+    label_en: "Displayed Setting"
+    value: "Multimodal setting"
+metrics:
+  - id: feasibility_rate
+    name: "Feasibility Rate"
+    description: "Feasible-plan rate in the multimodal setting."
+    higher_is_better: true
+    range: [0, 100]
+leaderboard_note_zh: "榜单采用论文多模态设置下的 Feasibility Rate (%)，不混入文本设置结果。"
+leaderboard_note_en: "The leaderboard uses the Feasibility Rate (%) from the multimodal setting and excludes the text-only setting."

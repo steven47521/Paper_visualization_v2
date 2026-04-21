@@ -6,6 +6,16 @@ url: "https://ii-bench.github.io/"
 paper: "https://arxiv.org/abs/2406.05862"
 description_zh: "II-Bench 聚焦图像深层含义理解。页面主榜单采用论文主表中的 Overall Accuracy。"
 description_en: "II-Bench focuses on image implication understanding. This page uses the Overall Accuracy from the paper's main table."
+overview_zh: |
+  II-Bench 关注图像的高阶含义理解，而不是表层目标识别或简单 VQA，核心问题是模型能否读懂隐喻、情绪和创作者想表达的深层意图。
+  数据集覆盖漫画、海报、插画、绘画等多种图像类型，并跨生活、艺术、社会、心理、环境等多个领域构建多选评测。
+  论文发现，当前 MLLM 与人类在该任务上仍有显著差距，尤其在抽象、复杂和需要高层语义推断的图像上表现较弱。
+  加入情绪极性提示后结果普遍提升，这进一步说明模型对图像情感和隐含意义的原生理解能力仍待加强。
+overview_en: |
+  II-Bench focuses on higher-order image implication understanding rather than surface-level object recognition or standard VQA.
+  It covers comics, posters, illustrations, paintings, and other image types across domains such as life, art, society, psychology, and environment.
+  The paper shows a large gap between current MLLMs and humans, especially on abstract and complex images that require deeper semantic interpretation.
+  Performance often improves when sentiment hints are added, which suggests that intrinsic understanding of image emotion and implication is still limited.
 glance:
   - label_zh: "研究重点"
     label_en: "Focus"

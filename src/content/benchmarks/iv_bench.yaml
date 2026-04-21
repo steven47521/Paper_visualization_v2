@@ -1,0 +1,32 @@
+id: iv_bench
+name: "IV-Bench"
+name_zh: "IV-Bench"
+name_en: "IV-Bench"
+url: "https://github.com/multimodal-art-projection/IV-Bench"
+paper: "https://arxiv.org/abs/2504.15415"
+description_zh: "IV-Bench 评测图像支撑视频理解与推理能力，要求模型同时整合图像和视频证据。页面主榜单采用论文主表中的 Overall。"
+description_en: "IV-Bench evaluates image-grounded video perception and reasoning. This page uses the Overall score from the main table."
+overview_zh: "这篇工作强调某些视频理解任务不能只依赖视频流本身，还需要结合配套图像才能完成推理。\nIV-Bench 覆盖感知与推理两大类能力，用图像必要性来提升任务难度与真实性。\n结果显示，强模型在整体上仍有明显上限，说明图像支撑的视频推理仍是一个独立且困难的方向。"
+overview_en: "This work argues that some video-understanding tasks require supporting images in addition to the video stream itself.\nIV-Bench covers both perception and reasoning, and uses image necessity to make the tasks more realistic and challenging.\nThe results show substantial headroom even for strong models, indicating that image-grounded video reasoning remains difficult."
+glance:
+  - label_zh: "研究重点"
+    label_en: "Focus"
+    value: "图像支撑视频推理"
+  - label_zh: "主指标"
+    label_en: "Primary Metric"
+    value: "Overall"
+  - label_zh: "任务结构"
+    label_en: "Structure"
+    value: "Perception + Reasoning"
+metrics:
+  - id: overall
+    name: "Overall"
+    description: "Overall score on the main IV-Bench results table."
+    higher_is_better: true
+    range: [0, 100]
+resources:
+  - label_zh: "代码仓库"
+    label_en: "Code Repository"
+    url: "https://github.com/multimodal-art-projection/IV-Bench"
+leaderboard_note_zh: "榜单采用论文主表的 Overall 列，用于概括图像支撑视频推理的综合表现。"
+leaderboard_note_en: "The leaderboard uses the Overall column from the main IV-Bench table."

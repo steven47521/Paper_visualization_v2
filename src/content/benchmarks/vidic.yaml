@@ -1,0 +1,32 @@
+id: vidic
+name: "ViDiC"
+name_zh: "ViDiC"
+name_en: "ViDiC"
+url: "https://huggingface.co/datasets/NJU-LINK/ViDiC-1K"
+paper: "https://arxiv.org/abs/2512.03405"
+description_zh: "ViDiC 面向视频差异描述，评测模型对相似视频之间细粒度差异与共性的表达能力。页面主榜单采用论文主表中的 Average。"
+description_en: "ViDiC evaluates video difference captioning by measuring how well models describe fine-grained differences and similarities between videos. This page uses the Average score from the main table."
+overview_zh: "这篇工作把差异描述从图像扩展到视频，要求模型准确表达两个视频之间的差异、共性与时序变化。\n论文特别强调位置、背景、镜头运动和拍摄技术等细粒度因素，使任务比传统 caption 更强调比较性推理。\n主结果表明，领先语言模型在该任务上已有较强表现，但在更细的类别上仍存在明显失误。"
+overview_en: "This work extends difference captioning from images to videos, requiring models to describe differences, similarities, and temporal changes between paired videos.\nIt emphasizes fine-grained factors such as position, background, camera motion, and filming technique, making the task more comparative than standard captioning.\nThe main results show strong performance from leading language models, but clear weaknesses remain on fine-grained categories."
+glance:
+  - label_zh: "研究重点"
+    label_en: "Focus"
+    value: "视频差异描述"
+  - label_zh: "主指标"
+    label_en: "Primary Metric"
+    value: "Average"
+  - label_zh: "数据规模"
+    label_en: "Scale"
+    value: "ViDiC-1K"
+metrics:
+  - id: average
+    name: "Average"
+    description: "Average score on the main ViDiC results table."
+    higher_is_better: true
+    range: [0, 100]
+resources:
+  - label_zh: "数据集"
+    label_en: "Dataset"
+    url: "https://huggingface.co/datasets/NJU-LINK/ViDiC-1K"
+leaderboard_note_zh: "榜单采用论文主结果表的 Average 列，表示对相似性与差异性描述的综合表现。"
+leaderboard_note_en: "The leaderboard uses the Average column from the main results table."

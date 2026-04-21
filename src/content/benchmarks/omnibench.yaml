@@ -6,6 +6,16 @@ url: "https://arxiv.org/abs/2409.15272"
 paper: "https://arxiv.org/abs/2409.15272"
 description_zh: "OmniBench 关注未来统一 omni-language model 的跨模态能力。页面主榜单采用论文图像与音频设置下的 Overall。"
 description_en: "OmniBench targets the future of universal omni-language models. This page uses the Overall score under the image-and-audio setting."
+overview_zh: |
+  OmniBench 面向文本、图像和音频三模态的联合理解与推理评测，目标是测试模型是否能在同一上下文里同时整合三种输入。
+  论文将具备此类能力的系统称为 omni-language models，并通过高质量人工标注样本确保正确答案必须依赖跨模态联合推理。
+  实验显示，无论开源还是闭源基线，很多模型在真正的三模态场景中都表现不佳，即使给出图像或音频的替代文本表示也难以显著改善。
+  因此 OmniBench 不只是测性能，更揭示了现有 MLLM 训练范式对统一三模态上下文建模的不足。
+overview_en: |
+  OmniBench evaluates whether models can jointly recognize, interpret, and reason over text, image, and audio within the same context.
+  The paper refers to systems with this capability as omni-language models and uses carefully human-annotated examples so that correct answers truly require tri-modal integration.
+  The results show that many baselines, including open-source systems, still perform poorly in genuine tri-modal settings, even when alternative textual representations of image or audio are provided.
+  OmniBench therefore highlights a core weakness of current multimodal training pipelines: they still struggle to build a coherent shared context across three modalities at once.
 glance:
   - label_zh: "研究重点"
     label_en: "Focus"

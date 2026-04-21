@@ -6,6 +6,16 @@ url: "https://arxiv.org/abs/2502.14739"
 paper: "https://arxiv.org/abs/2502.14739"
 description_zh: "SuperGPQA 评估 285 个研究生学科上的知识与推理能力。页面主榜单采用 Overall (sample)。"
 description_en: "SuperGPQA evaluates knowledge and reasoning across 285 graduate disciplines. This page uses Overall (sample)."
+overview_zh: |
+  SuperGPQA 试图把 LLM 知识评测从少数热门学科扩展到 285 个研究生层级学科，从而覆盖更广泛、更真实的人类专业知识版图。
+  benchmark 通过 Human-LLM 协同筛选机制反复清理琐碎、歧义或过于简单的问题，并组织了大规模专家标注流程来保证题目质量。
+  论文评测结果表明，即使是当前最强模型，在跨学科、长尾专业知识场景下也仍有很大提升空间。
+  这项工作同时提供了大规模学科评测的组织经验，为后续更大范围的知识 benchmark 构建提供了方法参考。
+overview_en: |
+  SuperGPQA expands LLM knowledge evaluation from a handful of mainstream subjects to 285 graduate-level disciplines, aiming to cover a much broader slice of human expertise.
+  It uses a Human-LLM collaborative filtering pipeline to remove trivial or ambiguous questions, together with a large expert annotation process to maintain quality.
+  The reported results show that even the strongest current models still have substantial room for improvement across diverse and long-tail professional domains.
+  Beyond the leaderboard itself, the work also offers a methodology for organizing and managing large-scale discipline-level benchmark construction.
 glance:
   - label_zh: "研究重点"
     label_en: "Focus"

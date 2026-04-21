@@ -3,26 +3,12 @@ name_zh: "AIGC"
 name_en: "AIGC"
 icon: "sparkles"
 color: "#ea580c"
-order: 2
+order: 4
 subcategories:
-  - id: character_generation
-    name_zh: "角色生成"
-    name_en: "Character Generation"
-    description_zh: "关注角色扮演、角色定制与风格一致性生成。"
-    description_en: "Focuses on role playing, character customization, and style-consistent generation."
+  - id: text_to_audio_video_generation
+    name_zh: "Text-to-Audio-Video"
+    name_en: "Text-to-Audio-Video"
+    description_zh: "聚焦文本到音视频生成系统的统一评测。"
+    description_en: "Benchmarks for unified evaluation of text-to-audio-video generation systems."
     benchmarks:
-      - rolellm
-  - id: long_form_generation
-    name_zh: "长文生成"
-    name_en: "Long-form Generation"
-    description_zh: "关注长文本生成的内容质量、结构与可读性。"
-    description_en: "Focuses on content quality, structure, and readability in long-form generation."
-    benchmarks:
-      - hellobench
-  - id: social_generation
-    name_zh: "社交生成"
-    name_en: "Social Generation"
-    description_zh: "关注社会身份、价值立场与同理生成能力。"
-    description_en: "Focuses on social identity, value alignment, and empathetic generation."
-    benchmarks:
-      - giebench
+      - t2av_compass

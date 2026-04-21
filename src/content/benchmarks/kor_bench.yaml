@@ -6,6 +6,16 @@ url: "https://arxiv.org/abs/2410.06526"
 paper: "https://arxiv.org/abs/2410.06526"
 description_zh: "KOR-Bench 以知识正交推理为核心，尽量减少背景知识对推理评估的干扰。页面主榜单采用论文主表的 Overall。"
 description_en: "KOR-Bench evaluates knowledge-orthogonal reasoning by reducing the effect of prior domain knowledge. This page uses the Overall score from the main results table."
+overview_zh: |
+  KOR-Bench 提出“知识正交推理”概念，目标是在尽量弱化领域知识依赖的前提下，更纯粹地测试模型的规则理解与推理能力。
+  数据覆盖操作、逻辑、密码、谜题和反事实五类任务，要求模型根据新的规则描述解决此前未见过的规则驱动问题。
+  论文表明，KOR-Bench 能更清楚地区分模型是否真正学会了推理，而不是仅仅依赖训练中见过的知识模式。
+  作者还分析了 stepwise prompting、自我修正和不同任务技巧对表现的影响，为通用推理评测提供了新的基准视角。
+overview_en: |
+  KOR-Bench introduces the idea of knowledge-orthogonal reasoning, aiming to evaluate rule understanding and reasoning ability while minimizing dependence on domain-specific knowledge.
+  It includes five task families: operation, logic, cipher, puzzle, and counterfactual, all designed around novel rule-driven problems.
+  The paper shows that this benchmark can better reveal whether a model is genuinely reasoning instead of leaning on memorized knowledge patterns.
+  It also studies stepwise prompting, self-correction, and task-specific tricks, making KOR-Bench a useful foundation for general reasoning evaluation.
 glance:
   - label_zh: "研究重点"
     label_en: "Focus"

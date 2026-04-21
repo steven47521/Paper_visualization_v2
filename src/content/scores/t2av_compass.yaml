@@ -1,0 +1,27 @@
+benchmark_id: t2av_compass
+updated: "2026-04-21"
+results:
+  - model_id: veo_3_1
+    scores: { average: 70.29 }
+    source: official
+    source_url: "https://arxiv.org/abs/2512.21094"
+  - model_id: sora_2
+    scores: { average: 69.83 }
+    source: official
+    source_url: "https://arxiv.org/abs/2512.21094"
+  - model_id: kling_2_6
+    scores: { average: 68.16 }
+    source: official
+    source_url: "https://arxiv.org/abs/2512.21094"
+  - model_id: wan_2_6
+    scores: { average: 67.68 }
+    source: official
+    source_url: "https://arxiv.org/abs/2512.21094"
+  - model_id: seedance_1_5
+    scores: { average: 66.24 }
+    source: official
+    source_url: "https://arxiv.org/abs/2512.21094"
+  - model_id: wan_2_5
+    scores: { average: 61.39 }
+    source: official
+    source_url: "https://arxiv.org/abs/2512.21094"

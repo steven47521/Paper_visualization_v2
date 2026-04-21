@@ -1,0 +1,37 @@
+id: web_compass
+name: "WebCompass"
+name_zh: "WebCompass"
+name_en: "WebCompass"
+url: "https://nju-link.github.io/WebCompass/"
+description_zh: "WebCompass 统一评测网页生成、编辑与修复三类 Web 编码任务。页面主榜单采用论文主表中的 Overall。"
+description_en: "WebCompass unifies evaluation for web generation, editing, and repair. This page uses the Overall score from the main table."
+overview_zh: "这篇工作把 Web 编码任务统一到生成、编辑、修复三类场景中，并同时考察可运行性、规范实现、设计质量与交互修复。\n论文通过真实浏览器与 agent-as-a-judge 协议评测模型在前端开发中的综合能力。\n主结果显示，顶级闭源模型仍然明显领先，而开源模型在复杂多页面与交互任务上还有较大提升空间。"
+overview_en: "This work unifies web coding into generation, editing, and repair tasks, and jointly evaluates runnability, spec implementation, design quality, and interaction repair.\nIt uses real-browser execution and an agent-as-a-judge protocol to assess front-end development ability.\nThe main results show a clear lead for top closed-source systems, while open-source models still lag on complex multi-page and interactive tasks."
+glance:
+  - label_zh: "研究重点"
+    label_en: "Focus"
+    value: "网页生成 / 编辑 / 修复"
+  - label_zh: "主指标"
+    label_en: "Primary Metric"
+    value: "Overall"
+  - label_zh: "任务类型"
+    label_en: "Task Types"
+    value: "Generation, Editing, Repair"
+metrics:
+  - id: overall
+    name: "Overall"
+    description: "Overall mean score across generation, editing, and repair dimensions."
+    higher_is_better: true
+    range: [0, 100]
+resources:
+  - label_zh: "项目主页"
+    label_en: "Project Page"
+    url: "https://nju-link.github.io/WebCompass/"
+  - label_zh: "代码仓库"
+    label_en: "Code Repository"
+    url: "https://github.com/NJU-LINK/WebCompass"
+  - label_zh: "数据集"
+    label_en: "Dataset"
+    url: "https://huggingface.co/datasets/NJU-LINK/WebCompass"
+leaderboard_note_zh: "榜单采用论文主结果表的 Overall 列，表示九个细分维度的算术平均。"
+leaderboard_note_en: "The leaderboard uses the Overall column from the main results table, which averages the nine fine-grained dimensions."

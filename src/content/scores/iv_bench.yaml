@@ -1,0 +1,27 @@
+benchmark_id: iv_bench
+updated: "2026-04-21"
+results:
+  - model_id: qwen2_5_vl_72b
+    scores: { overall: 28.9 }
+    source: official
+    source_url: "https://arxiv.org/abs/2504.15415"
+  - model_id: internvl2_5_78b
+    scores: { overall: 28.6 }
+    source: official
+    source_url: "https://arxiv.org/abs/2504.15415"
+  - model_id: gemini_2_pro
+    scores: { overall: 27.7 }
+    source: official
+    source_url: "https://arxiv.org/abs/2504.15415"
+  - model_id: gemini_2_flash
+    scores: { overall: 27.4 }
+    source: official
+    source_url: "https://arxiv.org/abs/2504.15415"
+  - model_id: internvl2_5_38b
+    scores: { overall: 26.6 }
+    source: official
+    source_url: "https://arxiv.org/abs/2504.15415"
+  - model_id: qwen2_5_vl_32b
+    scores: { overall: 23.0 }
+    source: official
+    source_url: "https://arxiv.org/abs/2504.15415"

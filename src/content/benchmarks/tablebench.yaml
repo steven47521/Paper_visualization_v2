@@ -6,6 +6,16 @@ url: "https://github.com/TableBench/TableBench"
 paper: "https://arxiv.org/abs/2408.09174"
 description_zh: "TableBench 评估复杂表格问答能力。页面主榜单采用论文主表中 TCoT 设定下的 Overall。"
 description_en: "TableBench evaluates complex table question answering. This page uses Overall under the TCoT setting from the paper's main results table."
+overview_zh: |
+  TableBench 面向真实工业场景中的复杂表格问答，关注的不只是查表，而是事实核验、数值推理、数据分析和可视化等更完整的 TableQA 能力。
+  benchmark 覆盖四大类能力和 18 个细分领域，并通过真实场景调研、人工标注流程和复杂度定义来缩小学术 benchmark 与实际需求之间的差距。
+  论文还构建了 TableInstruct 与 TABLELLM，用于探索文本链式推理、符号推理和程序推理在表格任务上的效果。
+  实验表明，当前开源和闭源模型距离真实表格分析需求仍有明显差距，即便最强模型与人类水平相比也还有不小提升空间。
+overview_en: |
+  TableBench targets complex table question answering in realistic industrial scenarios, going beyond simple lookup to cover fact checking, numerical reasoning, data analysis, and visualization.
+  It spans four major capability groups and 18 subfields, and is built through scenario analysis, manual annotation, and explicit task-complexity design to better match real-world demands.
+  The paper also introduces TableInstruct and TABLELLM to study textual, symbolic, and program-based reasoning strategies for tabular tasks.
+  The experiments show that both open-source and proprietary models still fall short of practical table-analysis needs, with even the strongest systems remaining noticeably behind humans.
 glance:
   - label_zh: "研究重点"
     label_en: "Focus"

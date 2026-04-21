@@ -1,0 +1,38 @@
+id: artifactsbench
+name: "ArtifactsBench"
+name_zh: "ArtifactsBench"
+name_en: "ArtifactsBench"
+url: "https://artifactsbenchmark.github.io/"
+paper: "https://arxiv.org/abs/2507.04952"
+description_zh: "ArtifactsBench 面向交互式视觉代码生成，强调可执行产物的视觉质量、动态行为与交互完整性。页面主榜单采用论文主结果表中的 AVG。"
+description_en: "ArtifactsBench evaluates interactive visual code generation with emphasis on visual quality, dynamic behavior, and interaction integrity. This page uses the AVG score from the main result table."
+overview_zh: "这篇工作关注传统代码 benchmark 难以覆盖的“可交互视觉产物”场景，例如网页、小工具、小游戏和 SVG 生成。\n论文通过执行代码、截取多时刻屏幕，再结合 checklist 驱动的多模态裁判模型，对代码、视觉和交互进行联合打分。\n作者构建了 1,825 个任务，并证明自动评测与人工偏好具有较强一致性，使其成为更贴近真实前端与可视化代码生成需求的评测基准。"
+overview_en: "This work targets interactive visual artifacts such as web apps, small tools, games, and SVG generation, which are poorly covered by traditional code benchmarks.\nIt executes generated code, captures temporal screenshots, and evaluates code, visuals, and interaction with checklist-guided multimodal judges.\nThe paper builds 1,825 tasks and shows strong agreement with human preference, making ArtifactsBench a practical benchmark for user-facing code generation."
+glance:
+  - label_zh: "研究重点"
+    label_en: "Focus"
+    value: "交互式视觉代码生成"
+  - label_zh: "主指标"
+    label_en: "Primary Metric"
+    value: "AVG"
+  - label_zh: "展示设置"
+    label_en: "Displayed Setting"
+    value: "Gemini referee main table"
+metrics:
+  - id: avg_score
+    name: "AVG"
+    description: "Overall average score on the main ArtifactsBench table."
+    higher_is_better: true
+    range: [0, 100]
+resources:
+  - label_zh: "项目主页"
+    label_en: "Project Page"
+    url: "https://artifactsbenchmark.github.io/"
+highlights_zh:
+  - "Benchmark 显式评估视觉质量、动态反馈与交互完整性，而不是只看代码是否能运行。"
+  - "论文报告其自动评测与 WebDev Arena 人类偏好排名具有较强一致性。"
+highlights_en:
+  - "The benchmark explicitly evaluates visual quality, dynamic feedback, and interaction integrity rather than only executability."
+  - "The paper reports strong agreement between its automated evaluation and human preference rankings from WebDev Arena."
+leaderboard_note_zh: "榜单取自主结果表中 Gemini-2.5-Pro 裁判设置下的 AVG 列，用于呈现交互式视觉代码生成的整体表现。"
+leaderboard_note_en: "The leaderboard uses the AVG column from the main result table under the Gemini-2.5-Pro referee setting."

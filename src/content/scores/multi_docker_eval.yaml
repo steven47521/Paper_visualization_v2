@@ -1,0 +1,27 @@
+benchmark_id: multi_docker_eval
+updated: "2026-04-21"
+results:
+  - model_id: deepseek_v3_1
+    scores: { f2p: 37.72 }
+    source: official
+    source_url: "https://arxiv.org/abs/2512.06915"
+  - model_id: kimi_k2_0905
+    scores: { f2p: 37.62 }
+    source: official
+    source_url: "https://arxiv.org/abs/2512.06915"
+  - model_id: kimi_k2_thinking
+    scores: { f2p: 36.53 }
+    source: official
+    source_url: "https://arxiv.org/abs/2512.06915"
+  - model_id: claude_sonnet_4
+    scores: { f2p: 35.53 }
+    source: official
+    source_url: "https://arxiv.org/abs/2512.06915"
+  - model_id: gpt_5_mini
+    scores: { f2p: 34.13 }
+    source: official
+    source_url: "https://arxiv.org/abs/2512.06915"
+  - model_id: gpt_oss_120b
+    scores: { f2p: 27.00 }
+    source: official
+    source_url: "https://arxiv.org/abs/2512.06915"

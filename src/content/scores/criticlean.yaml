@@ -1,0 +1,27 @@
+benchmark_id: criticlean
+updated: "2026-04-21"
+results:
+  - model_id: gemini_2_5_pro
+    scores: { acc: 89.2 }
+    source: official
+    source_url: "https://arxiv.org/abs/2507.06181"
+  - model_id: qwq_32b
+    scores: { acc: 86.4 }
+    source: official
+    source_url: "https://arxiv.org/abs/2507.06181"
+  - model_id: qwen3_32b
+    scores: { acc: 85.6 }
+    source: official
+    source_url: "https://arxiv.org/abs/2507.06181"
+  - model_id: qwen3_235b
+    scores: { acc: 84.8 }
+    source: official
+    source_url: "https://arxiv.org/abs/2507.06181"
+  - model_id: deepseek_r1
+    scores: { acc: 84.0 }
+    source: official
+    source_url: "https://arxiv.org/abs/2507.06181"
+  - model_id: qwen3_14b
+    scores: { acc: 83.6 }
+    source: official
+    source_url: "https://arxiv.org/abs/2507.06181"

@@ -1,0 +1,15 @@
+benchmark_id: codetracer
+updated: "2026-04-21"
+results:
+  - model_id: codetracer_gpt_5
+    scores: { overall_f1: 48.02 }
+    source: official
+    source_url: "https://arxiv.org/abs/2604.11641"
+  - model_id: codetracer_claude_sonnet_4
+    scores: { overall_f1: 46.57 }
+    source: official
+    source_url: "https://arxiv.org/abs/2604.11641"
+  - model_id: codetracer_deepseek_v3_2
+    scores: { overall_f1: 46.14 }
+    source: official
+    source_url: "https://arxiv.org/abs/2604.11641"

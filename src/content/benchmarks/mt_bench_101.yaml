@@ -6,6 +6,16 @@ url: "https://github.com/mtbench101/mt-bench-101"
 paper: "https://arxiv.org/abs/2402.14762"
 description_zh: "MT-Bench-101 针对多轮对话中的细粒度指令遵循能力展开评测。页面主榜单采用论文表中的 Avg。"
 description_en: "MT-Bench-101 evaluates fine-grained instruction following in multi-turn dialogue. This page uses the Avg score from the paper."
+overview_zh: |
+  MT-Bench-101 面向多轮对话能力评测，目标是弥补传统对话 benchmark 对多轮交互覆盖不够、粒度过粗的问题。
+  论文通过分析真实多轮对话，构建了三层能力分类体系，并在 13 类任务、1388 组多轮对话和 4208 个回合上做细粒度评估。
+  借助这一框架，作者不仅比较模型总体对话水平，还分析了不同任务中模型在回合推进过程中的能力变化趋势。
+  结果表明，常见对齐技术和 chat 特化设计并未显著提升多轮能力，真实多轮对话仍然是 LLM 的薄弱环节。
+overview_en: |
+  MT-Bench-101 is designed for fine-grained evaluation of multi-turn dialogue, addressing the fact that prior dialogue benchmarks are often too coarse or too focused on single-turn settings.
+  By analyzing real multi-turn conversations, the paper builds a three-level ability taxonomy spanning 13 tasks, 1,388 dialogues, and 4,208 turns.
+  This allows the authors to compare models not only on overall dialogue quality but also on how their abilities change across turns within different tasks.
+  The study finds that common alignment techniques and chat-oriented designs do not clearly improve multi-turn ability, leaving real conversational interaction as a major challenge for LLMs.
 glance:
   - label_zh: "研究重点"
     label_en: "Focus"

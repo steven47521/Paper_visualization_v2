@@ -1,0 +1,27 @@
+benchmark_id: inverse_ifeval
+updated: "2026-04-21"
+results:
+  - model_id: o3_high
+    scores: { overall_score: 75.66 }
+    source: official
+    source_url: "https://arxiv.org/abs/2509.04292"
+  - model_id: o3_mini
+    scores: { overall_score: 74.67 }
+    source: official
+    source_url: "https://arxiv.org/abs/2509.04292"
+  - model_id: gpt_5_high
+    scores: { overall_score: 73.72 }
+    source: official
+    source_url: "https://arxiv.org/abs/2509.04292"
+  - model_id: gemini_2_5_pro
+    scores: { overall_score: 70.55 }
+    source: official
+    source_url: "https://arxiv.org/abs/2509.04292"
+  - model_id: gemini_2_5_flash
+    scores: { overall_score: 68.61 }
+    source: official
+    source_url: "https://arxiv.org/abs/2509.04292"
+  - model_id: claude_4_opus_thinking
+    scores: { overall_score: 67.16 }
+    source: official
+    source_url: "https://arxiv.org/abs/2509.04292"

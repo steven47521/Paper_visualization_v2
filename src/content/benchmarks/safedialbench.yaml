@@ -6,6 +6,16 @@ url: "https://safedialbench.github.io/"
 paper: "https://arxiv.org/abs/2502.11090"
 description_zh: "SafeDialBench 评测多轮对话中的安全性与 jailbreak 抵抗能力。页面主榜单采用论文表中的 ASR，分数越低越好。"
 description_en: "SafeDialBench evaluates safety and jailbreak resistance in multi-turn dialogue. This page uses ASR from the paper, where lower is better."
+overview_zh: |
+  SafeDialBench 面向多轮对话安全评测，重点不是单次拒答，而是模型在持续对话和多种 jailbreak 攻击下能否稳定识别、处理并拒绝不安全内容。
+  该工作构建了两层安全分类体系，覆盖 6 个安全维度、22 个对话场景，并在中英文环境下生成 4000 余组多轮对话。
+  论文还设计了自动化评测框架，把安全能力拆成发现风险、处理风险和抵御越狱时保持一致性等多个层面。
+  实验结果显示，不同模型在安全对齐上的强弱差异明显，而推理模型也不必然天然更安全。
+overview_en: |
+  SafeDialBench focuses on multi-turn dialogue safety, asking whether models can consistently detect, handle, and resist unsafe requests under diverse jailbreak attacks.
+  It builds a two-level safety taxonomy covering 6 safety dimensions and 22 dialogue scenarios, and generates more than 4,000 multi-turn conversations in Chinese and English.
+  The paper also introduces an automatic assessment framework that breaks safety down into detection, handling, and consistency under attack.
+  The results reveal large safety differences across models and show that stronger reasoning ability does not automatically translate into safer behavior.
 glance:
   - label_zh: "研究重点"
     label_en: "Focus"

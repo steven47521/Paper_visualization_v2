@@ -1,0 +1,32 @@
+id: nl2repo_bench
+name: "NL2Repo-Bench"
+name_zh: "NL2Repo-Bench"
+name_en: "NL2Repo-Bench"
+url: "https://github.com/multimodal-art-projection/NL2RepoBench"
+paper: "https://arxiv.org/abs/2512.12730"
+description_zh: "NL2Repo-Bench 评测代码智能体从自然语言需求出发完成长时程仓库级生成的能力。页面主榜单采用论文主表中的 Overall Score。"
+description_en: "NL2Repo-Bench evaluates long-horizon repository generation from natural-language requirements. This page uses the Overall Score from the paper's main table."
+overview_zh: "这篇工作把评测重点从单函数或局部补全推进到整个仓库级软件生成。\n论文构建了跨 Web 开发、测试、工具库和机器学习等场景的任务集，并按仓库规模划分难度。\n主结果显示，即便是当前最强的 coding systems，在长时程仓库生成上仍然距离高可靠完成有明显差距。"
+overview_en: "This work shifts evaluation from local code completion to full repository-level software generation.\nIt builds tasks across web development, testing, utility libraries, and machine learning, with difficulty stratified by repository scale.\nThe main results show that even leading coding systems remain far from reliable completion on long-horizon repository generation."
+glance:
+  - label_zh: "研究重点"
+    label_en: "Focus"
+    value: "长时程仓库生成"
+  - label_zh: "主指标"
+    label_en: "Primary Metric"
+    value: "Overall Score (%)"
+  - label_zh: "数据规模"
+    label_en: "Scale"
+    value: "104 repos"
+metrics:
+  - id: overall_score
+    name: "Overall Score"
+    description: "Overall repository-generation score reported in the main results table."
+    higher_is_better: true
+    range: [0, 100]
+resources:
+  - label_zh: "代码仓库"
+    label_en: "Code Repository"
+    url: "https://github.com/multimodal-art-projection/NL2RepoBench"
+leaderboard_note_zh: "榜单使用论文主表的 Overall Score (%)，不额外组合难度或领域分列。"
+leaderboard_note_en: "The leaderboard uses the Overall Score (%) from the main result table without recombining difficulty or domain columns."

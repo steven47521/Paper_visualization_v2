@@ -1,0 +1,32 @@
+id: if_vidcap
+name: "IF-VidCap"
+name_zh: "IF-VidCap"
+name_en: "IF-VidCap"
+url: "https://github.com/NJU-LINK/IF-VidCap"
+paper: "https://arxiv.org/abs/2510.18726"
+description_zh: "IF-VidCap 关注视频描述中的指令遵循能力。页面主榜单采用论文主表中的 Overall CSR。"
+description_en: "IF-VidCap evaluates instruction following in video captioning. This page uses the Overall CSR from the main table."
+overview_zh: "这篇工作指出视频 caption 不应只看内容覆盖，还应考察模型是否真正遵循格式、关键词和结构等显式约束。\nIF-VidCap 将规则约束与开放式约束结合起来，系统评测视频描述模型的指令执行能力。\n主结果表明，顶级闭源和强开源多模态模型在 CSR 上领先，但严格指令遵循仍然远未解决。"
+overview_en: "This work argues that video captioning should evaluate not only content coverage, but also whether models truly follow explicit instructions on format, keywords, and structure.\nIF-VidCap combines rule-based and open-ended constraints to systematically assess instruction following in video captioning.\nThe main results show clear advantages for leading closed-source and strong open-source multimodal models, yet strict instruction following remains unsolved."
+glance:
+  - label_zh: "研究重点"
+    label_en: "Focus"
+    value: "视频描述中的指令遵循"
+  - label_zh: "主指标"
+    label_en: "Primary Metric"
+    value: "Overall CSR"
+  - label_zh: "评测方式"
+    label_en: "Evaluation"
+    value: "Rule-based + Open-ended"
+metrics:
+  - id: overall_csr
+    name: "Overall CSR"
+    description: "Overall CSR score from the main IF-VidCap results table."
+    higher_is_better: true
+    range: [0, 100]
+resources:
+  - label_zh: "代码仓库"
+    label_en: "Code Repository"
+    url: "https://github.com/NJU-LINK/IF-VidCap"
+leaderboard_note_zh: "榜单采用论文主表中的 Overall CSR，而不是 ISR。"
+leaderboard_note_en: "The leaderboard uses the Overall CSR from the main table rather than ISR."

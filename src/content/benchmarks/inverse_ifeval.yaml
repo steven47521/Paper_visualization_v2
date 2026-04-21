@@ -1,0 +1,32 @@
+id: inverse_ifeval
+name: "Inverse IFEval"
+name_zh: "Inverse IFEval"
+name_en: "Inverse IFEval"
+url: "https://huggingface.co/datasets/m-a-p/Inverse_IFEval"
+paper: "https://arxiv.org/abs/2509.04292"
+description_zh: "Inverse IFEval 关注模型能否打破训练惯性、在反常规指令下仍然遵循用户要求。页面主榜单采用论文英文主表中的 Overall Score。"
+description_en: "Inverse IFEval studies whether models can break stubborn training conventions and still follow real instructions. This page uses the Overall Score from the English main table."
+overview_zh: "这篇工作不再考察常规格式遵循，而是专门设计与模型训练习惯相冲突的“反向指令”场景。\n任务要求模型在纠错、反常格式、对话干预和最小修改等情况下依然服从真实指令。\n主结果说明，即便是最强模型，在逆惯性指令遵循上也仍有明显不足。"
+overview_en: "This work goes beyond conventional formatting compliance and explicitly designs inverse instructions that conflict with common training conventions.\nThe tasks test whether models can still obey real user intent under correction, counter-conventional formatting, dialogue intervention, and minimal-modification requirements.\nThe results show that even the strongest models still have clear weaknesses on inverse instruction following."
+glance:
+  - label_zh: "研究重点"
+    label_en: "Focus"
+    value: "反向指令遵循"
+  - label_zh: "主指标"
+    label_en: "Primary Metric"
+    value: "Overall Score"
+  - label_zh: "展示设置"
+    label_en: "Displayed Setting"
+    value: "English main table"
+metrics:
+  - id: overall_score
+    name: "Overall Score"
+    description: "Overall score from the English Inverse IFEval main table."
+    higher_is_better: true
+    range: [0, 100]
+resources:
+  - label_zh: "数据集"
+    label_en: "Dataset"
+    url: "https://huggingface.co/datasets/m-a-p/Inverse_IFEval"
+leaderboard_note_zh: "榜单采用论文英文主表的 Overall Score；中英文双语结果没有在此页再次混合。"
+leaderboard_note_en: "The leaderboard uses the Overall Score from the English main table rather than recombining English and Chinese results."

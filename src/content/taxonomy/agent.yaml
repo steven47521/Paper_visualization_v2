@@ -3,32 +3,38 @@ name_zh: "Agent"
 name_en: "Agent"
 icon: "bot"
 color: "#475569"
-order: 4
+order: 1
 subcategories:
   - id: code_agent
-    name_zh: "代码智能体"
+    name_zh: "Code Agent"
     name_en: "Code Agent"
-    description_zh: "聚焦代码生成、仓库级补全与软件工程代理能力。"
-    description_en: "Benchmarks for code generation, repository completion, and software engineering agents."
+    description_zh: "聚焦代码生成、仓库级补全、环境构建、过程追踪与 Web 编码等智能体评测。"
+    description_en: "Benchmarks for coding agents, repository generation, environment building, process tracing, and web coding."
     benchmarks:
       - mceval
       - m2rc_eval
       - fullstack_bench
       - swe_compass
+      - artifactsbench
+      - nl2repo_bench
+      - multi_docker_eval
+      - codetracer
+      - web_compass
   - id: search_agent
-    name_zh: "搜索智能体"
+    name_zh: "Search Agent"
     name_en: "Search Agent"
-    description_zh: "聚焦深度研究与长程信息检索代理。"
-    description_en: "Benchmarks for deep research and long-horizon information seeking agents."
+    description_zh: "聚焦深度研究、学术推理与图文交织研究报告生成等检索型智能体评测。"
+    description_en: "Benchmarks for deep research, academic reasoning, and text-visual report generation agents."
     benchmarks:
       - finder
       - dr3_eval
-  - id: general_agent
-    name_zh: "通用智能体"
-    name_en: "General Agent"
-    description_zh: "聚焦工具使用、IT 运维与角色代理等通用智能体能力。"
-    description_en: "Benchmarks for tool use, IT operations, and role-based general agents."
+      - acadreason
+      - tvir
+  - id: multimodal_agent
+    name_zh: "Multimodal Agent"
+    name_en: "Multimodal Agent"
+    description_zh: "聚焦旅行规划与多模态浏览等需要图文联合决策的智能体任务。"
+    description_en: "Benchmarks for multimodal agents in travel planning and multimodal browsing."
     benchmarks:
-      - mtu_bench
-      - owl
-      - roleagent
+      - worldtravel
+      - mm_browsecomp

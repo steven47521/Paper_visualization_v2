@@ -1,6 +1,6 @@
 id: multimodal
-name_zh: "Multimodal"
-name_en: "Multimodal"
+name_zh: "MLLM Benchmark"
+name_en: "MLLM Benchmark"
 icon: "image"
 color: "#0891b2"
 order: 3
@@ -8,23 +8,37 @@ subcategories:
   - id: image_understanding
     name_zh: "图像理解"
     name_en: "Image Understanding"
-    description_zh: "关注图像含义、深层隐喻与跨文化视觉理解。"
-    description_en: "Benchmarks for image implication, deep semantics, and cross-cultural visual understanding."
+    description_zh: "关注图像隐含义、跨文化视觉语义与图像深层理解能力。"
+    description_en: "Benchmarks for image implication, cross-cultural semantics, and deep visual understanding."
     benchmarks:
       - ii_bench
       - lime
       - cii_bench
-  - id: video_understanding
-    name_zh: "视频理解"
-    name_en: "Video Understanding"
-    description_zh: "关注多轮视频对话中的感知、记忆与交互能力。"
-    description_en: "Benchmarks for perception, memory, and interaction in multi-turn video dialogue."
+  - id: long_video_understanding
+    name_zh: "长视频理解"
+    name_en: "Long Video Understanding"
+    description_zh: "关注长视频、多视频和图像支撑视频推理等复杂视频理解能力。"
+    description_en: "Benchmarks for long-video, multi-video, and image-grounded video understanding."
     benchmarks:
       - mt_video_bench
-  - id: general_multimodal
-    name_zh: "通用多模态"
-    name_en: "General Multimodal"
-    description_zh: "关注跨图像、音频与多模态统一建模能力。"
-    description_en: "Benchmarks for unified modeling across image, audio, and multiple modalities."
+      - scalelong
+      - mvu_eval
+      - iv_bench
+  - id: video_captioning
+    name_zh: "视频描述"
+    name_en: "Video Captioning"
+    description_zh: "关注视频差异描述、指令遵循式视频描述与高质量视频 caption 评测。"
+    description_en: "Benchmarks for video difference captioning, instruction-following captioning, and comprehensive video caption evaluation."
+    benchmarks:
+      - vidic
+      - if_vidcap
+      - vidcapbench
+  - id: omni_understanding
+    name_zh: "全模态理解"
+    name_en: "Omni Understanding"
+    description_zh: "关注音视频联合理解、全模态指令遵循与统一全模态评测。"
+    description_en: "Benchmarks for audio-visual understanding, omni instruction following, and unified omni evaluation."
     benchmarks:
       - omnibench
+      - omnivideobench
+      - omnicap_if

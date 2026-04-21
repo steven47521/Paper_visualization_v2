@@ -1,0 +1,32 @@
+id: codetracer
+name: "CodeTracer"
+name_zh: "CodeTracer"
+name_en: "CodeTracer"
+url: "https://github.com/NJU-LINK/CodeTracer"
+paper: "https://arxiv.org/abs/2604.11641"
+description_zh: "CodeTracer 关注代码智能体在真实轨迹中进行过程级状态追踪与定位的能力。页面主榜单采用论文主表中 CodeTracer 配置下的 Overall F1。"
+description_en: "CodeTracer evaluates process-level tracing and localization for coding agents. This page uses the Overall F1 of the CodeTracer configuration from the main table."
+overview_zh: "这篇工作关注“最终是否修好”之外的另一个关键问题：智能体能否在中间过程里准确追踪状态与定位错误来源。\n论文提出 CodeTraceBench，并用 step-level 的精确率、召回率和 F1 评估过程级定位能力。\n主结果显示，加入 CodeTracer 之后，不同 backbone 在过程追踪上的 F1 有明显提升。"
+overview_en: "This work focuses on a question beyond final success: whether an agent can accurately trace intermediate states and localize the source of failure.\nIt introduces CodeTraceBench and reports step-level precision, recall, and F1 for process-aware localization.\nThe main results show substantial F1 gains when the CodeTracer framework is added to different backbones."
+glance:
+  - label_zh: "研究重点"
+    label_en: "Focus"
+    value: "过程追踪与定位"
+  - label_zh: "主指标"
+    label_en: "Primary Metric"
+    value: "Overall F1"
+  - label_zh: "展示设置"
+    label_en: "Displayed Setting"
+    value: "CodeTracer configuration"
+metrics:
+  - id: overall_f1
+    name: "Overall F1"
+    description: "Overall step-level F1 of the CodeTracer configuration."
+    higher_is_better: true
+    range: [0, 100]
+resources:
+  - label_zh: "代码仓库"
+    label_en: "Code Repository"
+    url: "https://github.com/NJU-LINK/CodeTracer"
+leaderboard_note_zh: "榜单采用主表中 CodeTracer 行的 Overall F1，不混入 Bare LLM 或 Mini-CodeTracer 基线。"
+leaderboard_note_en: "The leaderboard uses the Overall F1 from the CodeTracer rows in the main table, excluding Bare LLM and Mini-CodeTracer baselines."

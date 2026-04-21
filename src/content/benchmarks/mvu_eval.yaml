@@ -1,0 +1,32 @@
+id: mvu_eval
+name: "MVU-Eval"
+name_zh: "MVU-Eval"
+name_en: "MVU-Eval"
+url: "https://github.com/NJU-LINK/MVU-Eval"
+paper: "https://arxiv.org/abs/2511.07250"
+description_zh: "MVU-Eval 评测多视频理解能力，要求模型在多个视频之间进行比较、检索与推理。页面主榜单采用论文主表中的 Overall。"
+description_en: "MVU-Eval evaluates multi-video understanding, requiring comparison, retrieval, and reasoning across multiple videos. This page uses the Overall score from the main table."
+overview_zh: "这篇工作指出现有视频 benchmark 大多只处理单视频输入，而现实任务常常要求在多个视频之间联合分析。\nMVU-Eval 围绕感知与推理两大类能力，覆盖目标识别、空间理解、知识密集推理和检索增强等任务。\n结果表明，多视频设置会显著拉开模型差距，说明视频理解还需要更强的跨样本整合能力。"
+overview_en: "This work argues that existing video benchmarks mostly assume single-video input, while real tasks often require joint analysis over multiple videos.\nMVU-Eval covers both perception and reasoning, including object recognition, spatial understanding, knowledge-intensive reasoning, and retrieval-augmented tasks.\nThe results show that multi-video settings significantly separate model capabilities, highlighting the need for stronger cross-instance integration."
+glance:
+  - label_zh: "研究重点"
+    label_en: "Focus"
+    value: "多视频理解"
+  - label_zh: "主指标"
+    label_en: "Primary Metric"
+    value: "Overall"
+  - label_zh: "能力结构"
+    label_en: "Abilities"
+    value: "Perception + Reasoning"
+metrics:
+  - id: overall
+    name: "Overall"
+    description: "Overall accuracy reported in the main MVU-Eval table."
+    higher_is_better: true
+    range: [0, 100]
+resources:
+  - label_zh: "代码仓库"
+    label_en: "Code Repository"
+    url: "https://github.com/NJU-LINK/MVU-Eval"
+leaderboard_note_zh: "榜单采用 MVU-Eval 主表的 Overall 列，不额外拆分感知与推理分项。"
+leaderboard_note_en: "The leaderboard uses the Overall column from the main MVU-Eval table without recombining perception and reasoning subtasks."

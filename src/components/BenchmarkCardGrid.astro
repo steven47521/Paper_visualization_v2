@@ -1,0 +1,140 @@
+---
+import { getLocalizedPath } from '../i18n/translations';
+
+interface CardItem {
+  id: string;
+  name: string;
+  description: string;
+  snippet: string;
+  primaryMetric?: string;
+  focus?: string;
+  modelCount: number;
+  resourceLabels: string[];
+  updated?: string;
+}
+
+interface Props {
+  locale: 'zh' | 'en';
+  l1Id: string;
+  accentColor: string;
+  sectionName: string;
+  sectionDescription?: string;
+  items: CardItem[];
+}
+
+const {
+  locale,
+  l1Id,
+  accentColor,
+  sectionName,
+  sectionDescription,
+  items,
+} = Astro.props as Props;
+
+const eyebrow = locale === 'zh' ? 'Benchmark Directory' : 'Benchmark Directory';
+const countLabel =
+  locale === 'zh' ? `共 ${items.length} 个工作` : `${items.length} benchmarks`;
+const primaryMetricLabel = locale === 'zh' ? '主榜指标' : 'Primary Metric';
+const focusLabel = locale === 'zh' ? '研究重点' : 'Focus';
+const modelsLabel = locale === 'zh' ? '上榜模型' : 'Scored Models';
+const updatedLabel = locale === 'zh' ? '数据更新' : 'Updated';
+const detailsLabel = locale === 'zh' ? '查看工作详情' : 'Open benchmark details';
+---
+
+<section class="space-y-5">
+  <div class="flex flex-col gap-3 lg:flex-row lg:items-end lg:justify-between">
+    <div class="space-y-2">
+      <p class="text-[11px] font-semibold uppercase tracking-[0.28em] text-[var(--color-text-secondary)]">
+        {eyebrow}
+      </p>
+      <h2 class="text-2xl font-semibold tracking-tight">{sectionName}</h2>
+      {sectionDescription && (
+        <p class="max-w-3xl text-sm leading-7 text-[var(--color-text-secondary)]">
+          {sectionDescription}
+        </p>
+      )}
+    </div>
+    <div class="text-sm text-[var(--color-text-secondary)]">{countLabel}</div>
+  </div>
+
+  <div class="grid gap-5 md:grid-cols-2 xl:grid-cols-3">
+    {items.map((item, index) => (
+      <a
+        href={getLocalizedPath(`/${l1Id}/${item.id}/`, locale)}
+        class="group relative flex min-h-[320px] flex-col overflow-hidden rounded-[22px] border border-[var(--color-border)]/80 bg-[var(--color-bg-card)] p-5 shadow-[0_18px_60px_rgba(15,23,42,0.06)] transition-all duration-300 hover:-translate-y-1.5 hover:border-[var(--color-primary)]/50 hover:shadow-[0_24px_80px_rgba(15,23,42,0.12)]"
+      >
+        <div
+          class="pointer-events-none absolute inset-x-0 top-0 h-1.5 opacity-90"
+          style={`background: linear-gradient(90deg, ${accentColor}, transparent 80%)`}
+        ></div>
+        <div
+          class="pointer-events-none absolute right-0 top-0 h-36 w-36 rounded-full opacity-60 blur-3xl"
+          style={`background: radial-gradient(circle, ${accentColor}20 0%, transparent 72%)`}
+        ></div>
+
+        <div class="relative flex items-start justify-between gap-3">
+          <div class="text-xs font-semibold uppercase tracking-[0.2em] text-[var(--color-text-secondary)]">
+            {String(index + 1).padStart(2, '0')}
+          </div>
+          {item.primaryMetric && (
+            <span class="rounded-full border border-[var(--color-border)] bg-[var(--color-bg)] px-3 py-1 text-[11px] text-[var(--color-text-secondary)]">
+              {primaryMetricLabel}: {item.primaryMetric}
+            </span>
+          )}
+        </div>
+
+        <div class="relative mt-5 space-y-3">
+          <h3 class="text-xl font-semibold leading-tight transition-colors group-hover:text-[var(--color-primary)]">
+            {item.name}
+          </h3>
+          <p class="text-sm leading-7 text-[var(--color-text-secondary)]">{item.description}</p>
+          <p class="card-snippet text-sm leading-7 text-[var(--color-text-secondary)]/90">
+            {item.snippet}
+          </p>
+        </div>
+
+        <div class="relative mt-auto space-y-4 pt-6">
+          <div class="flex flex-wrap gap-2">
+            {item.focus && (
+              <span class="rounded-full bg-[var(--color-bg)] px-3 py-1.5 text-xs text-[var(--color-text-secondary)]">
+                {focusLabel}: {item.focus}
+              </span>
+            )}
+            <span class="rounded-full bg-[var(--color-bg)] px-3 py-1.5 text-xs text-[var(--color-text-secondary)]">
+              {modelsLabel}: {item.modelCount}
+            </span>
+            {item.updated && (
+              <span class="rounded-full bg-[var(--color-bg)] px-3 py-1.5 text-xs text-[var(--color-text-secondary)]">
+                {updatedLabel}: {item.updated}
+              </span>
+            )}
+          </div>
+
+          {item.resourceLabels.length > 0 && (
+            <div class="flex flex-wrap gap-2">
+              {item.resourceLabels.map(label => (
+                <span class="rounded-full border border-[var(--color-border)]/80 px-3 py-1 text-[11px] uppercase tracking-[0.12em] text-[var(--color-text-secondary)]">
+                  {label}
+                </span>
+              ))}
+            </div>
+          )}
+
+          <div class="flex items-center justify-between border-t border-[var(--color-border)]/70 pt-4 text-sm font-medium">
+            <span>{detailsLabel}</span>
+            <span class="transition-transform group-hover:translate-x-1">↗</span>
+          </div>
+        </div>
+      </a>
+    ))}
+  </div>
+</section>
+
+<style>
+  .card-snippet {
+    display: -webkit-box;
+    overflow: hidden;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 4;
+  }
+</style>

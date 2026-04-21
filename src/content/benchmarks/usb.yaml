@@ -1,0 +1,35 @@
+id: usb
+name: "USB"
+name_zh: "USB"
+name_en: "USB"
+url: "https://github.com/Hongqiong12/USB-SafeBench"
+paper: "https://arxiv.org/abs/2505.23793"
+description_zh: "USB 是统一多模态安全评测 benchmark。页面主榜单采用总 ASRT，数值越低越好。"
+description_en: "USB is a unified multimodal safety benchmark. This page uses the total ASRT, where lower is better."
+overview_zh: "这篇工作希望统一评测多模态模型在国家安全、公共安全和伦理安全等场景下的脆弱性。\nUSB 通过多种攻击方式和多类风险主题，系统衡量模型在安全对抗下的失败率。\n主结果显示，不同模型的总 ASRT 差异显著，说明多模态安全仍然是一个远未收敛的问题。"
+overview_en: "This work aims to unify multimodal safety evaluation across national safety, public safety, and ethical safety scenarios.\nUSB systematically measures failure under attack using multiple attack types and risk themes.\nThe main results show large differences in total ASRT across models, indicating that multimodal safety remains far from solved."
+glance:
+  - label_zh: "研究重点"
+    label_en: "Focus"
+    value: "统一多模态安全评测"
+  - label_zh: "主指标"
+    label_en: "Primary Metric"
+    value: "Total ASRT"
+  - label_zh: "排名方向"
+    label_en: "Ranking Direction"
+    value: "Lower is better"
+metrics:
+  - id: total_asrt
+    name: "Total ASRT"
+    description: "Total ASRT reported in the USB main results table."
+    higher_is_better: false
+    range: [0, 100]
+resources:
+  - label_zh: "代码仓库"
+    label_en: "Code Repository"
+    url: "https://github.com/Hongqiong12/USB-SafeBench"
+  - label_zh: "数据集"
+    label_en: "Dataset"
+    url: "https://huggingface.co/datasets/cgjacklin/USB"
+leaderboard_note_zh: "榜单采用主表中的 Total ASRT，数值越低表示越稳健。"
+leaderboard_note_en: "The leaderboard uses Total ASRT from the main table; lower values indicate better robustness."

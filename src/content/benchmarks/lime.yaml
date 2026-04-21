@@ -6,6 +6,16 @@ url: "https://github.com/kangreen0210/LIME"
 paper: "https://arxiv.org/abs/2409.06851"
 description_zh: "LIME 通过筛掉无区分度和泄漏样本，构建更高效的多模态评测集。页面主榜单采用论文表中的 LIME Overall。"
 description_en: "LIME curates a more discriminative and efficient multimodal benchmark by filtering low-value and leakage-prone samples. This page uses the LIME Overall score reported in the paper."
+overview_zh: |
+  LIME 的核心出发点是“少而精”的评测：现有 MLLM benchmark 往往含有大量区分度不高或信息量不足的样本，导致评测成本高却不一定更有效。
+  该工作通过半自动流程筛除无信息样本、减少答案泄漏，并保留真正依赖图像理解的题目，从而构建更紧凑的评测集。
+  论文实验显示，LIME 在显著减少样本数量和评测时间的同时，反而更能区分不同模型的真实能力差异。
+  作者还指出，像 CIDEr 这类传统自动指标并不足以准确衡量 MLLM caption 能力，这对多模态评测设计本身也具有方法论意义。
+overview_en: |
+  LIME is motivated by the idea that MLLM evaluation should be smaller but more informative, because many existing benchmarks contain samples that are too easy or weakly discriminative.
+  It uses a semi-automatic pipeline to remove uninformative items, reduce answer leakage, and keep tasks that genuinely require image understanding.
+  The paper shows that this refined benchmark cuts both sample count and evaluation time substantially while improving the ability to distinguish models.
+  It also argues that traditional automatic metrics such as CIDEr are insufficient for MLLM caption evaluation, which makes LIME relevant not only as a benchmark but also as a methodology for benchmark design.
 glance:
   - label_zh: "研究重点"
     label_en: "Focus"

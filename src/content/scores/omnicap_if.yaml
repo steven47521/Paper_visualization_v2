@@ -1,0 +1,27 @@
+benchmark_id: omnicap_if
+updated: "2026-04-21"
+results:
+  - model_id: gemini_3_1_pro
+    scores: { overall_csr: 79.80 }
+    source: official
+    source_url: "https://openreview.net/"
+  - model_id: gemini_3_flash
+    scores: { overall_csr: 78.70 }
+    source: official
+    source_url: "https://openreview.net/"
+  - model_id: mimo_v2_omni
+    scores: { overall_csr: 74.59 }
+    source: official
+    source_url: "https://openreview.net/"
+  - model_id: gemini_2_5_pro
+    scores: { overall_csr: 74.06 }
+    source: official
+    source_url: "https://openreview.net/"
+  - model_id: qwen3_omni_30b_a3b_thinking
+    scores: { overall_csr: 72.58 }
+    source: official
+    source_url: "https://openreview.net/"
+  - model_id: qwen3_omni_30b_a3b_instruct
+    scores: { overall_csr: 67.44 }
+    source: official
+    source_url: "https://openreview.net/"

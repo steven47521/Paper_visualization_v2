@@ -1,0 +1,27 @@
+benchmark_id: tvir
+updated: "2026-04-21"
+results:
+  - model_id: tvir_agent_claude_4_5_sonnet
+    scores: { overall_avg: 74.44 }
+    source: official
+    source_url: "https://aclanthology.org/"
+  - model_id: tvir_agent_qwen3_max
+    scores: { overall_avg: 73.53 }
+    source: official
+    source_url: "https://aclanthology.org/"
+  - model_id: tvir_agent_glm_4_7
+    scores: { overall_avg: 72.62 }
+    source: official
+    source_url: "https://aclanthology.org/"
+  - model_id: manus_1_6
+    scores: { overall_avg: 69.73 }
+    source: official
+    source_url: "https://aclanthology.org/"
+  - model_id: claude_4_5_sonnet_search
+    scores: { overall_avg: 68.72 }
+    source: official
+    source_url: "https://aclanthology.org/"
+  - model_id: genspark_deep_research
+    scores: { overall_avg: 66.99 }
+    source: official
+    source_url: "https://aclanthology.org/"

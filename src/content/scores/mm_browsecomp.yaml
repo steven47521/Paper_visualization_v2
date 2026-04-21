@@ -1,0 +1,27 @@
+benchmark_id: mm_browsecomp
+updated: "2026-04-21"
+results:
+  - model_id: o3
+    scores: { overall: 29.02 }
+    source: official
+    source_url: "https://arxiv.org/abs/2508.13186"
+  - model_id: gpt_4_1
+    scores: { overall: 7.59 }
+    source: official
+    source_url: "https://arxiv.org/abs/2508.13186"
+  - model_id: o4_mini_high
+    scores: { overall: 7.14 }
+    source: official
+    source_url: "https://arxiv.org/abs/2508.13186"
+  - model_id: gemini_2_5_pro_preview_0506
+    scores: { overall: 7.14 }
+    source: official
+    source_url: "https://arxiv.org/abs/2508.13186"
+  - model_id: o4_mini
+    scores: { overall: 5.36 }
+    source: official
+    source_url: "https://arxiv.org/abs/2508.13186"
+  - model_id: gemini_2_5_flash_preview_0520
+    scores: { overall: 3.12 }
+    source: official
+    source_url: "https://arxiv.org/abs/2508.13186"

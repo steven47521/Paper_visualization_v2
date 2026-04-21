@@ -1,0 +1,27 @@
+benchmark_id: mvu_eval
+updated: "2026-04-21"
+results:
+  - model_id: gemini_2_5_pro
+    scores: { overall: 58.4 }
+    source: official
+    source_url: "https://arxiv.org/abs/2511.07250"
+  - model_id: gemini_1_5_pro
+    scores: { overall: 57.3 }
+    source: official
+    source_url: "https://arxiv.org/abs/2511.07250"
+  - model_id: qwen2_5_vl_72b
+    scores: { overall: 57.1 }
+    source: official
+    source_url: "https://arxiv.org/abs/2511.07250"
+  - model_id: gemini_2_0_flash
+    scores: { overall: 56.3 }
+    source: official
+    source_url: "https://arxiv.org/abs/2511.07250"
+  - model_id: gpt_4o
+    scores: { overall: 55.9 }
+    source: official
+    source_url: "https://arxiv.org/abs/2511.07250"
+  - model_id: internvl3_78b
+    scores: { overall: 50.6 }
+    source: official
+    source_url: "https://arxiv.org/abs/2511.07250"

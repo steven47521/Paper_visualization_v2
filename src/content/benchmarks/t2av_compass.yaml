@@ -1,0 +1,35 @@
+id: t2av_compass
+name: "T2AV-Compass"
+name_zh: "T2AV-Compass"
+name_en: "T2AV-Compass"
+url: "https://github.com/NJU-LINK/T2AV-Compass"
+paper: "https://arxiv.org/abs/2512.21094"
+description_zh: "T2AV-Compass 统一评测文本到音视频生成系统。页面主榜单采用论文主观评测表中的 Average。"
+description_en: "T2AV-Compass provides unified evaluation for text-to-audio-video generation systems. This page uses the Average score from the subjective evaluation table."
+overview_zh: "这篇工作面向文本到音视频生成，强调视频质量、音频质量、跨模态对齐、指令遵循和真实感的统一评测。\n作者构建了 500 条高复杂度提示，并结合客观指标与 MLLM-as-a-Judge 的主观评测框架进行评估。\n主结果显示，当前模型在视频表现之外，仍普遍受到音频真实感和精细跨模态同步的限制。"
+overview_en: "This work targets text-to-audio-video generation and jointly evaluates video quality, audio quality, cross-modal alignment, instruction following, and realism.\nIt builds 500 high-complexity prompts and combines objective metrics with an MLLM-as-a-Judge subjective protocol.\nThe main results show that, beyond visual quality, current systems remain bottlenecked by audio realism and fine-grained cross-modal synchronization."
+glance:
+  - label_zh: "研究重点"
+    label_en: "Focus"
+    value: "文本到音视频生成"
+  - label_zh: "主指标"
+    label_en: "Primary Metric"
+    value: "Average"
+  - label_zh: "数据规模"
+    label_en: "Scale"
+    value: "500 prompts"
+metrics:
+  - id: average
+    name: "Average"
+    description: "Average score from the subjective evaluation table."
+    higher_is_better: true
+    range: [0, 100]
+resources:
+  - label_zh: "代码仓库"
+    label_en: "Code Repository"
+    url: "https://github.com/NJU-LINK/T2AV-Compass"
+  - label_zh: "数据集"
+    label_en: "Dataset"
+    url: "https://huggingface.co/datasets/NJU-LINK/T2AV-Compass"
+leaderboard_note_zh: "榜单采用论文主观评测表中的 Average 列，用于概括指令遵循与真实感的整体表现。"
+leaderboard_note_en: "The leaderboard uses the Average column from the subjective evaluation table."

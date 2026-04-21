@@ -6,6 +6,16 @@ url: "https://github.com/OpenStellarTeam/ChineseSimpleQA"
 paper: "https://arxiv.org/abs/2411.07140"
 description_zh: "Chinese SimpleQA 聚焦中文事实性问答。页面主榜单采用论文中的 F-score。"
 description_en: "Chinese SimpleQA focuses on Chinese factual question answering. This page uses the F-score reported in the paper."
+overview_zh: |
+  Chinese SimpleQA 是首个系统评测中文短问答事实性的综合 benchmark，目标是衡量模型在中文事实检索式问答中的可靠性边界。
+  数据集覆盖 6 个大主题和 99 个细分子主题，并通过多轮质检、静态参考答案设计和简短问答形式来提高评测质量与可复现性。
+  论文基于该 benchmark 全面比较现有 LLM 的中文事实性表现，并进一步分析模型规模、校准能力、RAG 和对齐策略对结果的影响。
+  结论表明，中文事实性能力与英文榜单并不完全一致，面向中文用户的模型仍需要单独评测与优化。
+overview_en: |
+  Chinese SimpleQA is the first comprehensive benchmark for factual short-form question answering in Chinese, designed to measure how reliably models answer concise fact-seeking questions.
+  It covers 6 broad topics and 99 subtopics, and combines strict quality control, static reference answers, and short QA pairs to keep evaluation reliable and reproducible.
+  The paper uses the benchmark to compare existing LLMs and further studies the effects of model scale, calibration, RAG, and alignment on Chinese factuality.
+  The results show that Chinese factuality rankings do not simply mirror English leaderboards, so Chinese-facing models still require dedicated evaluation and optimization.
 glance:
   - label_zh: "研究重点"
     label_en: "Focus"
