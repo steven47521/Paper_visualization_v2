@@ -5,7 +5,7 @@ import tailwindcss from '@tailwindcss/vite';
 
 export default defineConfig({
   site: 'https://Dabingzz.github.io',
-  base: '/Paper_visualization',
+  base: '/Paper_visualization_v2/',
   integrations: [react()],
   vite: {
     plugins: [tailwindcss()]
