@@ -21,7 +21,7 @@
 
 所有页面使用同一套**纸质**主题（`body.site-paper`）：米白底、低对比暖色纸张纹理（`global.css` 中避免 `multiply` 叠细噪点，减轻久看偏色与疲劳）、无顶栏毛玻璃。首页主视觉：粒子 Canvas 作为 **hero 最底层全幅背景**（`z-index: 0`），左侧标题与说明叠在上层（`z-index: 1`），可互相重叠；粒子经 `scale` + 上移，略大于原单独一栏时的尺寸。首页在 `.home-editorial-main` 内将 `--color-bg-card` 与页面 `--color-bg` 对齐，避免 hero 与领域卡片之间出现色块台阶；hero 内去掉额外 multiply 噪点层，粒子改为低饱和墨色，且 `home-hero` 使用 `overflow: hidden` 防止粒子层向下溢出到卡片区。
 
-首页另含非对称大标题与四张领域卡片；除首页外子页**仅换肤**，路由与功能未改。文案在 `src/i18n/translations.ts` 的 `home_*` 等键中维护。
+首页另含非对称大标题与分类区：**首屏**仅粒子背景 + 左侧文案（hero 高度为 `100dvh` 减顶栏）；其下 `#home-categories` 为左侧 **2×2** 领域卡片 + 右侧 **3D 旋转 benchmark 标签云**（`BenchmarkTagCloud3D.tsx`，SVG + 斐波那契球面分布；直接叠在纸质背景上、无边框容器；每项 `<a>` 链至对应 `/{locale}/{l1}/{benchmark}/` 详情页；尊重 `prefers-reduced-motion`）。用户**向下滚动**或点击 hero 锚点进入该区域。除首页外子页**仅换肤**，路由与功能未改。文案在 `src/i18n/translations.ts` 的 `home_*` 等键中维护。
 
 一级领域页（如 `/zh/llm/`）由 `DomainListingLayout.astro` 排版：标题居中，其下为面包屑 `首页 / 领域(Domains) / 当前子类`；子类为**转盘**：SVG 画出浅色弧线，标签沿圆周放置，整盘旋转使**选中项对准弧线最低点（居中）**；`--dial-rot-deg` 取 **与 `anglesDeg[idx]` 同号**（与教科书「反向转动 −θ」不同——须与 `hubDir` + CSS `rotate` 顺时针为正一致）。图标见 `src/lib/domainTabIcons.ts`。LLM 默认选中 `role_playing`。下方为分类说明 + `BenchmarkCardGrid`（`editorialCards`）。数据仍来自 `src/content/taxonomy/*.yaml`。
 

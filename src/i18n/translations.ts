@@ -84,6 +84,8 @@ export const translations = {
       "围绕推理、知识、安全与对齐等维度的基础语言模型评测集合。",
     home_hero_visual_aria:
       "装饰动画：蓝色流线与粒子沿光轨流动；指针在首屏区域内移动时粒子会向外避让",
+    home_tagcloud_aria:
+      "可旋转的 benchmark 名称球；名称可点击前往对应论文详情页；指针移动会影响旋转方向",
     domain_subtabs_aria: "子分类标签",
     domain_hub_mid: "领域",
     benchmark_eyebrow: "Benchmark",
@@ -195,6 +197,8 @@ export const translations = {
       "Foundational language model evaluations spanning reasoning, knowledge, safety, and alignment.",
     home_hero_visual_aria:
       "Decorative animation: flowing blue lines and particles along a curved light trail; they gently move away from the pointer over the hero area",
+    home_tagcloud_aria:
+      "Rotating sphere of benchmark names; each label links to its paper detail page; pointer position steers the rotation",
     domain_subtabs_aria: "Subcategory tabs",
     domain_hub_mid: "Domains",
     benchmark_eyebrow: "Benchmark",

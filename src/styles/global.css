@@ -47,6 +47,8 @@
 
 :root {
   color-scheme: light dark;
+  /* Sticky site header height (matches Layout `h-16`) — home hero fills viewport below it */
+  --site-header-h: 4rem;
 }
 
 :root[data-theme="dark"] {
@@ -72,6 +74,12 @@ body {
   transition: background-color 0.3s, color 0.3s;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
 }
 
 /* Refined scrollbar */
@@ -714,6 +722,22 @@ body.site-paper > header {
   --color-bg-card: var(--color-bg);
 }
 
+/* First paint: hero fills viewport under header; domain cards sit below the fold */
+.home-editorial-main:has(> .home-page) {
+  padding-top: 0;
+}
+
+.home-page .home-hero {
+  margin-bottom: clamp(2.5rem, 6vw, 4.25rem);
+  min-height: calc(100vh - var(--site-header-h));
+  min-height: calc(100dvh - var(--site-header-h));
+}
+
+.home-page .home-hero-grid {
+  min-height: calc(100vh - var(--site-header-h));
+  min-height: calc(100dvh - var(--site-header-h));
+}
+
 /* —— Hero —— (particles = full-bleed bg z0; copy z1, can overlap) */
 .home-hero {
   position: relative;
@@ -896,6 +920,53 @@ body.site-paper > header {
   margin: 0;
 }
 
+/* Domain cards (2×2) + 3D benchmark tag cloud */
+.home-categories-split {
+  display: grid;
+  gap: clamp(1.5rem, 4vw, 2.75rem);
+  grid-template-columns: 1fr;
+  align-items: stretch;
+}
+
+@media (min-width: 1024px) {
+  .home-categories-split {
+    grid-template-columns: minmax(0, 1fr) minmax(22rem, 1.12fr);
+    align-items: start;
+  }
+}
+
+/* Tag cloud sits on page paper background — no card chrome */
+.home-benchmark-tag-cloud-aside {
+  position: relative;
+  width: 100%;
+  min-height: min(680px, 72vh);
+}
+
+.home-benchmark-tag-cloud-host {
+  width: 100%;
+  height: min(680px, 72vh);
+  min-height: min(440px, 52vh);
+  font-family: var(--font-sans);
+  color: var(--color-text);
+  touch-action: pan-y;
+}
+
+.home-benchmark-tag-cloud-host svg {
+  overflow: visible;
+}
+
+.home-benchmark-tag-cloud-host svg a {
+  cursor: pointer;
+}
+
+.home-benchmark-tag-cloud-host svg a:focus-visible {
+  outline: none;
+}
+
+.home-benchmark-tag-cloud-host svg a:focus-visible text {
+  fill: var(--color-primary);
+}
+
 .home-card-grid {
   display: grid;
   grid-template-columns: 1fr;
@@ -910,7 +981,6 @@ body.site-paper > header {
 
 @media (min-width: 1200px) {
   .home-card-grid {
-    grid-template-columns: repeat(4, minmax(0, 1fr));
     gap: 1.125rem;
   }
 }

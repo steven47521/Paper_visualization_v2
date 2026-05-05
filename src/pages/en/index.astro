@@ -1,6 +1,7 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 import HeroParticleStream from '../../components/HeroParticleStream';
+import BenchmarkTagCloud3D from '../../components/BenchmarkTagCloud3D';
 import { getLocalizedPath, t, type TranslationKey } from '../../i18n/translations';
 import { getCollection } from 'astro:content';
 import { homeDomainCardBarsInnerHtml } from '../../lib/homeDomainCardViz';
@@ -9,6 +10,28 @@ const locale = 'en';
 
 const taxonomy = await getCollection('taxonomy');
 const sortedTaxonomy = taxonomy.sort((a, b) => a.data.order - b.data.order);
+
+const benchmarksCol = await getCollection('benchmarks');
+const benchById = new Map(benchmarksCol.map(b => [b.data.id, b]));
+
+const tagCloudEntries: { label: string; href: string }[] = [];
+const seenBench = new Set<string>();
+for (const tax of sortedTaxonomy) {
+  const l1 = tax.data.id;
+  for (const sub of tax.data.subcategories) {
+    for (const benchId of sub.benchmarks) {
+      if (seenBench.has(benchId)) continue;
+      seenBench.add(benchId);
+      const bench = benchById.get(benchId);
+      if (!bench) continue;
+      const label = locale === 'zh' ? bench.data.name_zh : bench.data.name_en;
+      tagCloudEntries.push({
+        label,
+        href: getLocalizedPath(`/${l1}/${benchId}/`, locale),
+      });
+    }
+  }
+}
 
 const CARD_DESC_KEYS: Record<string, TranslationKey> = {
   agent: 'home_card_desc_agent',
@@ -19,59 +42,70 @@ const CARD_DESC_KEYS: Record<string, TranslationKey> = {
 ---
 
 <Layout title={t(locale, 'nav_home')} editorialHome>
-  <section class="home-hero" aria-labelledby="home-hero-heading">
-    <div class="home-hero-bg" aria-hidden="true">
-      <div class="home-hero-particle-stage">
-        <HeroParticleStream client:visible ariaLabel={t(locale, 'home_hero_visual_aria')} />
+  <div class="home-page">
+    <section class="home-hero" aria-labelledby="home-hero-heading">
+      <div class="home-hero-bg" aria-hidden="true">
+        <div class="home-hero-particle-stage">
+          <HeroParticleStream client:visible ariaLabel={t(locale, 'home_hero_visual_aria')} />
+        </div>
       </div>
-    </div>
-    <div class="home-hero-grid">
-      <div class="home-hero-copy">
-        <p class="home-hero-eyebrow">{t(locale, 'home_hero_eyebrow')}</p>
-        <h1 id="home-hero-heading" class="home-hero-title">{t(locale, 'home_hero_title')}</h1>
-        <p class="home-hero-tagline">{t(locale, 'home_hero_tagline')}</p>
-        <p class="home-hero-body">{t(locale, 'home_hero_body')}</p>
-        <a href="#home-categories" class="home-hero-cta">
-          {t(locale, 'home_hero_cta')}
-          <span aria-hidden="true">→</span>
-        </a>
-      </div>
-    </div>
-  </section>
-
-  <section id="home-categories" class="home-categories" aria-labelledby="home-cat-heading">
-    <div class="home-categories-head">
-      <p class="home-categories-eyebrow">{t(locale, 'home_categories_eyebrow')}</p>
-      <h2 id="home-cat-heading" class="sr-only">{t(locale, 'category_quickview')}</h2>
-    </div>
-    <div class="home-card-grid">
-      {sortedTaxonomy.map(category => {
-        const benchCount = category.data.subcategories.reduce(
-          (s: number, sc: { benchmarks: string[] }) => s + sc.benchmarks.length,
-          0
-        );
-        const descKey = CARD_DESC_KEYS[category.data.id] ?? 'home_card_desc_llm';
-        const barsInner = homeDomainCardBarsInnerHtml(category.data.subcategories, locale);
-
-        return (
-          <a
-            href={getLocalizedPath(`/${category.data.id}/`, locale)}
-            class="home-domain-card"
-            style={`--accent: ${category.data.color}`}
-            aria-label={category.data.name_en}
-          >
-            <span class="home-domain-card-arrow" aria-hidden="true">→</span>
-            <p class="home-domain-card-kicker">{category.data.name_en}</p>
-            <div class="home-domain-card-metric">
-              <span class="home-domain-card-count">{benchCount}</span>
-              <span class="home-domain-card-count-label">{t(locale, 'home_benchmarks_label')}</span>
-            </div>
-            <svg class="home-domain-card-spark" viewBox="0 0 120 40" preserveAspectRatio="none" aria-hidden="true" set:html={barsInner} />
-            <p class="home-domain-card-desc">{t(locale, descKey)}</p>
-            <span class="home-domain-card-footer">{t(locale, 'card_explore')}</span>
+      <div class="home-hero-grid">
+        <div class="home-hero-copy">
+          <p class="home-hero-eyebrow">{t(locale, 'home_hero_eyebrow')}</p>
+          <h1 id="home-hero-heading" class="home-hero-title">{t(locale, 'home_hero_title')}</h1>
+          <p class="home-hero-tagline">{t(locale, 'home_hero_tagline')}</p>
+          <p class="home-hero-body">{t(locale, 'home_hero_body')}</p>
+          <a href="#home-categories" class="home-hero-cta">
+            {t(locale, 'home_hero_cta')}
+            <span aria-hidden="true">→</span>
           </a>
-        );
-      })}
-    </div>
-  </section>
+        </div>
+      </div>
+    </section>
+
+    <section id="home-categories" class="home-categories" aria-labelledby="home-cat-heading">
+      <div class="home-categories-head">
+        <p class="home-categories-eyebrow">{t(locale, 'home_categories_eyebrow')}</p>
+        <h2 id="home-cat-heading" class="sr-only">{t(locale, 'category_quickview')}</h2>
+      </div>
+      <div class="home-categories-split">
+        <div class="home-card-grid">
+          {sortedTaxonomy.map(category => {
+            const benchCount = category.data.subcategories.reduce(
+              (s: number, sc: { benchmarks: string[] }) => s + sc.benchmarks.length,
+              0
+            );
+            const descKey = CARD_DESC_KEYS[category.data.id] ?? 'home_card_desc_llm';
+            const barsInner = homeDomainCardBarsInnerHtml(category.data.subcategories, locale);
+
+            return (
+              <a
+                href={getLocalizedPath(`/${category.data.id}/`, locale)}
+                class="home-domain-card"
+                style={`--accent: ${category.data.color}`}
+                aria-label={category.data.name_en}
+              >
+                <span class="home-domain-card-arrow" aria-hidden="true">→</span>
+                <p class="home-domain-card-kicker">{category.data.name_en}</p>
+                <div class="home-domain-card-metric">
+                  <span class="home-domain-card-count">{benchCount}</span>
+                  <span class="home-domain-card-count-label">{t(locale, 'home_benchmarks_label')}</span>
+                </div>
+                <svg class="home-domain-card-spark" viewBox="0 0 120 40" preserveAspectRatio="none" aria-hidden="true" set:html={barsInner} />
+                <p class="home-domain-card-desc">{t(locale, descKey)}</p>
+                <span class="home-domain-card-footer">{t(locale, 'card_explore')}</span>
+              </a>
+            );
+          })}
+        </div>
+        <aside class="home-benchmark-tag-cloud-aside">
+          <BenchmarkTagCloud3D
+            client:visible
+            entries={tagCloudEntries}
+            ariaLabel={t(locale, 'home_tagcloud_aria')}
+          />
+        </aside>
+      </div>
+    </section>
+  </div>
 </Layout>
