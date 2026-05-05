@@ -96,7 +96,7 @@ export default function ModelCompareSelector({
 
       {/* Dropdown */}
       {open && (
-        <div className="absolute z-50 mt-1 w-full rounded-xl border border-[var(--color-border)] bg-[var(--color-bg-card)] shadow-lg max-h-64 overflow-auto">
+        <div className="absolute z-[110] mt-1 w-full rounded-xl border border-[var(--color-border)] bg-[var(--color-bg-card)] shadow-lg max-h-64 overflow-auto">
           <div className="sticky top-0 p-2 bg-[var(--color-bg-card)] border-b border-[var(--color-border)]">
             <input
               type="text"

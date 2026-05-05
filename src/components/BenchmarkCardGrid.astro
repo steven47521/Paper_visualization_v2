@@ -20,6 +20,11 @@ interface Props {
   sectionName: string;
   sectionDescription?: string;
   items: CardItem[];
+  /** Domain hub: max 2 columns, cream cards, soft blue top band, subtle hover */
+  editorialCards?: boolean;
+  omitSectionDescription?: boolean;
+  /** Shown after eyebrow + section title (e.g. taxonomy subcategory blurb) */
+  categoryIntro?: string;
 }
 
 const {
@@ -29,6 +34,9 @@ const {
   sectionName,
   sectionDescription,
   items,
+  editorialCards = false,
+  omitSectionDescription = false,
+  categoryIntro,
 } = Astro.props as Props;
 
 const eyebrow = locale === 'zh' ? 'Benchmark Directory' : 'Benchmark Directory';
@@ -41,14 +49,17 @@ const updatedLabel = locale === 'zh' ? '数据更新' : 'Updated';
 const detailsLabel = locale === 'zh' ? '查看工作详情' : 'Open benchmark details';
 ---
 
-<section class="space-y-5">
+<section class:list={['space-y-5', editorialCards && 'domain-bench-grid']}>
   <div class="flex flex-col gap-3 lg:flex-row lg:items-end lg:justify-between">
     <div class="space-y-2">
       <p class="text-[11px] font-semibold uppercase tracking-[0.28em] text-[var(--color-text-secondary)]">
         {eyebrow}
       </p>
       <h2 class="text-2xl font-semibold tracking-tight">{sectionName}</h2>
-      {sectionDescription && (
+      {categoryIntro && (
+        <p class="domain-category-intro domain-category-intro--after-heading">{categoryIntro}</p>
+      )}
+      {sectionDescription && !omitSectionDescription && (
         <p class="max-w-3xl text-sm leading-7 text-[var(--color-text-secondary)]">
           {sectionDescription}
         </p>
@@ -57,20 +68,40 @@ const detailsLabel = locale === 'zh' ? '查看工作详情' : 'Open benchmark de
     <div class="text-sm text-[var(--color-text-secondary)]">{countLabel}</div>
   </div>
 
-  <div class="grid gap-5 md:grid-cols-2 xl:grid-cols-3">
+  <div
+    class:list={[
+      'grid gap-5',
+      editorialCards ? 'grid-cols-1 md:grid-cols-2' : 'md:grid-cols-2 xl:grid-cols-3',
+    ]}
+  >
     {items.map((item, index) => (
       <a
         href={getLocalizedPath(`/${l1Id}/${item.id}/`, locale)}
-        class="group relative flex min-h-[320px] flex-col overflow-hidden rounded-[22px] border border-[var(--color-border)]/80 bg-[var(--color-bg-card)] p-5 shadow-[0_18px_60px_rgba(15,23,42,0.06)] transition-all duration-300 hover:-translate-y-1.5 hover:border-[var(--color-primary)]/50 hover:shadow-[0_24px_80px_rgba(15,23,42,0.12)]"
+        class:list={[
+          'group flex flex-col overflow-hidden p-5',
+          editorialCards
+            ? 'domain-bench-card relative min-h-[280px] rounded-2xl transition-[transform,border-color,color] duration-300 ease-out'
+            : 'relative min-h-[320px] rounded-[22px] border border-[var(--color-border)]/80 bg-[var(--color-bg-card)] shadow-[0_18px_60px_rgba(15,23,42,0.06)] transition-all duration-300 hover:-translate-y-1.5 hover:border-[var(--color-primary)]/50 hover:shadow-[0_24px_80px_rgba(15,23,42,0.12)]',
+        ]}
       >
-        <div
-          class="pointer-events-none absolute inset-x-0 top-0 h-1.5 opacity-90"
-          style={`background: linear-gradient(90deg, ${accentColor}, transparent 80%)`}
-        ></div>
-        <div
-          class="pointer-events-none absolute right-0 top-0 h-36 w-36 rounded-full opacity-60 blur-3xl"
-          style={`background: radial-gradient(circle, ${accentColor}20 0%, transparent 72%)`}
-        ></div>
+        {editorialCards ? (
+          <div
+            class="pointer-events-none absolute inset-x-0 top-0 z-[1] h-[5px] rounded-t-2xl"
+            style="background: linear-gradient(90deg, rgba(191, 219, 254, 0.9) 0%, rgba(219, 234, 254, 0.45) 42%, transparent 88%)"
+            aria-hidden="true"
+          />
+        ) : (
+          <>
+            <div
+              class="pointer-events-none absolute inset-x-0 top-0 h-1.5 opacity-90"
+              style={`background: linear-gradient(90deg, ${accentColor}, transparent 80%)`}
+            />
+            <div
+              class="pointer-events-none absolute right-0 top-0 h-36 w-36 rounded-full opacity-60 blur-3xl"
+              style={`background: radial-gradient(circle, ${accentColor}20 0%, transparent 72%)`}
+            />
+          </>
+        )}
 
         <div class="relative flex items-start justify-between gap-3">
           <div class="text-xs font-semibold uppercase tracking-[0.2em] text-[var(--color-text-secondary)]">
@@ -84,7 +115,7 @@ const detailsLabel = locale === 'zh' ? '查看工作详情' : 'Open benchmark de
         </div>
 
         <div class="relative mt-5 space-y-3">
-          <h3 class="text-xl font-semibold leading-tight transition-colors group-hover:text-[var(--color-primary)]">
+          <h3 class="text-xl font-semibold leading-tight transition-colors duration-200 group-hover:text-[var(--color-primary)]">
             {item.name}
           </h3>
           <p class="text-sm leading-7 text-[var(--color-text-secondary)]">{item.description}</p>

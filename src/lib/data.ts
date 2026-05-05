@@ -61,6 +61,22 @@ export interface BenchmarkEntry {
     highlights_en?: string[];
     leaderboard_note_zh?: string;
     leaderboard_note_en?: string;
+    authors_zh?: string;
+    authors_en?: string;
+    abstract_zh?: string;
+    abstract_en?: string;
+    method_zh?: string;
+    method_en?: string;
+    figures?: Array<{
+      image: string;
+      caption_zh: string;
+      caption_en: string;
+    }>;
+    chart_figures?: Array<{
+      image: string;
+      caption_zh: string;
+      caption_en: string;
+    }>;
     samples?: Array<{
       input_zh: string;
       input_en: string;
@@ -334,11 +350,30 @@ export function buildBenchmarkDetailData(
     note: locale === 'zh' ? item.note_zh : item.note_en,
   }));
 
+  const desc = locale === 'zh' ? benchmark.data.description_zh : benchmark.data.description_en;
+  const abstractRaw = locale === 'zh' ? benchmark.data.abstract_zh : benchmark.data.abstract_en;
+  const methodRaw = locale === 'zh' ? benchmark.data.method_zh : benchmark.data.method_en;
+  const authorsRaw = locale === 'zh' ? benchmark.data.authors_zh : benchmark.data.authors_en;
+
+  const figures = (benchmark.data.figures ?? []).map(f => ({
+    image: f.image,
+    caption: locale === 'zh' ? f.caption_zh : f.caption_en,
+  }));
+  const chartFigures = (benchmark.data.chart_figures ?? []).map(f => ({
+    image: f.image,
+    caption: locale === 'zh' ? f.caption_zh : f.caption_en,
+  }));
+
   return {
     id: benchmark.data.id,
     name: locale === 'zh' ? benchmark.data.name_zh : benchmark.data.name_en,
-    description: locale === 'zh' ? benchmark.data.description_zh : benchmark.data.description_en,
+    description: desc,
+    abstract: abstractRaw?.trim() ? abstractRaw : desc,
+    authors: authorsRaw?.trim() || undefined,
+    method: methodRaw?.trim() || undefined,
     overview: locale === 'zh' ? benchmark.data.overview_zh : benchmark.data.overview_en,
+    figures,
+    chartFigures,
     url: benchmark.data.url,
     paper: benchmark.data.paper,
     glance: (benchmark.data.glance ?? []).map(item => ({

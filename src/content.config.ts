@@ -78,6 +78,30 @@ const benchmarks = defineCollection({
     highlights_en: z.array(z.string()).optional(),
     leaderboard_note_zh: z.string().optional(),
     leaderboard_note_en: z.string().optional(),
+    authors_zh: z.string().optional(),
+    authors_en: z.string().optional(),
+    abstract_zh: z.string().optional(),
+    abstract_en: z.string().optional(),
+    method_zh: z.string().optional(),
+    method_en: z.string().optional(),
+    figures: z
+      .array(
+        z.object({
+          image: z.string(),
+          caption_zh: z.string(),
+          caption_en: z.string(),
+        })
+      )
+      .optional(),
+    chart_figures: z
+      .array(
+        z.object({
+          image: z.string(),
+          caption_zh: z.string(),
+          caption_en: z.string(),
+        })
+      )
+      .optional(),
     samples: z
       .array(
         z.object({

@@ -1,0 +1,320 @@
+---
+import BenchmarkCardGrid from './BenchmarkCardGrid.astro';
+import { getLocalizedPath, t, type Locale } from '../i18n/translations';
+import { domainTabIconSvg } from '../lib/domainTabIcons';
+
+export interface DomainBenchmarkCard {
+  id: string;
+  name: string;
+  description: string;
+  snippet: string;
+  primaryMetric?: string;
+  focus?: string;
+  modelCount: number;
+  resourceLabels: string[];
+  updated?: string;
+}
+
+export interface DomainTab {
+  id: string;
+  label: string;
+  description: string;
+  benchmarkCards: DomainBenchmarkCard[];
+}
+
+interface Props {
+  locale: Locale;
+  l1Id: string;
+  l1Name: string;
+  l1Color: string;
+  tabs: DomainTab[];
+  defaultTabId?: string;
+}
+
+const { locale, l1Id, l1Name, l1Color, tabs, defaultTabId } = Astro.props;
+
+const fallbackId = tabs[0]?.id ?? '';
+const preferred =
+  defaultTabId && tabs.some(t => t.id === defaultTabId) ? defaultTabId : fallbackId;
+const initialIdx = Math.max(0, tabs.findIndex(t => t.id === preferred));
+
+/** ViewBox: shorter VB_H lowers layout height; R_arc is stroke only; tabs use larger R_orbit (outside arc). */
+const VB_MIN_Y = -236;
+const VB_W = 1400;
+const VB_H = 258;
+const cx = VB_W / 2;
+const marginBottom = 8;
+const marginTop = 4;
+/** Circle radius for SVG arc path */
+const R_arc = 332;
+/** Tab orbit radius (viewBox units) — > R_arc so controls sit outside the stroke */
+const orbitOutset = 1.072;
+const R_orbit = R_arc * orbitOutset;
+
+const yBottom = VB_MIN_Y + VB_H - marginBottom;
+const cy = yBottom - R_arc;
+/** Half-span each side of nadir (θ=0); base from clip margin, then widen opening */
+const phiBaseDeg =
+  (Math.acos(
+    Math.min(1, Math.max(-1, (VB_MIN_Y + marginTop - cy) / R_arc))
+  ) *
+    180) /
+    Math.PI -
+  0.06;
+/** Extra degrees on arc span; svg-wrap uses overflow visible so tips may extend slightly past viewBox top */
+const phiOpeningExtraDeg = 7;
+const phiMaxDeg = phiBaseDeg + phiOpeningExtraDeg;
+
+const anglesDeg =
+  tabs.length <= 1
+    ? [0]
+    : tabs.map((_, i) => {
+        const u = i / (tabs.length - 1);
+        return -phiMaxDeg + 2 * phiMaxDeg * u;
+      });
+
+/* Dial rotate(φ) with +φ = CSS clockwise; bring tab at native angle θ to nadir with φ = θ (see hubDir). */
+const initialDialRot = anglesDeg[initialIdx] ?? 0;
+
+const toRad = (d: number) => (d * Math.PI) / 180;
+const pMax = toRad(phiMaxDeg);
+const x1 = cx + R_arc * Math.sin(-pMax);
+const y1 = cy + R_arc * Math.cos(-pMax);
+const x2 = cx + R_arc * Math.sin(pMax);
+const y2 = cy + R_arc * Math.cos(pMax);
+const arcSpanDeg = 2 * phiMaxDeg;
+const arcLarge = arcSpanDeg > 180 ? 1 : 0;
+/* Stroke uses R_arc; tab orbit uses R_orbit > R_arc; sweep 0 through nadir */
+const arcPath = `M ${x1.toFixed(2)} ${y1.toFixed(2)} A ${R_arc} ${R_arc} 0 ${arcLarge} 0 ${x2.toFixed(2)} ${y2.toFixed(2)}`;
+
+const hubLeftPct = (cx / VB_W) * 100;
+const hubTopPct = ((cy - VB_MIN_Y) / VB_H) * 100;
+/** Unitless orbit radius / VB_W for JS (--orbit-px); outer ring, not arc stroke */
+const orbitRatio = R_orbit / VB_W;
+
+/** Unit direction from hub toward tab on circle (θ=0 → straight down in viewBox) */
+function hubDir(deg: number) {
+  const r = toRad(deg);
+  return { tx: Math.sin(r), ty: Math.cos(r) };
+}
+
+const initialLeaf = tabs[initialIdx]?.label ?? '';
+---
+
+<div class="domain-l1 domain-l1--turntable-hub">
+  <header class="domain-l1__head domain-l1__head--turntable">
+    <div class="domain-l1__title-row">
+      <span class="domain-l1__dot" style={`background-color: ${l1Color}`} aria-hidden="true"></span>
+      <h1 class="domain-l1__title">{l1Name}</h1>
+    </div>
+    <nav class="domain-l1__crumb domain-l1__crumb--below-title" aria-label="Breadcrumb">
+      <a href={getLocalizedPath('/', locale)} class="domain-l1__crumb-link">{t(locale, 'nav_home')}</a>
+      <span class="domain-l1__crumb-sep">/</span>
+      <a href={getLocalizedPath(`/${l1Id}/`, locale)} class="domain-l1__crumb-link domain-l1__crumb-mid">{l1Name}</a>
+      <span class="domain-l1__crumb-sep">/</span>
+      <span class="domain-l1__crumb-leaf" id="domain-crumb-leaf">{initialLeaf}</span>
+    </nav>
+  </header>
+
+  <div
+    class="domain-turntable"
+    role="tablist"
+    aria-label={t(locale, 'domain_subtabs_aria')}
+    data-l1-id={l1Id}
+    data-orbit-ratio={orbitRatio}
+    data-vb-w={VB_W}
+    data-vb-h={VB_H}
+    data-vb-min-y={VB_MIN_Y}
+    data-cx={cx}
+    data-cy={cy}
+    data-r={R_orbit}
+    style={`--orbit-ratio: ${orbitRatio}; --dial-rot-deg: ${initialDialRot}deg; --hub-left-pct: ${hubLeftPct}%; --hub-top-pct: ${hubTopPct}%;`}
+  >
+    <div class="domain-turntable__svg-wrap">
+      <svg
+        class="domain-turntable__svg"
+        viewBox={`0 ${VB_MIN_Y} ${VB_W} ${VB_H}`}
+        preserveAspectRatio="xMidYMid meet"
+        aria-hidden="true"
+      >
+        <path class="domain-turntable__arc" vector-effect="non-scaling-stroke" d={arcPath} />
+      </svg>
+    </div>
+
+    <div class="domain-turntable__dial" data-angles-json={JSON.stringify(anglesDeg)}>
+      {
+        tabs.map((tab, i) => {
+          const { tx, ty } = hubDir(anglesDeg[i]);
+          return (
+          <button
+            type="button"
+            role="tab"
+            class:list={['domain-turntable-node', { 'domain-turntable-node--active': i === initialIdx }]}
+            id={`domain-tab-${tab.id}`}
+            aria-selected={i === initialIdx ? 'true' : 'false'}
+            aria-controls={`domain-panel-${tab.id}`}
+            tabindex={i === initialIdx ? 0 : -1}
+            data-tab={tab.id}
+            data-idx={i}
+            style={`--tx-dir: ${tx}; --ty-dir: ${ty};`}
+          >
+            <span class="domain-turntable-node__inner">
+              <span class="domain-turntable-node__ico" set:html={domainTabIconSvg(tab.id)} />
+              <span class="domain-turntable-node__label">{tab.label}</span>
+              <span class="domain-turntable-node__tick" aria-hidden="true"></span>
+            </span>
+          </button>
+          );
+        })
+      }
+    </div>
+  </div>
+
+  {
+    tabs.map((tab, i) => (
+      <div
+        class="domain-tab-panel"
+        role="tabpanel"
+        id={`domain-panel-${tab.id}`}
+        aria-labelledby={`domain-tab-${tab.id}`}
+        data-tab-content={tab.id}
+        hidden={i !== initialIdx}
+      >
+        <BenchmarkCardGrid
+          locale={locale}
+          l1Id={l1Id}
+          accentColor={l1Color}
+          sectionName={tab.label}
+          sectionDescription={undefined}
+          items={tab.benchmarkCards}
+          editorialCards
+          omitSectionDescription
+          categoryIntro={tab.description}
+        />
+      </div>
+    ))
+  }
+</div>
+
+<script is:inline>
+  (function () {
+    const root = document.querySelector('.domain-l1--turntable-hub');
+    if (!root) return;
+    const turntable = root.querySelector('.domain-turntable');
+    const dial = root.querySelector('.domain-turntable__dial');
+    const nodes = root.querySelectorAll('.domain-turntable-node');
+    const panels = root.querySelectorAll('.domain-tab-panel');
+    const crumbLeaf = root.querySelector('#domain-crumb-leaf');
+    let anglesDeg = [];
+    try {
+      anglesDeg = JSON.parse(dial?.getAttribute('data-angles-json') || '[]');
+    } catch (_) {}
+
+    /** Hub + orbit in px + dial transform-origin — matches SVG viewBox mapping on .domain-turntable__svg-wrap */
+    function syncTurntableGeometry() {
+      if (!turntable || !dial) return;
+      var wrap = turntable.querySelector('.domain-turntable__svg-wrap');
+      if (!wrap) return;
+      var w = wrap.clientWidth;
+      var h = wrap.clientHeight;
+      if (!(w > 0 && h > 0)) return;
+      var vbW = parseFloat(turntable.getAttribute('data-vb-w') || '1400');
+      var vbH = parseFloat(turntable.getAttribute('data-vb-h') || '328');
+      var vbMinY = parseFloat(turntable.getAttribute('data-vb-min-y') || '-236');
+      var cx = parseFloat(turntable.getAttribute('data-cx') || '700');
+      var cy = parseFloat(turntable.getAttribute('data-cy') || '-248');
+      var R = parseFloat(turntable.getAttribute('data-r') || '356');
+      var hubX = (cx / vbW) * w;
+      var hubY = ((cy - vbMinY) / vbH) * h;
+      var orbitPx = (R / vbW) * w;
+      turntable.style.setProperty('--hub-left-px', hubX + 'px');
+      turntable.style.setProperty('--hub-top-px', hubY + 'px');
+      turntable.style.setProperty('--orbit-px', orbitPx + 'px');
+      dial.style.transformOrigin = hubX + 'px ' + hubY + 'px';
+    }
+
+    var geomScheduled = false;
+    function scheduleTurntableGeometry() {
+      if (geomScheduled) return;
+      geomScheduled = true;
+      requestAnimationFrame(function () {
+        geomScheduled = false;
+        syncTurntableGeometry();
+      });
+    }
+
+    syncTurntableGeometry();
+    requestAnimationFrame(function () {
+      syncTurntableGeometry();
+    });
+
+    var wrap = turntable.querySelector('.domain-turntable__svg-wrap');
+    if (wrap && typeof ResizeObserver !== 'undefined') {
+      new ResizeObserver(scheduleTurntableGeometry).observe(wrap);
+    }
+    window.addEventListener('resize', scheduleTurntableGeometry);
+
+    function activate(tabId) {
+      const btn = root.querySelector('.domain-turntable-node[data-tab="' + tabId + '"]');
+      if (!btn || !dial || !turntable) return;
+      const idx = parseInt(btn.getAttribute('data-idx') || '0', 10);
+      const rot = anglesDeg.length ? anglesDeg[idx] : 0;
+      turntable.style.setProperty('--dial-rot-deg', rot + 'deg');
+
+      nodes.forEach(n => {
+        const on = n.getAttribute('data-tab') === tabId;
+        n.classList.toggle('domain-turntable-node--active', on);
+        n.setAttribute('aria-selected', on ? 'true' : 'false');
+        n.tabIndex = on ? 0 : -1;
+      });
+
+      panels.forEach(panel => {
+        const on = panel.getAttribute('data-tab-content') === tabId;
+        panel.toggleAttribute('hidden', !on);
+      });
+
+      const labelEl = btn.querySelector('.domain-turntable-node__label');
+      if (crumbLeaf && labelEl) crumbLeaf.textContent = labelEl.textContent || '';
+
+      try {
+        if (tabId && typeof history !== 'undefined' && history.replaceState) {
+          var u = new URL(window.location.href);
+          u.searchParams.set('tab', tabId);
+          history.replaceState({}, '', u);
+        }
+      } catch (_) {}
+    }
+
+    turntable?.addEventListener('focusin', e => {
+      const t = e.target;
+      if (!(t instanceof HTMLElement)) return;
+      const btn = t.closest('.domain-turntable-node');
+      if (!btn || !turntable.contains(btn)) return;
+      activate(btn.getAttribute('data-tab') || '');
+    });
+
+    nodes.forEach(btn => {
+      btn.addEventListener('click', () => activate(btn.getAttribute('data-tab') || ''));
+      btn.addEventListener('keydown', e => {
+        const keys = ['ArrowLeft', 'ArrowRight', 'Home', 'End'];
+        if (!keys.includes(e.key)) return;
+        e.preventDefault();
+        const list = Array.from(nodes);
+        const i = list.indexOf(btn);
+        let next = i;
+        if (e.key === 'ArrowLeft') next = Math.max(0, i - 1);
+        if (e.key === 'ArrowRight') next = Math.min(list.length - 1, i + 1);
+        if (e.key === 'Home') next = 0;
+        if (e.key === 'End') next = list.length - 1;
+        const nbtn = list[next];
+        nbtn.focus();
+        activate(nbtn.getAttribute('data-tab') || '');
+      });
+    });
+
+    try {
+      var wantedTab = new URLSearchParams(window.location.search).get('tab');
+      if (wantedTab) activate(wantedTab);
+    } catch (_) {}
+  })();
+</script>

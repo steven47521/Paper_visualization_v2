@@ -1,8 +1,7 @@
 ---
 import Layout from '../../../layouts/Layout.astro';
-import { getLocalizedPath, t } from '../../../i18n/translations';
 import { getCollection } from 'astro:content';
-import BenchmarkCardGrid from '../../../components/BenchmarkCardGrid.astro';
+import DomainListingLayout from '../../../components/DomainListingLayout.astro';
 
 const locale = 'zh';
 
@@ -62,80 +61,24 @@ const subcategoryTabs = taxEntry.data.subcategories.map(sub => {
     benchmarkCards,
   };
 });
+
+const domainTabs = subcategoryTabs.map(sub => ({
+  id: sub.id,
+  label: sub.name_zh,
+  description: sub.description_zh,
+  benchmarkCards: sub.benchmarkCards,
+}));
+
+const defaultTabId = taxEntry.data.id === 'llm' ? 'role_playing' : undefined;
 ---
 
 <Layout title={taxEntry.data.name_zh}>
-  <nav class="mb-6 text-sm text-[var(--color-text-secondary)]">
-    <a href={getLocalizedPath('/', locale)} class="hover:text-[var(--color-primary)]">{t(locale, 'nav_home')}</a>
-    <span class="mx-2">/</span>
-    <span>{taxEntry.data.name_zh}</span>
-  </nav>
-
-  <div class="mb-8">
-    <div class="flex items-center gap-3 mb-2">
-      <span class="w-4 h-4 rounded-full" style={`background-color: ${taxEntry.data.color}`}></span>
-      <h1 class="text-3xl font-bold">{taxEntry.data.name_zh}</h1>
-    </div>
-  </div>
-
-  <!-- Subcategory Tabs -->
-  <div class="mb-6 border-b border-[var(--color-border)]">
-    <div class="flex gap-1 overflow-x-auto">
-      {subcategoryTabs.map((tab, i) => (
-        <button
-          class="subcategory-tab px-4 py-2.5 text-sm font-medium whitespace-nowrap border-b-2 transition-colors"
-          data-tab={tab.id}
-          data-active={i === 0 ? 'true' : 'false'}
-        >
-          {tab.name_zh}
-        </button>
-      ))}
-    </div>
-  </div>
-
-  <!-- Tab Contents -->
-  {subcategoryTabs.map((tab, i) => (
-    <div
-      class="subcategory-content"
-      data-tab-content={tab.id}
-      style={i === 0 ? '' : 'display:none'}
-    >
-      <BenchmarkCardGrid
-        locale={locale}
-        l1Id={taxEntry.data.id}
-        accentColor={taxEntry.data.color}
-        sectionName={tab.name_zh}
-        sectionDescription={tab.description_zh}
-        items={tab.benchmarkCards}
-      />
-    </div>
-  ))}
-
-  <script is:inline>
-    document.querySelectorAll('.subcategory-tab').forEach(tab => {
-      tab.addEventListener('click', () => {
-        const tabId = tab.getAttribute('data-tab');
-        document.querySelectorAll('.subcategory-tab').forEach(t => {
-          t.setAttribute('data-active', 'false');
-          t.style.borderBottomColor = 'transparent';
-          t.style.color = '';
-        });
-        tab.setAttribute('data-active', 'true');
-        tab.style.borderBottomColor = 'var(--color-primary)';
-        tab.style.color = 'var(--color-primary)';
-
-        document.querySelectorAll('.subcategory-content').forEach(c => {
-          c.style.display = c.getAttribute('data-tab-content') === tabId ? '' : 'none';
-        });
-      });
-
-      // Initial styling
-      if (tab.getAttribute('data-active') === 'true') {
-        tab.style.borderBottomColor = 'var(--color-primary)';
-        tab.style.color = 'var(--color-primary)';
-      } else {
-        tab.style.borderBottomColor = 'transparent';
-      }
-    });
-  </script>
+  <DomainListingLayout
+    locale={locale}
+    l1Id={taxEntry.data.id}
+    l1Name={taxEntry.data.name_zh}
+    l1Color={taxEntry.data.color}
+    tabs={domainTabs}
+    defaultTabId={defaultTabId}
+  />
 </Layout>

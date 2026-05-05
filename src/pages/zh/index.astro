@@ -1,176 +1,74 @@
 ---
 import Layout from '../../layouts/Layout.astro';
-import { getLocalizedPath, t } from '../../i18n/translations';
+import HeroParticleStream from '../../components/HeroParticleStream';
+import { getLocalizedPath, t, type TranslationKey } from '../../i18n/translations';
 import { getCollection } from 'astro:content';
-import {
-  buildCategoryData,
-  buildHomepageProjectionData,
-  getModelsArray,
-} from '../../lib/data';
-import { computeOverallRanking } from '../../lib/aggregate';
-import TaxonomyUniverse from '../../components/TaxonomyUniverse';
-import HomepageLeaderboard from '../../components/HomepageLeaderboard';
+import { homeDomainCardBarsInnerHtml } from '../../lib/homeDomainCardViz';
 
 const locale = 'zh';
 
 const taxonomy = await getCollection('taxonomy');
-const benchmarks = await getCollection('benchmarks');
-const scores = await getCollection('scores');
-const modelsCollection = await getCollection('models');
-const models = getModelsArray(modelsCollection);
-
-const universeTaxonomy = taxonomy
-  .sort((a, b) => a.data.order - b.data.order)
-  .map(entry => ({
-    id: entry.data.id,
-    name: locale === 'zh' ? entry.data.name_zh : entry.data.name_en,
-    color: entry.data.color,
-    subcategories: entry.data.subcategories.map((sc: { id: string; name_zh: string; name_en: string }) => ({
-      id: sc.id,
-      name: sc.name_zh,
-    })),
-  }));
-
-const categories = taxonomy
-  .sort((a, b) => a.data.order - b.data.order)
-  .map(entry => buildCategoryData(entry, benchmarks, scores));
-
-const homepageProjectionData = buildHomepageProjectionData(
-  taxonomy,
-  benchmarks,
-  scores,
-  locale
-);
-
-const modelsList = models.map(model => ({
-  id: model.id,
-  name: model.name,
-  org: model.org,
-  color: model.color,
-}));
-const overallRanking = computeOverallRanking(categories, modelsList);
-
 const sortedTaxonomy = taxonomy.sort((a, b) => a.data.order - b.data.order);
-const totalDims = sortedTaxonomy.reduce(
-  (acc, c) => acc + c.data.subcategories.length,
-  0
-);
-const totalBenchmarks = sortedTaxonomy.reduce(
-  (acc, c) =>
-    acc +
-    c.data.subcategories.reduce(
-      (s: number, sc: { benchmarks: string[] }) => s + sc.benchmarks.length,
-      0
-    ),
-  0
-);
+
+const CARD_DESC_KEYS: Record<string, TranslationKey> = {
+  agent: 'home_card_desc_agent',
+  multimodal: 'home_card_desc_multimodal',
+  aigc: 'home_card_desc_aigc',
+  llm: 'home_card_desc_llm',
+};
 ---
 
-<Layout title={t(locale, 'nav_home')}>
-  <TaxonomyUniverse
-    client:load
-    taxonomy={universeTaxonomy}
-    locale={locale}
-    basePath={getLocalizedPath('/', locale)}
-    labels={{
-      eyebrow: t(locale, 'universe_eyebrow'),
-      title: t(locale, 'universe_title'),
-      sub: t(locale, 'universe_sub'),
-    }}
-  />
-
-  <div class="section-divider"></div>
-
-  <section class="mb-12">
-    <p class="eyebrow mb-2">{t(locale, 'eyebrow_leaderboard')}</p>
-    <h2 class="text-xl font-semibold mb-5">{t(locale, 'overall_ranking')}</h2>
-    <HomepageLeaderboard
-      client:load
-      categories={homepageProjectionData}
-      models={models}
-      locale={locale}
-      labels={{
-        overall_ranking: t(locale, 'overall_ranking'),
-        overall_score: t(locale, 'overall_score'),
-        model: t(locale, 'model'),
-        organization: t(locale, 'organization'),
-        weight_reset: t(locale, 'weight_reset'),
-        search_placeholder: t(locale, 'search_placeholder'),
-      }}
-    />
-  </section>
-
-  <div class="section-divider"></div>
-
-  <section class="mb-12">
-    <div class="category-section-header">
-      <div class="title-block">
-        <p class="eyebrow">{t(locale, 'eyebrow_taxonomy')}</p>
-        <h2>{t(locale, 'category_quickview')}</h2>
-      </div>
-      <div class="scale-readout">
-        <strong>{sortedTaxonomy.length}</strong> {t(locale, 'card_domain_label')}
-        <span class="readout-sep">·</span>
-        <strong>{totalDims}</strong> {t(locale, 'card_dim_unit')}
-        <span class="readout-sep">·</span>
-        <strong>{totalBenchmarks}</strong> {t(locale, 'card_bench_unit')}
+<Layout title={t(locale, 'nav_home')} editorialHome>
+  <section class="home-hero" aria-labelledby="home-hero-heading">
+    <div class="home-hero-bg" aria-hidden="true">
+      <div class="home-hero-particle-stage">
+        <HeroParticleStream client:visible ariaLabel={t(locale, 'home_hero_visual_aria')} />
       </div>
     </div>
-    <div class="category-grid">
+    <div class="home-hero-grid">
+      <div class="home-hero-copy">
+        <p class="home-hero-eyebrow">{t(locale, 'home_hero_eyebrow')}</p>
+        <h1 id="home-hero-heading" class="home-hero-title">{t(locale, 'home_hero_title')}</h1>
+        <p class="home-hero-tagline">{t(locale, 'home_hero_tagline')}</p>
+        <p class="home-hero-body">{t(locale, 'home_hero_body')}</p>
+        <a href="#home-categories" class="home-hero-cta">
+          {t(locale, 'home_hero_cta')}
+          <span aria-hidden="true">→</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section id="home-categories" class="home-categories" aria-labelledby="home-cat-heading">
+    <div class="home-categories-head">
+      <p class="home-categories-eyebrow">{t(locale, 'home_categories_eyebrow')}</p>
+      <h2 id="home-cat-heading" class="sr-only">{t(locale, 'category_quickview')}</h2>
+    </div>
+    <div class="home-card-grid">
       {sortedTaxonomy.map(category => {
-        const topModels = overallRanking
-          .filter(model => model.l1Scores[category.data.id] !== null)
-          .sort(
-            (a, b) =>
-              (b.l1Scores[category.data.id] ?? 0) - (a.l1Scores[category.data.id] ?? 0)
-          )
-          .slice(0, 5);
-        const dimCount = category.data.subcategories.length;
         const benchCount = category.data.subcategories.reduce(
           (s: number, sc: { benchmarks: string[] }) => s + sc.benchmarks.length,
           0
         );
-        const order = String(category.data.order).padStart(2, '0');
+        const descKey = CARD_DESC_KEYS[category.data.id] ?? 'home_card_desc_llm';
+        const barsInner = homeDomainCardBarsInnerHtml(category.data.subcategories, locale);
 
         return (
           <a
             href={getLocalizedPath(`/${category.data.id}/`, locale)}
-            class="category-card"
+            class="home-domain-card"
             style={`--accent: ${category.data.color}`}
             aria-label={category.data.name_zh}
           >
-            <div class="category-card-eyebrow">
-              <span class="label-group">
-                <span class="domain-dot" aria-hidden="true"></span>
-                <span>{t(locale, 'card_domain_label')}</span>
-              </span>
-              <span class="order">{order}</span>
+            <span class="home-domain-card-arrow" aria-hidden="true">→</span>
+            <p class="home-domain-card-kicker">{category.data.name_zh}</p>
+            <div class="home-domain-card-metric">
+              <span class="home-domain-card-count">{benchCount}</span>
+              <span class="home-domain-card-count-label">{t(locale, 'home_benchmarks_label')}</span>
             </div>
-            <h3 class="category-card-name">{category.data.name_zh}</h3>
-            <p class="category-card-meta">
-              <span class="num">{dimCount}</span> {t(locale, 'card_dim_unit')}
-              <span class="meta-sep">·</span>
-              <span class="num">{benchCount}</span> {t(locale, 'card_bench_unit')}
-            </p>
-            <div class="category-card-divider"></div>
-            <ol class="category-ranking">
-              {topModels.map((model, index) => (
-                <li>
-                  <span class="rank">{String(index + 1).padStart(2, '0')}</span>
-                  <span class="model">
-                    <span class="model-dot" style={`background-color: ${model.color}`}></span>
-                    <span class="model-name">{model.model_name}</span>
-                  </span>
-                  <span class="score">
-                    {model.l1Scores[category.data.id]?.toFixed(1) ?? '—'}
-                  </span>
-                </li>
-              ))}
-            </ol>
-            <span class="category-card-footer">
-              <span>{t(locale, 'card_explore')}</span>
-              <span class="arrow" aria-hidden="true">→</span>
-            </span>
+            <svg class="home-domain-card-spark" viewBox="0 0 120 40" preserveAspectRatio="none" aria-hidden="true" set:html={barsInner} />
+            <p class="home-domain-card-desc">{t(locale, descKey)}</p>
+            <span class="home-domain-card-footer">{t(locale, 'card_explore')}</span>
           </a>
         );
       })}

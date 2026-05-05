@@ -27,6 +27,8 @@ interface Props {
   emptyLabel?: string;
   pageSize?: number;
   locale?: 'zh' | 'en';
+  /** e.g. leaderboard-table--editorial for benchmark detail page */
+  className?: string;
 }
 
 export default function LeaderboardTable({
@@ -41,6 +43,7 @@ export default function LeaderboardTable({
   emptyLabel = 'No results found',
   pageSize,
   locale = 'zh',
+  className = '',
 }: Props) {
   const [search, setSearch] = useState('');
   const [sortKey, setSortKey] = useState<string | null>(null);
@@ -131,12 +134,14 @@ export default function LeaderboardTable({
 
   const getSourceBadge = (source: string) => {
     const label = sourceLabels?.[source] || source;
-    const colorClass =
-      source === 'official'
+    const editorial = className.includes('leaderboard-table--editorial');
+    const colorClass = editorial
+      ? 'border border-[var(--color-border)] bg-[var(--color-bg-secondary)] text-[var(--color-text-secondary)]'
+      : source === 'official'
         ? 'bg-blue-100 text-blue-700 dark:bg-blue-900/30 dark:text-blue-300'
         : source === 'community'
-        ? 'bg-gray-100 text-gray-600 dark:bg-gray-800 dark:text-gray-400'
-        : 'bg-yellow-100 text-yellow-700 dark:bg-yellow-900/30 dark:text-yellow-300';
+          ? 'bg-gray-100 text-gray-600 dark:bg-gray-800 dark:text-gray-400'
+          : 'bg-yellow-100 text-yellow-700 dark:bg-yellow-900/30 dark:text-yellow-300';
     return (
       <span className={`inline-block px-1.5 py-0.5 text-xs rounded ${colorClass}`}>
         {label}
@@ -145,7 +150,7 @@ export default function LeaderboardTable({
   };
 
   return (
-    <div>
+    <div className={className}>
       {searchable && (
         <div className="mb-4">
           <input

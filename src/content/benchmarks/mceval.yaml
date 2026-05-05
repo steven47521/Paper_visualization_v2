@@ -18,6 +18,41 @@ overview_en: |
   The paper also releases MCEVAL-INSTRUCT and trains MCODER for multilingual code generation.
   Experiments show that closed-source models still hold a clear advantage across many languages.
   Its main contribution is pushing code evaluation from a few languages to a genuinely multilingual setting.
+authors_en: "Linzheng Chai, Shukai Liu, Jian Yang, Yuwei Yin, Ke Jin, Jiaheng Liu, Tao Sun, Ge Zhang, Changyu Ren, Hongcheng Guo, Zekun Wang, Boyang Wang, Xianjie Wu, Bing Wang, Tongliang Li, Liqun Yang, Sufeng Duan, Zhoujun Li (Beihang University; University of British Columbia; University of Waterloo; Beijing Information Science and Technology University; Shanghai Jiao Tong University)"
+authors_zh: "柴林征、刘术凯、杨健、尹玉伟、金柯、刘嘉恒、孙韬、张格、任昌宇、郭宏程、王泽坤、王博洋、武贤杰、王冰、李童亮、杨立群、段苏峰、李舟军（北京航空航天大学、英属哥伦比亚大学、滑铁卢大学、北京信息科技大学、上海交通大学等）"
+abstract_en: |
+  Code LLMs are often benchmarked on Python-centric suites, with other languages sometimes derived by translation, which limits diversity. MCEVAL is a massively multilingual benchmark spanning 40 programming languages and about 16K test samples for generation, explanation, and completion. The work releases MCEVAL-INSTRUCT and trains MCODER on it. Experiments show a persistent gap between strong closed-source models and open-source systems across many languages; data and leaderboard are at mceval.github.io.
+abstract_zh: |
+  代码大模型多在以 Python 为主的基准上评测，其他语言常由翻译得到，多样性不足。MCEVAL 覆盖 40 种编程语言、约 1.6 万条测试样本，系统评测多语言代码生成、解释与补全；同时发布指令语料 MCEVAL-INSTRUCT，并在此基础上训练多语言代码模型 MCODER。实验表明闭源强模型与开源模型在多语言上仍有明显差距；数据与榜单见项目主页。
+method_en: |
+  MCEVAL is built with human annotators following written guidelines: self-contained problem statements, executable solutions with designed test cases, and difficulty labels (Easy/Middle/Hard). Each item is reviewed by at least two annotators; disagreements are resolved by consensus or a senior reviewer, and volunteers check overall correctness.
+
+  Evaluation covers three tasks. Code generation feeds a natural-language problem and example tests; success is execution-based Pass@1. Code explanation uses a two-pass procedure (code to description, then description back to code) so that understanding is measured by whether the reconstructed code passes tests, not by n-gram overlap. Code completion asks the model to fill a middle span given prefix and suffix, then runs the assembled program against tests.
+
+  MCEVAL-INSTRUCT starts from real snippets per language: an LLM filters and refines snippets for teaching value, then generates paired questions and solutions. Cross-lingual code transfer samples an instruction in one language and asks the LLM to adapt it to another, increasing complexity and cross-language alignment. MCODER is trained by multilingual supervised fine-tuning on these instruction pairs, then evaluated alongside many public code LLMs on MCEVAL.
+method_zh: |
+  MCEVAL 采用人工标注流程：题目与解答自洽、配套可执行测试用例，并按算法与功能难度标注为易/中/难。每条样本至少两名标注员独立标注，分歧由协商或资深标注员裁定，并有志愿者抽检正确性。
+
+  评测包含三类任务。多语言代码生成：给定自然语言题面与示例测试，模型生成代码，以能否通过全部测试的 Pass@1 衡量。多语言代码解释：采用「代码→自然语言→再生成代码」的双遍流程，用可执行性而非文本相似度衡量理解。多语言代码补全：给定前缀与后缀，模型补全中间片段，拼接后同样以测试执行判定。
+
+  MCEVAL-INSTRUCT 从各语言真实代码片段出发，由大模型筛选并精炼为适合教学的片段，再生成配套问答；跨语言代码迁移将一种语言的指令改写为另一语言并提高难度，以拉近多语言分布。MCODER 在上述多语言指令数据上做监督微调，并与多种公开代码大模型一起在 MCEVAL 上对比。
+figures:
+  - image: "/benchmarks/mceval/fig-three-tasks.jpg"
+    caption_en: "Figure 1 (paper): three massively multilingual tasks—code generation, completion, and explanation."
+    caption_zh: "论文图 1：大规模多语言评测的三类任务——代码生成、补全与解释。"
+  - image: "/benchmarks/mceval/fig-task-examples.jpg"
+    caption_en: "Figure 3 (paper): illustrative examples for multilingual generation, explanation, and completion."
+    caption_zh: "论文图 3：多语言代码生成、解释与补全的示例示意。"
+  - image: "/benchmarks/mceval/fig-mcoder-framework.jpg"
+    caption_en: "Figure 4 (paper): MCODER pipeline—build MCEVAL-INSTRUCT for 40 languages, fine-tune MCODER, then evaluate on MCEVAL."
+    caption_zh: "论文图 4：MCODER 框架——构建覆盖 40 语的 MCEVAL-INSTRUCT、微调 MCODER，再在 MCEVAL 上评测。"
+  - image: "/benchmarks/mceval/fig-paradigm-scenario.jpg"
+    caption_en: "Figure 5 (paper): languages grouped by five paradigms and eleven application scenarios."
+    caption_zh: "论文图 5：MCEVAL 中编程语言按五种范式与十一种应用场景的分类示意。"
+chart_figures:
+  - image: "/benchmarks/mceval/chart-explanation-pass1.jpg"
+    caption_en: "Figure 7 (paper, panel): comparing model scores on overlapping languages between MultiPL-E and MCEVAL—many models cluster on high-resource languages while low-resource performance remains weaker."
+    caption_zh: "论文图 7（子图）：在 MultiPL-E 与 MCEVAL 重叠语言上对比各模型分数——多数模型仍集中在高资源语言附近，低资源语言能力有待提升。"
 glance:
   - label_zh: "研究重点"
     label_en: "Focus"

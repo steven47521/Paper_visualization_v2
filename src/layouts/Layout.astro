@@ -7,12 +7,24 @@ import type { Locale } from '../i18n/translations';
 interface Props {
   title?: string;
   description?: string;
+  /** Home: editorial spacing / hero classes (width matches all pages — full bleed + fluid padding) */
+  editorialHome?: boolean;
+  /** Benchmark paper detail: readable column width, magazine rhythm */
+  benchmarkDetail?: boolean;
 }
 
-const { title, description } = Astro.props;
+const { title, description, editorialHome = false, benchmarkDetail = false } = Astro.props;
 const locale = getLocaleFromUrl(Astro.url) as Locale;
 const otherLocale: Locale = locale === 'zh' ? 'en' : 'zh';
 const currentPath = stripBasePath(Astro.url.pathname).replace(/^\/(zh|en)/, '') || '/';
+const navSegments = currentPath.replace(/^\/+|\/+$/g, '').split('/').filter(Boolean);
+const navIsHome = navSegments.length === 0;
+const navIsCompare = navSegments[0] === 'compare';
+const activeTaxonomyId = !navIsHome && !navIsCompare && navSegments[0] ? navSegments[0] : null;
+
+const navLinkActive =
+  'font-medium text-[var(--color-primary)] underline underline-offset-[7px] decoration-2 decoration-[var(--color-primary)]';
+const navLinkIdle = 'text-[var(--color-text)] hover:text-[var(--color-primary)] transition-colors';
 
 const pageTitle = title ? `${title} | ${t(locale, 'site_title')}` : t(locale, 'site_title');
 const pageDesc = description || t(locale, 'site_slogan');
@@ -37,7 +49,7 @@ const taxonomyItems = (await getCollection('taxonomy'))
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link
     rel="stylesheet"
-    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+SC:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+SC:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;0,8..60,700;1,8..60,400&display=swap"
   />
   <title>{pageTitle}</title>
   <script is:inline>
@@ -49,10 +61,15 @@ const taxonomyItems = (await getCollection('taxonomy'))
     })();
   </script>
 </head>
-<body class="min-h-screen flex flex-col bg-[var(--color-bg)] text-[var(--color-text)]">
-  <header class="sticky top-0 z-50 backdrop-blur-xl bg-[var(--color-bg)]/75 border-b border-[var(--color-border)]/60">
-    <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
-      <a href={getLocalizedPath('/', locale)} class="flex items-center gap-2 font-bold text-xl text-[var(--color-primary)]">
+<body
+  class:list={[
+    'min-h-screen flex flex-col bg-[var(--color-bg)] text-[var(--color-text)]',
+    'site-paper',
+  ]}
+>
+  <header class="sticky top-0 z-[100] isolate border-b border-[var(--color-border)]/60 bg-[var(--color-bg)]">
+    <nav class="mx-auto flex h-16 w-full max-w-none items-center gap-4 md:gap-6 px-4 sm:px-6 lg:px-10 xl:px-14 2xl:px-16">
+      <a href={getLocalizedPath('/', locale)} class="flex shrink-0 items-center gap-2 font-bold text-xl text-[var(--color-primary)]">
         <svg class="w-7 h-7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
           <circle cx="12" cy="12" r="10" />
           <path d="M12 2a10 10 0 0 1 0 20" />
@@ -63,21 +80,36 @@ const taxonomyItems = (await getCollection('taxonomy'))
         Benchmark Hub
       </a>
 
-      <div class="hidden md:flex items-center gap-5 text-sm">
-        <a href={getLocalizedPath('/', locale)} class="hover:text-[var(--color-primary)] transition-colors">
+      <div class="hidden md:flex flex-wrap items-center gap-x-5 gap-y-1 text-sm min-w-0">
+        <a
+          href={getLocalizedPath('/', locale)}
+          class:list={['shrink-0', navIsHome ? navLinkActive : navLinkIdle]}
+          aria-current={navIsHome ? 'page' : undefined}
+        >
           {t(locale, 'nav_home')}
         </a>
-        {taxonomyItems.map(item => (
-          <a href={getLocalizedPath(`/${item.id}/`, locale)} class="hover:text-[var(--color-primary)] transition-colors">
-            {locale === 'zh' ? item.name_zh : item.name_en}
-          </a>
-        ))}
-        <a href={getLocalizedPath('/compare/', locale)} class="hover:text-[var(--color-primary)] transition-colors">
+        {taxonomyItems.map(item => {
+          const active = activeTaxonomyId === item.id;
+          return (
+            <a
+              href={getLocalizedPath(`/${item.id}/`, locale)}
+              class:list={['shrink-0', active ? navLinkActive : navLinkIdle]}
+              aria-current={active ? 'page' : undefined}
+            >
+              {locale === 'zh' ? item.name_zh : item.name_en}
+            </a>
+          );
+        })}
+        <a
+          href={getLocalizedPath('/compare/', locale)}
+          class:list={['shrink-0', navIsCompare ? navLinkActive : navLinkIdle]}
+          aria-current={navIsCompare ? 'page' : undefined}
+        >
           {t(locale, 'nav_compare')}
         </a>
       </div>
 
-      <div class="flex items-center gap-3">
+      <div class="flex shrink-0 items-center gap-3 ml-auto">
         <a
           href={getLocalizedPath(currentPath || '/', otherLocale)}
           class="px-3 py-1.5 text-sm rounded-lg border border-[var(--color-border)] hover:border-[var(--color-primary)] transition-colors"
@@ -108,28 +140,68 @@ const taxonomyItems = (await getCollection('taxonomy'))
     </nav>
 
     <div id="mobile-menu" class="hidden md:hidden border-t border-[var(--color-border)] pb-4">
-      <div class="max-w-7xl mx-auto px-4 pt-2 flex flex-col gap-2">
-        <a href={getLocalizedPath('/', locale)} class="py-2 px-3 rounded-lg hover:bg-[var(--color-bg-secondary)]">
+      <div class="mx-auto flex w-full max-w-none flex-col gap-2 px-4 pt-2 sm:px-6 lg:px-10 xl:px-14 2xl:px-16">
+        <a
+          href={getLocalizedPath('/', locale)}
+          class:list={[
+            'py-2 px-3 rounded-lg',
+            navIsHome
+              ? 'bg-[var(--color-bg-secondary)] font-medium text-[var(--color-primary)] underline underline-offset-4 decoration-2 decoration-[var(--color-primary)]'
+              : 'hover:bg-[var(--color-bg-secondary)]',
+          ]}
+          aria-current={navIsHome ? 'page' : undefined}
+        >
           {t(locale, 'nav_home')}
         </a>
-        {taxonomyItems.map(item => (
-          <a href={getLocalizedPath(`/${item.id}/`, locale)} class="py-2 px-3 rounded-lg hover:bg-[var(--color-bg-secondary)]">
-            {locale === 'zh' ? item.name_zh : item.name_en}
-          </a>
-        ))}
-        <a href={getLocalizedPath('/compare/', locale)} class="py-2 px-3 rounded-lg hover:bg-[var(--color-bg-secondary)]">
+        {taxonomyItems.map(item => {
+          const active = activeTaxonomyId === item.id;
+          return (
+            <a
+              href={getLocalizedPath(`/${item.id}/`, locale)}
+              class:list={[
+                'py-2 px-3 rounded-lg',
+                active
+                  ? 'bg-[var(--color-bg-secondary)] font-medium text-[var(--color-primary)] underline underline-offset-4 decoration-2 decoration-[var(--color-primary)]'
+                  : 'hover:bg-[var(--color-bg-secondary)]',
+              ]}
+              aria-current={active ? 'page' : undefined}
+            >
+              {locale === 'zh' ? item.name_zh : item.name_en}
+            </a>
+          );
+        })}
+        <a
+          href={getLocalizedPath('/compare/', locale)}
+          class:list={[
+            'py-2 px-3 rounded-lg',
+            navIsCompare
+              ? 'bg-[var(--color-bg-secondary)] font-medium text-[var(--color-primary)] underline underline-offset-4 decoration-2 decoration-[var(--color-primary)]'
+              : 'hover:bg-[var(--color-bg-secondary)]',
+          ]}
+          aria-current={navIsCompare ? 'page' : undefined}
+        >
           {t(locale, 'nav_compare')}
         </a>
       </div>
     </div>
   </header>
 
-  <main class="flex-1 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 w-full">
+  <main
+    class:list={[
+      /* z-0 + isolate: keep transform/transition layers (e.g. domain turntable) below sibling header during animation */
+      'relative z-0 isolate flex-1 w-full',
+      editorialHome
+        ? 'home-editorial-main mx-auto w-full max-w-none px-5 py-10 sm:px-8 sm:py-14 lg:px-10 lg:py-14 xl:px-14 2xl:px-16'
+        : benchmarkDetail
+          ? 'benchmark-article-wrap mx-auto w-full max-w-5xl px-4 py-10 sm:px-6 sm:py-12 lg:px-8 lg:py-14'
+          : 'mx-auto w-full max-w-none px-4 py-8 sm:px-6 lg:px-10 xl:px-14 2xl:px-16',
+    ]}
+  >
     <slot />
   </main>
 
   <footer class="border-t border-[var(--color-border)]/40 mt-8">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <div class="mx-auto w-full max-w-none px-4 py-8 sm:px-6 lg:px-10 xl:px-14 2xl:px-16">
       <div class="flex flex-col md:flex-row justify-between items-start gap-6">
         <div class="max-w-md">
           <h3 class="font-bold text-lg mb-2">Benchmark Hub</h3>
